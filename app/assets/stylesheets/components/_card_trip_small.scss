@@ -1,48 +1,44 @@
-.card-trip {
+.card-product {
   overflow: hidden;
+  height: 120px;
   background: white;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
 }
 
-.card-trip > img {
-  height: 200px;
-  width: 100%;
+.card-product img {
+  height: 100%;
+  width: 120px;
   object-fit: cover;
 }
 
-.card-trip h2 {
+.card-product h2 {
   font-size: 16px;
   font-weight: bold;
   margin: 0;
 }
 
-.card-trip p {
+.card-product p {
   font-size: 12px;
+  line-height: 1.4;
   opacity: .7;
   margin: 0;
 }
 
-
-.card-trip .card-trip-infos {
+.card-product .card-product-infos {
   padding: 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  position: relative;
 }
 
-.risk-level-infos-large {
-  font-size: 30px;
-  position: absolute;
+.risk-level-infos-small {
+  font-size: 16px;
   margin: 0;
   padding: 3px;
-  right: 16px;
-  top: -20px;
-  height: 40px;
-  width: 40px;
+  height: 30px;
+  width: 30px;
   border-radius: 50%;
   box-shadow: 0 1px 2px rgba(0,0,0,0.2);
   background-color: white;
   text-align: center;
+  line-height:1.5;
 }
-
