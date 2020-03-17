@@ -1,6 +1,10 @@
 .navbar-lewagon {
   justify-content: space-between;
-  background: $blue;
+  background: $primary;
+  box-shadow: 0px 1px 10px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   h3 {
    color: white;
    margin: 0;
@@ -33,4 +37,10 @@
   white-space: nowrap;
   background-color: transparent;
   border: 0;
+}
+
+.navbar-toggler, .navbar-toggler:focus, .navbar-toggle:active {
+  outline: none;
+  box-shadow: none;
+  border: none;
 }

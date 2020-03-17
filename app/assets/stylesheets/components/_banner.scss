@@ -1,0 +1,19 @@
+body {
+  width: 100vw;
+}
+
+.banner-img {
+  position: relative;
+  margin-bottom: 15px;
+  min-height: 100vh;
+  background: url('https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.alpaventure.fr%2Fwp-content%2Fuploads%2F2013%2F05%2FFotolia_44818384_XL.jpg&f=1&nofb=1');
+  background-size: cover;
+  background-position: center;
+}
+
+.banner-title {
+  position: absolute;
+  top: 30px;
+  font-weight: bolder;
+  text-align: center;
+}
