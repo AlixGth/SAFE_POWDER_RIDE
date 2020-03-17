@@ -2,5 +2,13 @@
 
       <%= simple_form_for @itinerary do |f| %>
         <%= f.input :name %>
+        <%= f.input :description %>
+        <%= f.input :duration %>
+        <%= f.input :elevation %>
+        <%= f.input :departure %>
+        <%= f.input :arrival %>
+        <%= f.input :ascent_difficulty %>
+        <%= f.input :ski_difficulty %>
         <%= f.button :submit %>
       <% end %>
+      
