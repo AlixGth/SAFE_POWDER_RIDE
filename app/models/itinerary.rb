@@ -1,5 +1,6 @@
 class Itinerary < ApplicationRecord
-  belongs_to :MountainRange
-
-
+  belongs_to :mountain
+  belongs_to :user
+  has_many :coordinates
+  has_many :reviews
 end
