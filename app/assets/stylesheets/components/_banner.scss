@@ -5,8 +5,8 @@ body {
 .banner-img {
   position: relative;
   margin-bottom: 15px;
-  min-height: 100vh;
-  background: url('https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.alpaventure.fr%2Fwp-content%2Fuploads%2F2013%2F05%2FFotolia_44818384_XL.jpg&f=1&nofb=1');
+  min-height: 95vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1)),  url('https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.alpaventure.fr%2Fwp-content%2Fuploads%2F2013%2F05%2FFotolia_44818384_XL.jpg&f=1&nofb=1');
   background-size: cover;
   background-position: center;
 }
@@ -16,4 +16,21 @@ body {
   top: 30px;
   font-weight: bolder;
   text-align: center;
+  color: white;
+}
+
+#search-bar {
+  width: 90%;
+  position: absolute;
+  top: 200px;
+  input, button {
+    width: 100%;
+    margin: 5px;
+  }
+  input {
+    height: 60px;
+  }
+  button {
+    height: 45px;
+  }
 }
