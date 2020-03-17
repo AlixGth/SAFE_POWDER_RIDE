@@ -1,0 +1,8 @@
+
+<h1> All itineraries</h1>
+  <% @itineraries.each do |itinerary| %>
+    <h2><%= itinerary.name %></h2>
+        <%= link_to "show itinerary", itinerary_path(itinerary) %>
+          <%end%>
+     <%= link_to "Add an itinerary", new_itinerary_path %>
+ 
