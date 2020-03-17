@@ -5,3 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Mountain.destroy_all
+
+mountains = ["Chablais", "Vanoise", "Aravis", "Ecrins"]
+
+mountains.each do |mountain|
+	Mountain.create!(name: mountain)
+end

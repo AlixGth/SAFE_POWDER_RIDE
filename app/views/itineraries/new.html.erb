@@ -9,6 +9,8 @@
         <%= f.input :arrival %>
         <%= f.input :ascent_difficulty %>
         <%= f.input :ski_difficulty %>
+        <%= f.input :mountain, 
+                  collection: Mountain.all%>
         <%= f.button :submit %>
       <% end %>
       
