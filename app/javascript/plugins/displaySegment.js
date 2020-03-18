@@ -20,9 +20,9 @@ const waypoints = extractArray();
 
 var map = new mapboxgl.Map({
   container: 'map',
-  style: 'mapbox://styles/mapbox/outdoors-v11',
+  style: 'mapbox://styles/mapbox/outdoors-v11?optimize=true',
   center: [waypoints[0][0], waypoints[0][1]],
-  zoom: 20
+  zoom: 15
 });
 
 
@@ -55,7 +55,9 @@ const display = (route, name, color) => {
 };
 
 const displayRoute = () => {
-  map.on("click", function(e) {
+  // document.getElementById("map").addEventListener("DOMContentLoaded", function(e) {
+  // map.on("click", function(e) {
+  map.on("load", function(e) {
     for(let i = 1; i < waypoints.length - 1; i++) {
       const lng1 = waypoints[i-1][0];
       const lat1 = waypoints[i-1][1];
