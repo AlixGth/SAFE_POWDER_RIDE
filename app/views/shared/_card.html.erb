@@ -1,0 +1,12 @@
+<div class="card-trip">
+   <img src="http://savoie.alpes-refuges.fr/tzr/scripts/resizer.php?filename=CIRCUIT/photo/0e/d7/4y4cezew3d4h&mime=image%2Fjpeg&&originalname=Test.jpg&geometry=907x595%5E&crop=907x595" />
+    <div class="card-trip-infos">
+      <div>
+        <h2><%= itinerary.name %></h2>
+        <p><%= itinerary.mountain.name %></p>
+      </div>
+      <p class="ml-3"> <%= itinerary.ski_difficulty %></p>
+      <h1 class="risk-level-infos-large"> 3 </h1>
+    </div>
+ <%= link_to "", itinerary_path(itinerary), class: 'card-link' %>
+  </div>

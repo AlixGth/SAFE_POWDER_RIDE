@@ -34,6 +34,7 @@
 
 </div>
 <%
+
 url = Dir.pwd + "/app/views/pages/tour.gpx"
 doc = Nokogiri::XML(open(url))
 trackpoints = doc.xpath('//xmlns:trkpt')
