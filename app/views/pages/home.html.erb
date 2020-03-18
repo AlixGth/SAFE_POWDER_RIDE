@@ -63,7 +63,9 @@ def getColor(lng1, lat1, lng2, lat2, elvt1, elvt2)
   end
 end
 
-doc = Nokogiri::XML(open("/Users/gaetanmallet/code/malletgaetan/AlixGth/SAFE_POWDER_RIDE/app/views/pages/tour.gpx"))
+url = Dir.pwd + "/app/views/pages/tour.gpx"
+doc = Nokogiri::XML(open(url))
+
 trackpoints = doc.xpath('//xmlns:trkpt')
 array = []
 doc.search('trkpt').each_with_index do |trkpt, index|

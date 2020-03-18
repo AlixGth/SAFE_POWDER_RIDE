@@ -9,8 +9,7 @@
         <%= f.input :arrival %>
         <%= f.input :ascent_difficulty %>
         <%= f.input :ski_difficulty %>
-        <%= f.input :mountain, 
-                  collection: Mountain.all%>
+        <%= f.input :mountain, collection: Mountain.all%>
+        <%= f.input :photos, as: :file, input_html: { multiple: true } %>
         <%= f.button :submit %>
       <% end %>
-      
