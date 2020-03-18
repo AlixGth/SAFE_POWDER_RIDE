@@ -33,3 +33,26 @@
   </div>
 
 </div>
+
+<%
+doc = Nokogiri::XML(open("/Users/gaetanmallet/code/malletgaetan/AlixGth/SAFE_POWDER_RIDE/app/views/pages/tour.gpx"))
+trackpoints = doc.xpath('//xmlns:trkpt')
+
+array = []
+doc.search('trkpt').each_with_index do |trkpt, index|
+  ele = trkpt.search('ele').text
+  if index > 0
+    color = '#A8F70A'
+    if ele.to_f > 1500 #alt de changement d'indice de danger
+      color = '#F71F0A'
+    end
+  end
+  array <<  [trkpt.attribute("lon").value, trkpt.attribute("lat").value, ele, color ]
+end
+%>
+<div
+  id="map"
+  data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+></div>
+
+<div id="hidden" data-waypoints = "<%= array %>" ></div>
