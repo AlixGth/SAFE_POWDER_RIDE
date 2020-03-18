@@ -3,22 +3,24 @@ class ItinerariesController < ApplicationController
  skip_before_action :authenticate_user!, only: [:index, :show]
 
 	def index
-    @itineraries = Itinerary.all
+    @itineraries = policy_scope(Itinerary)
   end
 
   def show
-  	@itinerary = Itinerary.find(params[:id])
   end
 
   def new
     @itinerary = Itinerary.new
+    @itinerary.user = current_user
+    authorize @itinerary
   end
 
   def create
     @itinerary = Itinerary.new(itinerary_params)
     @mountain = Mountain.find(params[:itinerary][:mountain].to_i)
-    @itinerary.mountain = @mountain
     @itinerary.user = current_user
+    @itinerary.mountain = @mountain
+    authorize @itinerary
     if @itinerary.save
       redirect_to itinerary_path(@itinerary)
     else
@@ -34,6 +36,7 @@ private
 
   def set_itinerary
     @itinerary = Itinerary.find(params[:id])
+    authorize @itinerary
   end
 
 end

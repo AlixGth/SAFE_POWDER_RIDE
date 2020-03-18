@@ -18,7 +18,7 @@ gem 'webpacker'
 gem 'cloudinary', '~> 1.12.0'
 gem 'gpx'
 gem 'nokogiri'
-
+gem 'pundit'
 gem 'sidekiq'
 gem 'sidekiq-failures', '~> 1.0'
 
