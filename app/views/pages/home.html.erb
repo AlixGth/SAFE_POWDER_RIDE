@@ -33,22 +33,34 @@
   </div>
 
 </div>
-
 <%
-doc = Nokogiri::XML(open("/Users/alixgauthier/code/AlixGth/SAFE_POWDER_RIDE/app/views/pages/tour.gpx"))
-trackpoints = doc.xpath('//xmlns:trkpt')
 
+url = Dir.pwd + "/app/views/pages/tour.gpx"
+doc = Nokogiri::XML(open(url))
+trackpoints = doc.xpath('//xmlns:trkpt')
 array = []
 doc.search('trkpt').each_with_index do |trkpt, index|
   ele = trkpt.search('ele').text
-  if index > 0
-    color = '#A8F70A'
-    if ele.to_f > 1500 #alt de changement d'indice de danger
-      color = '#F71F0A'
-    end
-  end
-  array <<  [trkpt.attribute("lon").value, trkpt.attribute("lat").value, ele, color ]
+  array <<  [trkpt.attribute("lon").value, trkpt.attribute("lat").value, ele ]
 end
+
+reduce_value = (array.size.to_f / 300).round
+array = array.select.with_index do |coordinate, index|
+  index % reduce_value == 0
+end
+
+for i in (1...array.size)
+  if i % 4 == 0
+    lng1 = array[i-1][0].to_f
+    lat1 = array[i-1][1].to_f
+    lng2 = array[i][0].to_f
+    lat2 = array[i][1].to_f
+    yes = array[i]
+    color = array[i-1][2].to_i > 1500 ? "#F71F0A" : "#F7B20A"
+    array[i] = [array[i][0], array[i][1], color]
+  end
+end
+
 %>
 <div
   id="map"

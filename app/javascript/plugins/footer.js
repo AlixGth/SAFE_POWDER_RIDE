@@ -4,7 +4,6 @@ const fixFooter = () => {
     var height = element.offsetHeight;
     if (height <= window.innerHeight) {
       document.getElementById("footer").classList.add('stikybottom');
-      console.log("yes1");
     }
   }, false);
 };
