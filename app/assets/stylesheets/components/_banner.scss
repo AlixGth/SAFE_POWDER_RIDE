@@ -12,17 +12,17 @@ body {
 }
 
 .banner-title {
-  position: absolute;
-  top: 30px;
+  margin: 0 auto;
+  padding: 50px 0;
   font-weight: bolder;
   text-align: center;
   color: white;
 }
 
 #search-bar {
+  margin: 0 auto;
+  padding: 50px 0;
   width: 90%;
-  position: absolute;
-  top: 200px;
   input, button {
     width: 100%;
     margin: 5px;
