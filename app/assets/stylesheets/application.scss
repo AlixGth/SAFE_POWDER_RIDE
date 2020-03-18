@@ -13,3 +13,10 @@
 @import "pages/index";
 @import "components/card_trip_large";
 @import "components/card_trip_small";
+
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
