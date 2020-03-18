@@ -23,47 +23,46 @@ mountains.each do |mountain|
 end
 
 
+ puts "generating users"
 
-# puts "generating users"
+avatar1 = URI.open('https://avatars3.githubusercontent.com/u/58790438?v=4')
+avatar2 = URI.open('https://avatars0.githubusercontent.com/u/28073539?v=4')
+avatar3 = URI.open('https://avatars1.githubusercontent.com/u/59839816?v=4')
+avatar4 = URI.open('https://i0.wp.com/www.lechotouristique.com/wp-content/uploads/2018/02/alix-gauthier.jpg?resize=300%2C300&ssl=1')
 
-# avatar1 = URI.open('https://avatars3.githubusercontent.com/u/58790438?v=4')
-# avatar2 = URI.open('https://avatars0.githubusercontent.com/u/28073539?v=4')
-# avatar3 = URI.open('https://avatars1.githubusercontent.com/u/59839816?v=4')
-# avatar4 = URI.open('https://i0.wp.com/www.lechotouristique.com/wp-content/uploads/2018/02/alix-gauthier.jpg?resize=300%2C300&ssl=1')
+user1 = User.create({
+  username: 'Jerome',
+  email: 'jerome.crest@gmail.com',
+  password: 'password',
+  admin: true,
+})
+user1.avatar.attach(io: avatar1, filename: 'jerome.jpeg', content_type: 'image/jpeg')
 
-# user1 = User.create({
-#   first_name: 'Jerome',
-#   last_name: 'Crest',
-#   email: 'jerome.crest@gmail.com',
-#   password: 'password'
-# })
-# user1.avatar.attach(io: avatar1, filename: 'jerome.jpeg', content_type: 'image/jpeg')
+user2 = User.create({
+  username: 'Gaetan',
+  email: 'malletgaetantmp@gmail.com',
+  password: 'password',
+  admin: true,
+})
+user2.avatar.attach(io: avatar2, filename: 'gaetan.jpeg', content_type: 'image/jpeg')
 
-# user2 = User.create({
-#   first_name: 'Gaetan',
-#   last_name: 'Mallet',
-#   email: 'malletgaetantmp@gmail.com',
-#   password: 'password'
-# })
-# user2.avatar.attach(io: avatar2, filename: 'gaetan.jpeg', content_type: 'image/jpeg')
+user3 = User.create({
+  username: 'Tib',
+  email: 'thibault.adet@gmail.com',
+  password: 'password',
+  admin: true,
+})
+user3.avatar.attach(io: avatar3, filename: 'tib.jpeg', content_type: 'image/jpeg')
 
-# user3 = User.create({
-#   first_name: 'Tib',
-#   last_name: 'Adet',
-#   email: 'thibault.adet@gmail.com',
-#   password: 'password'
-# })
-# user3.avatar.attach(io: avatar3, filename: 'tib.jpeg', content_type: 'image/jpeg')
+user4 = User.create({
+  username: 'Alix',
+  email: 'gauthieralix@gmail.com',
+  password: 'password',
+  admin: true,
+})
+user4.avatar.attach(io: avatar4, filename: 'alix.jpeg', content_type: 'image/jpeg')
 
-# user4 = User.create({
-#   first_name: 'Alix',
-#   last_name: 'Gauthier',
-#   email: 'gauthieralix@gmail.com',
-#   password: 'password'
-# })
-# user4.avatar.attach(io: avatar4, filename: 'alix.jpeg', content_type: 'image/jpeg')
-
-# puts "users generated!"
+puts "users generated!"
 
 
 # puts "generating products"
