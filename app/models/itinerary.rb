@@ -4,4 +4,5 @@ class Itinerary < ApplicationRecord
   has_many :coordinates
   has_many :reviews
   has_many_attached :photos
+  # serialize :coordinates
 end

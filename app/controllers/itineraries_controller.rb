@@ -16,22 +16,51 @@ class ItinerariesController < ApplicationController
   end
 
   def create
-    @itinerary = Itinerary.new(itinerary_params)
-    @mountain = Mountain.find(params[:itinerary][:mountain].to_i)
-    @itinerary.user = current_user
-    @itinerary.mountain = @mountain
-    authorize @itinerary
-    if @itinerary.save
-      redirect_to itinerary_path(@itinerary)
+    file_data = params[:itinerary][:gpx_coordinates]
+    if file_data.respond_to?(:path)
+      doc = Nokogiri::XML(open(file_data.path))
+      trackpoints = doc.xpath('//xmlns:trkpt')
+      array = []
+      doc.search('trkpt').each_with_index do |trkpt, index|
+        ele = trkpt.search('ele').text
+        array <<  [trkpt.attribute("lon").value, trkpt.attribute("lat").value, ele ]
+      end
+
+      reduce_value = (array.size.to_f / 300).round
+      array = array.select.with_index do |coordinate, index|
+        index % reduce_value == 0
+      end
+
+      for i in (1...array.size)
+        if i % 4 == 0
+          lng1 = array[i-1][0].to_f
+          lat1 = array[i-1][1].to_f
+          lng2 = array[i][0].to_f
+          lat2 = array[i][1].to_f
+          yes = array[i]
+          color = array[i-1][2].to_i > 1500 ? "#F71F0A" : "#F7B20A"
+          array[i] = [array[i][0], array[i][1], color]
+        end
+      end
     else
-      render :new
+      redirect_to :new
     end
+    @itinerary = Itinerary.new(itinerary_params)
+    # @mountain = Mountain.find(params[:itinerary][:mountain].to_i)
+    # @itinerary.user = current_user
+    # @itinerary.mountain = @mountain
+    authorize @itinerary
+    # if @itinerary.save
+    #   redirect_to itinerary_path(@itinerary)
+    # else
+    #   render :new
+    # end
   end
 
 private
 
   def itinerary_params
-    params.require(:itinerary).permit(:name, :description, :duration, :elevation, :departure, :arrival, :ascent_difficulty, :ski_difficulty, photos: [])
+    params.require(:itinerary).permit(:name, :description, :duration, :elevation, :departure, :arrival, :gpx_coordinates, :ascent_difficulty, :ski_difficulty, photos: [])
   end
 
   def set_itinerary
