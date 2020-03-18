@@ -14,10 +14,10 @@
   <% end %>
   <div class="row">
     <% @itineraries.each do |itinerary| %>
-      <div class="col-12 col-md-6 col-lg-4">
+      <div>
       <%= render 'shared/card', itinerary: itinerary %>
       </div>
-    <% end %>
-    <%= link_to "Add an itinerary", new_itinerary_path %>
+    <% end %>  
   </div>
+  <%= link_to "Add an itinerary", new_itinerary_path %>
 </div>
