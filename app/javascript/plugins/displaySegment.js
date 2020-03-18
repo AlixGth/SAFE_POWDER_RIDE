@@ -9,10 +9,13 @@ const extractArray = () => {
     const qwe = yes.split("\"").join("").split("[").join("").split(",");
     let lng = Number.parseFloat(qwe[0].trim(), 10);
     let lat = Number.parseFloat(qwe[1].trim(), 10);
-    let ele = Number.parseFloat(qwe[2].trim(), 10);
-    let color = qwe[3].trim();
-    array.push([lng, lat, ele, color]);
+    if (qwe[2].includes("#")){
+      array.push([lng, lat, qwe[2].replace(/\s/g, '')]);
+    } else {
+      array.push([lng, lat]);
+    }
   });
+  console.log(array)
   return array;
 };
 
@@ -27,15 +30,20 @@ var map = new mapboxgl.Map({
 
 
 const display = (route, name, color) => {
-  console.log(color);
+  // [[lng1, lat1],[lng2, lat2], [lng3, lat3]]
   map.addSource(name, {
     'type': 'geojson',
     'data': {
       'type': 'Feature',
       'properties': {},
       'geometry': {
-        'type': 'LineString',
-        'coordinates': route // [[lng, lat],[lng, lat]]
+        'type': 'MultiLineString',
+        'coordinates': [
+          [route[0], route[1]],
+          [route[1], route[2]],
+          [route[2], route[3]],
+          [route[3], route[4]]
+        ]
       }
     }
   });
@@ -49,7 +57,7 @@ const display = (route, name, color) => {
     },
     'paint': {
       'line-color': color,
-      'line-width': 2
+      'line-width': 3
     }
   });
 };
@@ -58,15 +66,21 @@ const displayRoute = () => {
   // document.getElementById("map").addEventListener("DOMContentLoaded", function(e) {
   // map.on("click", function(e) {
   map.on("load", function(e) {
-    for(let i = 1; i < waypoints.length - 1; i++) {
-      const lng1 = waypoints[i-1][0];
-      const lat1 = waypoints[i-1][1];
-      const lng2 = waypoints[i][0];
-      const lat2 = waypoints[i][1];
-      const color = waypoints[i][3];
-      display([[lng1, lat1],[lng2, lat2]], i.toString(), color);
+    for(let i = 4; i < waypoints.length - 1; i = i + 4) {
+      const lng0 = waypoints[i-4][0];
+      const lat0 = waypoints[i-4][1];
+      const lng1 = waypoints[i-3][0];
+      const lat1 = waypoints[i-3][1];
+      const lng2 = waypoints[i-2][0];
+      const lat2 = waypoints[i-2][1];
+      const lng3 = waypoints[i-1][0];
+      const lat3 = waypoints[i-1][1];
+      const lng4 = waypoints[i][0];
+      const lat4 = waypoints[i][1];
+      const color = waypoints[i][2];
+      display([[lng0, lat0],[lng1, lat1],[lng2, lat2], [lng3, lat3], [lng4, lat4]], i.toString(), color);
     };
-  });
+  }); 
 };
 
 export { displayRoute };
