@@ -16,7 +16,7 @@ Mountain.destroy_all
 
 puts "creating mountain ranges"
 
-mountains = ["Thabor", "Pelvoux", "Queyras", "Champsaur", "Devoluy", "Embrunais Parpaillon"]
+mountains = ["Thabor", "Pelvoux", "Queyras", "Champsaur", "Devoluy", "Embrunais Parpaillon", "Chablais"]
 
 mountains.each do |mountain|
 	Mountain.create!(name: mountain)
