@@ -1,8 +1,23 @@
+<div class="container">
+  <h1 class="display-5 banner-title">Tous les itinéraires</h1>
+  <div id="search-bar">
+    <input type="text" class="form-control" placeholder="Chercher un itinéraire ou un massif">
+    <button class="btn btn-primary" type="button">
+        Chercher
+    </button>
+  </div>
+</div>
 
-<h1> All itineraries</h1>
-  <% @itineraries.each do |itinerary| %>
-    <h2><%= itinerary.name %></h2>
-        <%= link_to "show itinerary", itinerary_path(itinerary) %>
-          <%end%>
-     <%= link_to "Add an itinerary", new_itinerary_path %>
- 
+<div class="container">
+  <% if @itineraries.count > 0 %>
+    <p><%= @itineraries.count%> itinéraires trouvés </p>
+  <% end %>
+  <div class="row">
+    <% @itineraries.each do |itinerary| %>
+      <div class="col-12 col-md-6 col-lg-4">
+      <%= render 'shared/card', itinerary: itinerary %>
+      </div>
+    <% end %>
+    <%= link_to "Add an itinerary", new_itinerary_path %>
+  </div>
+</div>

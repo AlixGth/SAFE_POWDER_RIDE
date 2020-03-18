@@ -1,0 +1,12 @@
+<div class="card-trip">
+    <%= cl_image_tag itinerary.photos[0].key %> 
+    <div class="card-trip-infos">
+      <div>
+        <h2><%= itinerary.name %></h2>
+        <p><%= itinerary.mountain %></p>
+      </div>
+      <p class="ml-3"> <%= itinerary.ski_difficulty %></p>
+      <h1 class="risk-level-infos-large"> 3 </h1>
+    </div>
+ <%= link_to "", itinerary_path(itinerary), class: 'card-link' %>
+  </div>
