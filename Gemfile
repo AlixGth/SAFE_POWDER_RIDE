@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 ruby '2.6.5'
 
 gem 'bootsnap', require: false
-gem 'devise'
 gem 'jbuilder', '~> 2.0'
 gem 'pg', '~> 0.21'
 gem 'puma'
@@ -16,8 +15,13 @@ gem 'sassc-rails'
 gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
+gem 'cloudinary', '~> 1.12.0'
 gem 'gpx'
 gem 'nokogiri'
+
+gem 'sidekiq'
+gem 'sidekiq-failures', '~> 1.0'
+
 group :development do
   gem 'web-console', '>= 3.3.0'
 end
