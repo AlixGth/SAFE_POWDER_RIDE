@@ -34,34 +34,6 @@
 
 </div>
 <%
-def radians(degrees)
-  degrees * (Math::PI/180)
-end
-
-def getDistance(lon1, lat1, lon2, lat2)
-  r = 6371;
-  dLat = radians(lat2-lat1)
-  dLon = radians(lon2-lon1) 
-  a = (Math.sin(dLat/2) * Math.sin(dLat/2)) + (Math.cos(radians(lat1)) * Math.cos(radians(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2))
-  c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)) 
-  d = r * c
-  return d
-end
-
-def getColor(lng1, lat1, lng2, lat2, elvt1, elvt2)
-  if elvt1 == elvt2
-    return '#A8F70A'
-  end
-  dist = getDistance(lng1, lat1, lng2, lat2)
-  slope = (elvt1 - elvt2).abs / (dist * 1000)
-  if slope >= 0.3
-    return '#F71F0A'
-  elsif slope >= 0.15
-    return '#F7B20A'
-  else
-    return '#A8F70A'
-  end
-end
 
 doc = Nokogiri::XML(open("/Users/gaetanmallet/code/malletgaetan/AlixGth/SAFE_POWDER_RIDE/app/views/pages/tour.gpx"))
 trackpoints = doc.xpath('//xmlns:trkpt')
@@ -83,7 +55,7 @@ for i in (1...array.size)
     lng2 = array[i][0].to_f
     lat2 = array[i][1].to_f
     yes = array[i]
-    color = getColor(lng1, lat1, lng2, lat2, array[i-1][2].to_i, array[i][2].to_i)
+    color = array[i-1][2].to_i > 1500 ? "#F71F0A" : "#F7B20A"
     array[i] = [array[i][0], array[i][1], color]
   end
 end
