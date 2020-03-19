@@ -1,20 +1,28 @@
-<h2>Log in</h2>
+<div class="container">
+  <h2 class="pb-3 mt-3">Se connecter</h2>
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: false,
-                autofocus: true,
-                input_html: { autocomplete: "email" } %>
-    <%= f.input :password,
-                required: false,
-                input_html: { autocomplete: "current-password" } %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-  </div>
+  <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="form-inputs">
+      <%= f.input :email,
+                  required: false,
+                  autofocus: true,
+                  label: 'Email',
+                  input_html: { autocomplete: "email" } %>
+      <%= f.input :password,
+                  label: 'Mot de passe',
+                  required: false,
+                  input_html: { autocomplete: "current-password" } %>
+      <%= f.input :remember_me, label: 'Se souvenir de moi', as: :boolean if devise_mapping.rememberable? %>
+    </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+    <div class="form-actions d-flex justify-content-between align-items-center">
+      <div>
+        <%= f.button :submit, "Connexion", class: "btn btn-primary" %>
+      </div>
+      <div>
+        <small>Première visite? <%= link_to 'Créer un compte',  new_user_registration_path %></small>
+      </div>
+    </div>
+    <small> <%= link_to 'Mot de passe oublié?', home_path  %></small>
+  <% end %>
+</div>
