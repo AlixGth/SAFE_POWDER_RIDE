@@ -1,8 +1,8 @@
 
 
 <h1><%= @itinerary.name %></h1>
- 
-   
+
+
   <%= @itinerary.name %>
   <%= @itinerary.description %>
   <%= @itinerary.duration %>
@@ -11,6 +11,7 @@
   <%= @itinerary.arrival %>
   <%= @itinerary.ascent_difficulty %>
   <%= @itinerary.ski_difficulty %>
+  <%= @itinerary.mountain.name %>
 
    <%= link_to "Back to all itineraries", itineraries_path %>
 
@@ -25,7 +26,7 @@ Coordinate.where(itinerary_id: @itinerary.id).each do |coordinate|
 	end
 end
 array = array.sort_by { |coordinate| coordinate[0] }
-%>  
+%>
 <div
   id="map"
   data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"

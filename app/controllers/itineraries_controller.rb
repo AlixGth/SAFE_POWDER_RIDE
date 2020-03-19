@@ -1,3 +1,4 @@
+
 class ItinerariesController < ApplicationController
  before_action :set_itinerary, only: [:show]
  skip_before_action :authenticate_user!, only: [:index, :show]
@@ -20,7 +21,10 @@ class ItinerariesController < ApplicationController
     @mountain = Mountain.find(params[:itinerary][:mountain].to_i)
     @itinerary.user = current_user
     @itinerary.mountain = @mountain
+    bera = @itinerary.mountain.bera
+    raise
     authorize @itinerary
+
     if @itinerary.save
       file_data = params[:itinerary][:gpx_coordinates]
       if file_data.respond_to?(:path)
