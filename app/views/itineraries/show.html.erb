@@ -12,6 +12,7 @@
   <%= @itinerary.ascent_difficulty %>
   <%= @itinerary.ski_difficulty %>
   <%= @itinerary.mountain.name %>
+  <%= @bera.risk_max %>
 
    <%= link_to "Back to all itineraries", itineraries_path %>
 
@@ -21,4 +22,4 @@
   data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
 ></div>
 
-<div id="hidden" data-waypoints = "<%= @array %>" ></div>
+<div id="hidden" data-waypoints = "<%= @waypoints %>" ></div>
