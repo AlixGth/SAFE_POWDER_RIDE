@@ -130,7 +130,7 @@ puts "itineraries generated!"
 puts "generating coordinates"
 
 def coordinates(filename, itinerary)
-	url = Dir.pwd + "/db/"+filename
+	url = Dir.pwd + "/db/" + filename
 	doc = Nokogiri::XML(open(url))
 	trackpoints = doc.xpath('//xmlns:trkpt')
 	array = []
