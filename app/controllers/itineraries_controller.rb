@@ -8,11 +8,24 @@ class ItinerariesController < ApplicationController
   end
 
   def show
+    @bera = @itinerary.mountain.beras.last
+    @coordinates = @itinerary.coordinates
+    update_gpx_coordinates_coloring(@coordinates, @bera)
+    @array = []
+    @coordinates.each do |coordinate|
+      if coordinate.color
+        @array << [coordinate.order, coordinate.longitude, coordinate.latitude, coordinate.color]
+      else
+        @array << [coordinate.order, coordinate.longitude, coordinate.latitude]
+      end
+    end
+    @array = @array.sort_by { |coordinate| coordinate[0] }
   end
 
   def new
     @itinerary = Itinerary.new
     @itinerary.user = current_user
+    update_gpx_coordinates_coloring(coordinates)
     authorize @itinerary
   end
 
@@ -21,13 +34,13 @@ class ItinerariesController < ApplicationController
     @mountain = Mountain.find(params[:itinerary][:mountain].to_i)
     @itinerary.user = current_user
     @itinerary.mountain = @mountain
-    bera = @itinerary.mountain.beras[0]
+    bera = @itinerary.mountain.beras.last
 
     authorize @itinerary
 
     if @itinerary.save
       file_data = params[:itinerary][:gpx_coordinates]
-      gpx_parsing(file_data)
+      gpx_parsing(file_data, bera)
 
       redirect_to itinerary_path(@itinerary)
     else
@@ -37,7 +50,7 @@ class ItinerariesController < ApplicationController
 
 private
 
-  def gpx_parsing(file_data)
+  def gpx_parsing(file_data, bera)
     if file_data.respond_to?(:path)
       doc = Nokogiri::XML(open(file_data.path))
       trackpoints = doc.xpath('//xmlns:trkpt')
@@ -51,20 +64,34 @@ private
         index % reduce_value == 0
       end
 
-      gpx_coordinates_coloring(array)
+      for i in (0...array.size)
+        if i != 0 && i % 4 == 0
+          color = array[i-1][2].to_i > bera.altitude ? "#F71F0A" : "#F7B20A"
+          array[i] = [array[i][0], array[i][1], color]
+          Coordinate.create(longitude: array[i][0].to_f, latitude: array[i][1].to_f, color: color, order: i, itinerary: @itinerary)
+        else
+          Coordinate.create(longitude: array[i][0].to_f, latitude: array[i][1].to_f, color: nil, order: i, itinerary: @itinerary)
+        end
+      end
     else
       redirect_to :new
     end
   end
 
-  def gpx_coordinates_coloring(array)
-    for i in (0...array.size)
-      if i != 0 && i % 4 == 0
-        color = array[i-1][2].to_i > 1500 ? "#F71F0A" : "#F7B20A"
-        array[i] = [array[i][0], array[i][1], color]
-        Coordinate.create(longitude: array[i][0].to_f, latitude: array[i][1].to_f, color: color, order: i, itinerary: @itinerary)
+  def update_gpx_coordinates_coloring(coordinates, bera)
+    colors = {"1" => "#CAFF66", "2" => "#FBFF01", "3" => "#FE9800", "4" => "#FD0200", "5" => "#CB0200"}
+    risk1 = bera.risk1
+    risk2 = 3
+    bera_altitude = 1500
+    coordinates.each do |coordinate|
+      if bera_altitude.nil?
+        coordinate.color = colors[risk1.to_s]
       else
-        Coordinate.create(longitude: array[i][0].to_f, latitude: array[i][1].to_f, color: nil, order: i, itinerary: @itinerary)
+        if coordinate.altitude > bera_altitude
+          coordinate.update(color: colors[risk2.to_s])
+        else
+          coordinate.update(color: colors[risk1.to_s])
+        end
       end
     end
   end
