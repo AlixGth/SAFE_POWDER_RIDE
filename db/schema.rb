@@ -66,6 +66,8 @@ ActiveRecord::Schema.define(version: 2020_03_18_170102) do
     t.float "latitude"
     t.float "longitude"
     t.bigint "itinerary_id"
+    t.integer "order"
+    t.string "color"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["itinerary_id"], name: "index_coordinates_on_itinerary_id"
