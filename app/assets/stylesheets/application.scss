@@ -13,7 +13,20 @@
 @import "pages/index";
 @import "components/card_trip_large";
 @import "components/card_trip_small";
+@import "components/forms";
 
 #map {
   width: 50%;
+}
+
+body h1 {
+  color: $darkblue;
+}
+
+body h2 {
+  color: $darkblue;
+}
+
+body {
+  background-color: rgb(250,250,250)
 }

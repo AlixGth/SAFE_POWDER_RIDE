@@ -1,16 +1,50 @@
-<h1>Add a new itinerary</h1>
+<div class="container">
 
-<%= simple_form_for(@itinerary, :multipart => true) do |f| %>
-    <%= f.input :name %>
-    <%= f.input :description %>
-    <%= f.input :duration %>
-    <%= f.input :elevation %>
-    <%= f.input :departure %>
-    <%= f.input :arrival %>
-    <%= f.input :ascent_difficulty %>
-    <%= f.input :ski_difficulty %>
-    <%= f.input :mountain, collection: Mountain.all%>
-    <%= f.input :photos, as: :file, input_html: { multiple: true } %>
-    <%= f.file_field :gpx_coordinates %>
-    <%= f.button :submit %>
-<% end %>
+    <h2 class="pb-3 mt-3">Ajouter un itinéraire</h2>
+
+    <div class="form-inputs form-color">
+      <%= simple_form_for @itinerary do |f| %>
+        <%= f.input :name,
+                    required: true,
+                    placeholder: "Nom du sommet, vallée, col",
+                    label: 'Nom'%>
+        <%= f.input :mountain, collection: Mountain.all,
+                    label: "Massif"%>
+        <%= f.input :duration,
+                     placeholder: "ex: 4h",
+                    label: 'Durée'%>
+        <%= f.input :elevation,
+                    placeholder: "ex: 2000 m",
+                    label: 'Dénivelé'%>
+        <div class="d-flex align-items-center justify-content-between">
+          <%= f.input :departure,
+                      placeholder: "ex: 1000 m",
+                      label: 'Altitude départ' %>
+          <%= f.input :arrival,
+                      placeholder: "ex: 2500 m",
+                      label: "Altitude arrivée" %>
+        </div>
+        <%= f.input :ascent_difficulty,
+                    placeholder: "ex :PD, D, AD...",
+                    label: "Difficulté ascension"%>
+        <%= f.input :ski_difficulty,
+                    placeholder: "ex: 3.2 E1",
+                    label: "Difficulté ski"%>
+        <%= f.input :description,
+                    placeholder: "Description de la courses, spécificités,...",
+                    required: true,
+                    label: 'Description'%>
+        <%= f.input :photos, as: :file, input_html: { multiple: true },
+                    label: "Photos" %>
+        <p>Coordonnées au format GPX</p>
+        <%= f.file_field :gpx_coordinates,
+                    label: "Coordonnées GPX" %>
+
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, "Valider", class: "btn btn-primary btn-block my-3 " %>
+    </div>
+
+    <% end %>
+</div>
