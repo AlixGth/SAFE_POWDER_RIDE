@@ -1,15 +1,16 @@
 <h1>Add a new itinerary</h1>
 
-      <%= simple_form_for @itinerary do |f| %>
-        <%= f.input :name %>
-        <%= f.input :description %>
-        <%= f.input :duration %>
-        <%= f.input :elevation %>
-        <%= f.input :departure %>
-        <%= f.input :arrival %>
-        <%= f.input :ascent_difficulty %>
-        <%= f.input :ski_difficulty %>
-        <%= f.input :mountain, collection: Mountain.all%>
-        <%= f.input :photos, as: :file, input_html: { multiple: true } %>
-        <%= f.button :submit %>
-      <% end %>
+<%= simple_form_for(@itinerary, :multipart => true) do |f| %>
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.input :duration %>
+    <%= f.input :elevation %>
+    <%= f.input :departure %>
+    <%= f.input :arrival %>
+    <%= f.input :ascent_difficulty %>
+    <%= f.input :ski_difficulty %>
+    <%= f.input :mountain, collection: Mountain.all%>
+    <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+    <%= f.file_field :gpx_coordinates %>
+    <%= f.button :submit %>
+<% end %>
