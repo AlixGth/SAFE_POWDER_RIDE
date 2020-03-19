@@ -12,24 +12,14 @@
   <%= @itinerary.ascent_difficulty %>
   <%= @itinerary.ski_difficulty %>
   <%= @itinerary.mountain.name %>
+  <%= @bera.risk_max %>
 
    <%= link_to "Back to all itineraries", itineraries_path %>
 
 
-<%
-array = []
-Coordinate.where(itinerary_id: @itinerary.id).each do |coordinate|
-	if coordinate.color
-		array << [coordinate.order, coordinate.longitude, coordinate.latitude, coordinate.color]
-	else
-		array << [coordinate.order, coordinate.longitude, coordinate.latitude]
-	end
-end
-array = array.sort_by { |coordinate| coordinate[0] }
-%>
 <div
   id="map"
   data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
 ></div>
 
-<div id="hidden" data-waypoints = "<%= array %>" ></div>
+<div id="hidden" data-waypoints = "<%= @waypoints %>" ></div>
