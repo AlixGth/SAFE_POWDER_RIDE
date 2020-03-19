@@ -1,15 +1,31 @@
-<h1>Add a new itinerary</h1>
+<div class="container">
+
+    <h2 class="pb-3 mt-3">Ajouter un nouvel itinéraire</h2>
 
       <%= simple_form_for @itinerary do |f| %>
-        <%= f.input :name %>
-        <%= f.input :description %>
-        <%= f.input :duration %>
-        <%= f.input :elevation %>
-        <%= f.input :departure %>
-        <%= f.input :arrival %>
-        <%= f.input :ascent_difficulty %>
-        <%= f.input :ski_difficulty %>
-        <%= f.input :mountain, collection: Mountain.all%>
+        <%= f.input :name,
+                    required: true,
+                    label: 'Nom'%>
+        <%= f.input :description,
+                    required: true,
+                    label: 'Description'%>
+        <%= f.input :duration,
+                    label: 'Durée'%>
+        <%= f.input :elevation,
+                    label: 'Dénivelé'%>
+        <%= f.input :departure,
+                    label: 'Point de départ' %>
+        <%= f.input :arrival,
+                    label: "Point d'arrivée" %>
+        <%= f.input :ascent_difficulty,
+                    label: "Niveau de difficulté randonnée"%>
+        <%= f.input :ski_difficulty,
+                    label: "Niveau de difficulté à ski"%>
+        <%= f.input :mountain, collection: Mountain.all,
+                    label: "Massif"%>
         <%= f.input :photos, as: :file, input_html: { multiple: true } %>
         <%= f.button :submit %>
       <% end %>
+
+
+</div>
