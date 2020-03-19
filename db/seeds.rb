@@ -5,14 +5,14 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-# require "open-uri"
+require "open-uri"
 
 puts "cleaning database"
-# Product.destroy_all
-# User.destroy_all
-# Booking.destroy_all
-# Review.destroy_all
+
+Coordinate.destroy_all
+Itinerary.destroy_all
 Mountain.destroy_all
+User.destroy_all
 
 puts "creating mountain ranges"
 
@@ -65,161 +65,100 @@ user4.avatar.attach(io: avatar4, filename: 'alix.jpeg', content_type: 'image/jpe
 puts "users generated!"
 
 
-# puts "generating products"
+puts "generating itineraries"
 
-# product1_photo = URI.open('https://www.placedelaloc.com/sites/default/files/styles/annonce_detail/public/annonces/2016/01/28/16244/location-ski_rossignol-1049574906.jpg?itok=8f7wdso6')
-# product2_photo  = URI.open('https://www.placedelaloc.com/sites/default/files/styles/annonce_detail/public/annonces/2017/11/06/33683/location-skis_salomon_xwing_cruiser_158m-1816326028.jpg?itok=6mwG8PjU')
-# product3_photo = URI.open('https://app.sportyrent.com/uploads/quentin%20snow%200.jpg')
-# product4_photo = URI.open('https://www.placedelaloc.com/sites/default/files/styles/annonce_detail/public/annonces/2015/01/29/558/location-chaussures_de_ski_enfant_taille_19.5_tecnica-1243604997.jpg?itok=KgkX5iyH')
-# product5_photo_1 = URI.open('https://www.placedelaloc.com/sites/default/files/styles/annonce_detail/public/annonces/2018/03/27/4298/location-combinaison_de_ski_enfant_6_ans_quechua-809203567.jpg?itok=t9Y9tiht')
-# product5_photo_2 = URI.open('https://www.placedelaloc.com/sites/default/files/styles/annonce_detail/public/annonces/2018/03/27/4298/location-combinaison_de_ski_enfant_6_ans_quechua-1135021784.jpg?itok=oGwcaS3U')
-# product6_photo_1 = URI.open('https://www.placedelaloc.com/sites/default/files/styles/annonce_detail/public/annonces/2016/11/04/3475/location-skis_batons_chaussures-1441558497.jpg?itok=_GcLXjR5')
-# product6_photo_2 = URI.open('https://www.placedelaloc.com/sites/default/files/styles/annonce_detail/public/annonces/2016/11/04/3475/location-skis_batons_chaussures-1043309082.jpg?itok=yXPAZjKf')
-# product7_photo_1 = URI.open('https://www.placedelaloc.com/sites/default/files/styles/annonce_detail/public/annonces/2014/12/30/3930/location-casque_de_ski-456068682.jpg?itok=UXk1SEd6')
-# product7_photo_2 = URI.open('https://www.placedelaloc.com/sites/default/files/styles/annonce_detail/public/annonces/2014/12/30/3930/location-casque_de_ski-1041133703.jpg?itok=t4ybRY8m')
-# product7_photo_3 = URI.open('https://www.placedelaloc.com/sites/default/files/styles/annonce_detail/public/annonces/2014/12/30/3930/location-casque_de_ski-1467289711.jpg?itok=UT0cA6wo')
+ itinerary1_photo = URI.open('https://www.refugesclareethabor.com/InfoliveImages/itineraires/buffere/baude12_01_09.jpg')
+ itinerary2_photo  = URI.open('http://www.skitour.fr/photos_topos/3452.jpg')
+ itinerary3_photo_1 = URI.open('http://www.skitour.fr/photos_topos/2471.jpg')
+ itinerary3_photo_2 = URI.open('http://www.skitour.fr/photos_topos/2524.jpg')
 
 
-# product1 = Product.create({
-#   name: 'Skis Rossignol 170',
-#   address: 'Saint-Chaffrey (05330)',
-#   description: 'Skis Rossignol 170 de 2020 état neuf',
-#   price: 10,
-#   category: 'skis',
-#   user: user1
-# })
-# product1.photos.attach(io: product1_photo, filename: 'ski_rossignol.jpeg', content_type: 'image/jpeg')
-
-# product2 = Product.create({
-#   name: 'Skis Salomon 160',
-#   address: 'La Clusaz (74220)',
-#   description: 'Skis Salomon 160 de 2019 en très bon état',
-#   price: 15,
-#   category: 'skis',
-#   user: user1
-# })
-# product2.photos.attach(io: product2_photo, filename: 'ski_salomon.jpeg', content_type: 'image/jpeg')
+itinerary1 = Itinerary.create({
+  name: 'Pic du lac Blanc',
+  elevation: 1380,
+  departure: 'Névache (05100)',
+  arrival: 'Névache (05100)',
+  ascent_difficulty: 'R',
+  ski_difficulty: '3.1 E2',
+  description: "Une belle et longue boucle panoramique où lon peut profiter de la variété des paysages avec un joli sommet panoramique offrant une superbe vue sur les Ecrins. Pour le retour sur Névache par contre, il faut aimer le ski de fond! De Névache, suivre la route sur environ 900m avant de séchapper sur le droite plein N en direction du vallon qui monte en direction du Lac Blanc que lon suit jusqu'à celui-ci (long). Ensuite, soit prendre l'arête (parfois soufflé, à pied) qui monte en haut de la crête de la Gardiole puis au sommet du Pic de Lac Blanc, soit la face E pour atteindre le sommet directement (100m à 35°, attention aux plaques, mais nombreux rochers émergents).
+Au sommet, traverser plein S en visant le collu 2905. Ensuite prendre le vallon orienté W et le descendre tout du long (pente faible, nombreux plats) jusquà atteindre le route de ski de fond un peu en dessous du refuge de Laval.
+La descendre jusquà Névache (long et beaucoup de plat : faut aimer le skating!)",
+  duration: 6,
+  mountain: Mountain.find_by(name: 'Thabor'),
+  user: user1
+  })
+itinerary1.photos.attach(io: itinerary1_photo, filename: 'pic_lac_blanc.jpeg', content_type: 'image/jpeg')
 
 
-# product3 = Product.create({
-#   name: 'Snowboard Salomon 150',
-#   address: 'Rue des Ecrins, Orcières (05170)',
-#   description: 'Snowboard freeride',
-#   price: 10,
-#   category: 'snowboard',
-#   user: user4
-# })
-# product3.photos.attach(io: product3_photo, filename: 'snow_rossignol.jpeg', content_type: 'image/jpeg')
-
-# product4 = Product.create({
-#   name: 'Chaussures de ski enfant taille 19.5 TECNICA',
-#   address: 'Menthon-Saint-Bernard (74290)',
-#   description: 'Chaussures TECNICA taille 19.5, soit 203 mm, couleur orange',
-#   price: 4,
-#   category: "chaussures de ski",
-#   user: user4
-# })
-# product4.photos.attach(io: product4_photo, filename: 'chaussuresorange.jpeg', content_type: 'image/jpeg')
-
-# product5 = Product.create({
-#   name: 'Combinaison de ski enfant 6 ans quechua',
-#   address: 'Sevran (93270)',
-#   description: "Combinaison de ski Quechua. taille 6 ans. C'est une combinaison avec capuche, très étanche qui maintient bien au chaud. La combi s'ouvre et se ferme par devant, avec fermeture éclair et skratch. Elle possede deux poches latérales.",
-#   price: 4,
-#   category: "vêtements",
-#   user: user2
-# })
-# product5.photos.attach(io: product5_photo_1, filename: 'combi1.jpeg', content_type: 'image/jpeg')
-# product5.photos.attach(io: product5_photo_2, filename: 'combi2.jpeg', content_type: 'image/jpeg')
-
-# product6 = Product.create({
-#   name: 'Skis batons et chaussures',
-#   address: 'Pont-Noyelles (80115)',
-#   description: "IDEAL POUR SKIEUR OCCASIONNEL OU DEBUTANT. SKI 170 CHAUSSURES 43/44",
-#   price: 9,
-#   category: "skis + batons + chaussures",
-#   user: user3
-# })
-# product6.photos.attach(io: product6_photo_1, filename: 'pack1.jpeg', content_type: 'image/jpeg')
-# product6.photos.attach(io: product6_photo_2, filename: 'pack2.jpeg', content_type: 'image/jpeg')
+itinerary2 = Itinerary.create({
+  name: 'le Gilly, combe Nord en boucle',
+  elevation: 800,
+  departure: 'le Roux dAbriès (05460)',
+  arrival: 'le Roux dAbriès (05460)',
+  ascent_difficulty: 'R',
+  ski_difficulty: '3.1 E1',
+  description: "Stationner au niveau du pont qui franchit le Torrent du Bouchet, juste avant la Chapelle St Barthélémy.
+Remonter les clairières derrière la Chapelle St Barthélémy pour rejoindre la piste forestière du Bois de la Brune et la suivre quelques instants vers le SW.
+La quitter vers 1800m pour remonter une (ancienne?) piste de ski tracée dans le versant NW du Bois de la Brune et qui mène au sommet de Gilly.
+Du sommet, descendre par la combe Nord jusque dans le Bois Noir puis obliquer légèrement à droite pour rejoindre Valpréveyre.
+Le retour vers le parking se fait par la route enneigée.",
+  duration: 5,
+  mountain: Mountain.find_by(name: 'Queyras'),
+  user: user2
+  })
+itinerary2.photos.attach(io: itinerary2_photo, filename: 'gilly_versant_nord.jpeg', content_type: 'image/jpeg')
 
 
-
-# product7 = Product.create({
-#   name: 'Casque de Ski',
-#   address: 'Villelaure (84530)',
-#   description: "Loue casque de ski. peu utilisé. Taille de 54 à 60cm de tour de tête",
-#   price: 3,
-#   category: "casque",
-#   user: user3
-# })
-# product7.photos.attach(io: product7_photo_1, filename: 'casque1.jpeg', content_type: 'image/jpeg')
-# product7.photos.attach(io: product7_photo_2, filename: 'casque2.jpeg', content_type: 'image/jpeg')
-# product7.photos.attach(io: product7_photo_3, filename: 'casque3.jpeg', content_type: 'image/jpeg')
-
-# puts "product generated!"
-
-# booking1_own = Booking.create({
-#     product_id: product6.id,
-#     user_id: user4.id,
-#     start_date: Date.new(2020, 3, 18),
-#     end_date: Date.new(2020, 3, 20),
-#     status: "Confirmée"
-# })
-
-# booking2_own = Booking.create({
-#     product_id: product7.id,
-#     user_id: user4.id,
-#     start_date: Date.new(2020, 3, 18),
-#     end_date: Date.new(2020, 3, 20),
-#     status: "Confirmée"
-# })
-
-# booking3_own = Booking.create({
-#     product_id: product1.id,
-#     user_id: user4.id,
-#     start_date: Date.new(2020, 3, 20),
-#     end_date: Date.new(2020, 3, 22)
-# })
-
-# booking4_other = Booking.create({
-#     product_id: product3.id,
-#     user_id: user1.id,
-#     start_date: Date.new(2020, 3, 20),
-#     end_date: Date.new(2020, 3, 22),
-#     status: "Confirmée"
-# })
-
-# booking5_other = Booking.create({
-#     product_id: product4.id,
-#     user_id: user1.id,
-#     start_date: Date.new(2020, 3, 25),
-#     end_date: Date.new(2020, 3, 27),
-#     status: "Confirmée"
-# })
-
-# puts "bookings generated for Alix user!"
-
-# review1 = Review.create({
-#     content: "Très satisfait du produit",
-#     rating: 5,
-#     product_id: product3.id,
-#     user_id: user1.id
-# })
-
-# review2 = Review.create({
-#     content: "Bon produit",
-#     rating: 4,
-#     product_id: product3.id,
-#     user_id: user2.id
-# })
-
-# review3 = Review.create({
-#     content: "Très content",
-#     rating: 4,
-#     product_id: product4.id,
-#     user_id: user3.id
-# })
+itinerary3 = Itinerary.create({
+  name: 'Pic du Jaillon, Couloir NE',
+  elevation: 1125,
+  departure: 'Arvieux (05350)',
+  arrival: 'Arvieux (05350)',
+  ascent_difficulty: 'AD',
+  ski_difficulty: '5.1 E3',
+  description: "Suivre le fond du vallon de torrent de Combe Bonne, en direction de lac du Lauzon, jusqu’au point 1890, après de Cabane de la Gardère. Puis monter en direction ouest vers le point 2067. Après ce point, pour dépasser la première barre rocheuse, il faut prendre le couloir le plus a droite, toujours en direction ouest. Le centre du couloir avait une barre d’une dizaine de mètres, mais nous avons trouvé une voie qui passe du côté droit. Après on se trouve sur un épaule et le couloir est évident droit devant.",
+  duration: 6,
+  mountain: Mountain.find_by(name: 'Queyras'),
+  user: user3
+  })
+itinerary3.photos.attach(io: itinerary3_photo_1, filename: 'pic_jaillon_1.jpeg', content_type: 'image/jpeg')
+itinerary3.photos.attach(io: itinerary3_photo_2, filename: 'pic_jaillon_2.jpeg', content_type: 'image/jpeg')
 
 
-# puts "reviews generated"
+puts "itineraries generated!"
+
+puts "generating coordinates"
+
+def coordinates(filename, itinerary)
+	url = Dir.pwd + "/db/" + filename
+	doc = Nokogiri::XML(open(url))
+	trackpoints = doc.xpath('//xmlns:trkpt')
+	array = []
+	doc.search('trkpt').each_with_index do |trkpt, index|
+	  ele = trkpt.search('ele').text
+	  array <<  [trkpt.attribute("lon").value, trkpt.attribute("lat").value, ele ]
+	end
+	reduce_value = (array.size.to_f / 300).round
+	array = array.select.with_index do |coordinate, index|
+	  index % reduce_value == 0
+	end
+	for i in (0...array.size)
+	  if i != 0 && i % 4 == 0
+	    color = array[i-1][2].to_i > 1500 ? "#F71F0A" : "#F7B20A"
+	    array[i] = [array[i][0], array[i][1], color]
+	    Coordinate.create(longitude: array[i][0].to_f, latitude: array[i][1].to_f, color: color, order: i, itinerary: itinerary)
+	  else
+	    Coordinate.create(longitude: array[i][0].to_f, latitude: array[i][1].to_f, color: nil, order: i, itinerary: itinerary)
+	  end
+	end
+end
+
+filenames = ["skitour_topo3707_jaillon.gpx", "skitour_topo4771_Gilly.gpx", "skitour_topo8041_lacblanc.gpx"]
+
+Itinerary.all.each_with_index do |itinerary, index|
+	coordinates(filenames[index], itinerary)
+end 
+
+puts "coordinates created!"      
+        
+
