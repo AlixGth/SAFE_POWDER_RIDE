@@ -85,7 +85,7 @@ Au sommet, traverser plein S en visant le collu 2905. Ensuite prendre le vallon 
 La descendre jusquà Névache (long et beaucoup de plat : faut aimer le skating!)",
   duration: 6,
   mountain: Mountain.find_by(name: 'Thabor'),
-  user_id: user1.id
+  user: user1
   })
 itinerary1.photos.attach(io: itinerary1_photo, filename: 'pic_lac_blanc.jpeg', content_type: 'image/jpeg')
 
@@ -104,7 +104,7 @@ Du sommet, descendre par la combe Nord jusque dans le Bois Noir puis obliquer l�
 Le retour vers le parking se fait par la route enneigée.",
   duration: 5,
   mountain: Mountain.find_by(name: 'Queyras'),
-  user_id: user2.id
+  user: user2
   })
 itinerary2.photos.attach(io: itinerary2_photo, filename: 'gilly_versant_nord.jpeg', content_type: 'image/jpeg')
 
@@ -119,7 +119,7 @@ itinerary3 = Itinerary.create({
   description: "Suivre le fond du vallon de torrent de Combe Bonne, en direction de lac du Lauzon, jusqu’au point 1890, après de Cabane de la Gardère. Puis monter en direction ouest vers le point 2067. Après ce point, pour dépasser la première barre rocheuse, il faut prendre le couloir le plus a droite, toujours en direction ouest. Le centre du couloir avait une barre d’une dizaine de mètres, mais nous avons trouvé une voie qui passe du côté droit. Après on se trouve sur un épaule et le couloir est évident droit devant.",
   duration: 6,
   mountain: Mountain.find_by(name: 'Queyras'),
-  user_id: user3.id
+  user: user3
   })
 itinerary3.photos.attach(io: itinerary3_photo_1, filename: 'pic_jaillon_1.jpeg', content_type: 'image/jpeg')
 itinerary3.photos.attach(io: itinerary3_photo_2, filename: 'pic_jaillon_2.jpeg', content_type: 'image/jpeg')
