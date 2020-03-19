@@ -9,11 +9,10 @@ require "open-uri"
 
 puts "cleaning database"
 
+Coordinate.destroy_all
 Itinerary.destroy_all
-User.destroy_all
-# Booking.destroy_all
-# Review.destroy_all
 Mountain.destroy_all
+User.destroy_all
 
 puts "creating mountain ranges"
 
@@ -69,9 +68,9 @@ puts "users generated!"
 puts "generating itineraries"
 
  itinerary1_photo = URI.open('https://www.refugesclareethabor.com/InfoliveImages/itineraires/buffere/baude12_01_09.jpg')
- itinerary2_photo  = URI.open('http://www.skitour.fr/topos/photo.php?i=3452')
- itinerary3_photo_1 = URI.open('http://www.skitour.fr/topos/photo.php?i=2471')
- itinerary3_photo_2 = URI.open('http://www.skitour.fr/topos/photo.php?i=2524')
+ itinerary2_photo  = URI.open('http://www.skitour.fr/photos_topos/3452.jpg')
+ itinerary3_photo_1 = URI.open('http://www.skitour.fr/photos_topos/2471.jpg')
+ itinerary3_photo_2 = URI.open('http://www.skitour.fr/photos_topos/2524.jpg')
 
 
 itinerary1 = Itinerary.create({
@@ -81,11 +80,11 @@ itinerary1 = Itinerary.create({
   arrival: 'Névache (05100)',
   ascent_difficulty: 'R',
   ski_difficulty: '3.1 E2',
-  description: 'Une belle et longue boucle panoramique où lon peut profiter de la variété des paysages avec un joli sommet panoramique offrant une superbe vue sur les Ecrins. Pour le retour sur Névache par contre, il faut aimer le ski de fond! De Névache, suivre la route sur environ 900m avant de s'échapper sur le droite plein N en direction du vallon qui monte en direction du Lac Blanc que l'on suit jusqu'à celui-ci (long). Ensuite, soit prendre l'arête (parfois soufflé, à pied) qui monte en haut de la crête de la Gardiole puis au sommet du Pic de Lac Blanc, soit la face E pour atteindre le sommet directement (100m à 35°, attention aux plaques, mais nombreux rochers émergents).
+  description: "Une belle et longue boucle panoramique où lon peut profiter de la variété des paysages avec un joli sommet panoramique offrant une superbe vue sur les Ecrins. Pour le retour sur Névache par contre, il faut aimer le ski de fond! De Névache, suivre la route sur environ 900m avant de séchapper sur le droite plein N en direction du vallon qui monte en direction du Lac Blanc que lon suit jusqu'à celui-ci (long). Ensuite, soit prendre l'arête (parfois soufflé, à pied) qui monte en haut de la crête de la Gardiole puis au sommet du Pic de Lac Blanc, soit la face E pour atteindre le sommet directement (100m à 35°, attention aux plaques, mais nombreux rochers émergents).
 Au sommet, traverser plein S en visant le collu 2905. Ensuite prendre le vallon orienté W et le descendre tout du long (pente faible, nombreux plats) jusquà atteindre le route de ski de fond un peu en dessous du refuge de Laval.
-La descendre jusquà Névache (long et beaucoup de plat : faut aimer le skating!)'
+La descendre jusquà Névache (long et beaucoup de plat : faut aimer le skating!)",
   duration: 6,
-  mountain: 'Thabor',
+  mountain: Mountain.find_by(name: 'Thabor'),
   user_id: user1.id
   })
 itinerary1.photos.attach(io: itinerary1_photo, filename: 'pic_lac_blanc.jpeg', content_type: 'image/jpeg')
@@ -98,13 +97,13 @@ itinerary2 = Itinerary.create({
   arrival: 'le Roux dAbriès (05460)',
   ascent_difficulty: 'R',
   ski_difficulty: '3.1 E1',
-  description: 'Stationner au niveau du pont qui franchit le Torrent du Bouchet, juste avant la Chapelle St Barthélémy.
+  description: "Stationner au niveau du pont qui franchit le Torrent du Bouchet, juste avant la Chapelle St Barthélémy.
 Remonter les clairières derrière la Chapelle St Barthélémy pour rejoindre la piste forestière du Bois de la Brune et la suivre quelques instants vers le SW.
 La quitter vers 1800m pour remonter une (ancienne?) piste de ski tracée dans le versant NW du Bois de la Brune et qui mène au sommet de Gilly.
 Du sommet, descendre par la combe Nord jusque dans le Bois Noir puis obliquer légèrement à droite pour rejoindre Valpréveyre.
-Le retour vers le parking se fait par la route enneigée.'
+Le retour vers le parking se fait par la route enneigée.",
   duration: 5,
-  mountain: 'Queyras',
+  mountain: Mountain.find_by(name: 'Queyras'),
   user_id: user2.id
   })
 itinerary2.photos.attach(io: itinerary2_photo, filename: 'gilly_versant_nord.jpeg', content_type: 'image/jpeg')
@@ -117,9 +116,9 @@ itinerary3 = Itinerary.create({
   arrival: 'Arvieux (05350)',
   ascent_difficulty: 'AD',
   ski_difficulty: '5.1 E3',
-  description: 'Suivre le fond du vallon de torrent de Combe Bonne, en direction de lac du Lauzon, jusqu’au point 1890, après de Cabane de la Gardère. Puis monter en direction ouest vers le point 2067. Après ce point, pour dépasser la première barre rocheuse, il faut prendre le couloir le plus a droite, toujours en direction ouest. Le centre du couloir avait une barre d’une dizaine de mètres, mais nous avons trouvé une voie qui passe du côté droit. Après on se trouve sur un épaule et le couloir est évident droit devant.'
+  description: "Suivre le fond du vallon de torrent de Combe Bonne, en direction de lac du Lauzon, jusqu’au point 1890, après de Cabane de la Gardère. Puis monter en direction ouest vers le point 2067. Après ce point, pour dépasser la première barre rocheuse, il faut prendre le couloir le plus a droite, toujours en direction ouest. Le centre du couloir avait une barre d’une dizaine de mètres, mais nous avons trouvé une voie qui passe du côté droit. Après on se trouve sur un épaule et le couloir est évident droit devant.",
   duration: 6,
-  mountain: Mountain.find(name: 'Queyras'),
+  mountain: Mountain.find_by(name: 'Queyras'),
   user_id: user3.id
   })
 itinerary3.photos.attach(io: itinerary3_photo_1, filename: 'pic_jaillon_1.jpeg', content_type: 'image/jpeg')
@@ -128,5 +127,38 @@ itinerary3.photos.attach(io: itinerary3_photo_2, filename: 'pic_jaillon_2.jpeg',
 
 puts "itineraries generated!"
 
+puts "generating coordinates"
 
+def coordinates(filename, itinerary)
+	url = Dir.pwd + "/db/"+filename
+	doc = Nokogiri::XML(open(url))
+	trackpoints = doc.xpath('//xmlns:trkpt')
+	array = []
+	doc.search('trkpt').each_with_index do |trkpt, index|
+	  ele = trkpt.search('ele').text
+	  array <<  [trkpt.attribute("lon").value, trkpt.attribute("lat").value, ele ]
+	end
+	reduce_value = (array.size.to_f / 300).round
+	array = array.select.with_index do |coordinate, index|
+	  index % reduce_value == 0
+	end
+	for i in (0...array.size)
+	  if i != 0 && i % 4 == 0
+	    color = array[i-1][2].to_i > 1500 ? "#F71F0A" : "#F7B20A"
+	    array[i] = [array[i][0], array[i][1], color]
+	    Coordinate.create(longitude: array[i][0].to_f, latitude: array[i][1].to_f, color: color, order: i, itinerary: itinerary)
+	  else
+	    Coordinate.create(longitude: array[i][0].to_f, latitude: array[i][1].to_f, color: nil, order: i, itinerary: itinerary)
+	  end
+	end
+end
+
+filenames = ["skitour_topo3707_jaillon.gpx", "skitour_topo4771_Gilly.gpx", "skitour_topo8041_lacblanc.gpx"]
+
+Itinerary.all.each_with_index do |itinerary, index|
+	coordinates(filenames[index], itinerary)
+end 
+
+puts "coordinates created!"      
+        
 
