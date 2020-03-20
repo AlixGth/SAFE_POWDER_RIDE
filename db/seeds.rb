@@ -164,4 +164,4 @@ puts "parsing bera"
 
 BeraParseJob.perform_now
 
-puts "bera parsing done!"
+puts "parsing done!"
