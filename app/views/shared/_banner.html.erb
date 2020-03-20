@@ -2,10 +2,22 @@
   <div class="container">
     <h1 class="display-5 banner-title">Skiez en toute sécurité</h1>
     <div id="search-bar">
+    	<%= form_tag itineraries_path, method: :get, class: "banner-form form-group form-inline" do %>
+        <div class="banner-form-input d-flex justify-content-between">
+          <%= text_field_tag :name,
+            params[:name],
+            class: "form-control",
+            placeholder: "Course, massif ..."
+          %>
+          
+        </div>
+        <div class="banner-form-button mt-4 d-flex justify-content-end">
+          <%= submit_tag "Lancer la recherche", class: "btn btn-primary" %>
       <input type="text" class="form-control" placeholder="Chercher un itinéraire ou un massif">
       <button class="btn btn-primary" type="button">
         Chercher
       </button>
+           <% end %>
     </div>
   </div>
 </div>
