@@ -11,6 +11,7 @@ puts "cleaning database"
 
 Coordinate.destroy_all
 Itinerary.destroy_all
+Bera.destroy_all
 Mountain.destroy_all
 User.destroy_all
 
@@ -156,12 +157,14 @@ filenames = ["skitour_topo3707_jaillon.gpx", "skitour_topo4771_Gilly.gpx", "skit
 
 Itinerary.all.each_with_index do |itinerary, index|
 	coordinates(filenames[index], itinerary)
-end 
+end
 
-puts "coordinates created!"      
-        
+puts "coordinates created!"
+
 puts "parsing bera"
 
-BeraParseJob.perform_now
+BeraParseJob.perform_now('app/assets/bera_files/BRA.CHABLAIS.20200317144018.xml')
+BeraParseJob.perform_now('app/assets/bera_files/BRA.QUEYRAS.20200318150126.xml')
+BeraParseJob.perform_now('app/assets/bera_files/BRA.THABOR.20200319151122.xml')
 
 puts "parsing done!"
