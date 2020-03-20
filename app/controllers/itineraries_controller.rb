@@ -5,7 +5,6 @@ class ItinerariesController < ApplicationController
 
 	def index
     @colors = {"1" => "#CAFF66", "2" => "#FBFF01", "3" => "#FE9800", "4" => "#FD0200", "5" => "#CB0200"}
-    if params[:query].present?
     @params_present = params[:query].present?
     @results_count = policy_scope(Itinerary).search_by_name_and_mountain(params[:query]).count
     if @params_present && @results_count > 0
