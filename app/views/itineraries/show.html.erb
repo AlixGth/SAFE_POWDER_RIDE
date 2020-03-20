@@ -1,25 +1,104 @@
 
 
-<h1><%= @itinerary.name %></h1>
+<div id="carouselExampleControls" class="carousel slide" data-touch="false" data-ride="carousel" data-interval="false">
+  <div class="carousel-inner">
+    <div
+    class="carousel-item active map"
+    id="map"
+    data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+  ></div>
 
+  <% @itinerary.photos.each do |photo| %>
+    <div class="carousel-item">
+      <%= cl_image_tag photo.key, class: "map"%>
+    </div>
+  <% end %>
+  </div>
 
-  <%= @itinerary.name %>
-  <%= @itinerary.description %>
-  <%= @itinerary.duration %>
-  <%= @itinerary.elevation %>
-  <%= @itinerary.departure %>
-  <%= @itinerary.arrival %>
-  <%= @itinerary.ascent_difficulty %>
-  <%= @itinerary.ski_difficulty %>
-  <%= @itinerary.mountain.name %>
-  <%= @bera.risk_max %>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
 
-   <%= link_to "Back to all itineraries", itineraries_path %>
+<div class="container">
+<h1 class="text-center"><%= @itinerary.name %></h1>
+<div class="d-flex align-items-center" style="height: 40px; position: relative">
+  <h6>Niveau de risque</h6>
+  <div style="position: absolute; left: 147px; top: -3px;background-color: <%= @bera_color %>; border-radius: 50%; width: 40px; height: 40px">
+  </div>
+  <p class="text-center" style="font-size: 30px; position: absolute;left: 160px; top: -6px"><%= @bera.risk_max %></p>
+</div>
 
-<%= cl_image_tag @itinerary.photos[0].key %>
-<div
-  id="map"
-  data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
-></div>
+<h5>Données principales</h5>
 
+<div style="border: 2px solid #eee; background-color: #eee" class="p-1">
+
+  <div class="d-flex justify-content-between">
+    <h6>Massif</h6>
+    <h6><%= @itinerary.mountain.name %></h6>
+  </div>
+
+  <div class="d-flex justify-content-between">
+    <h6>Dénivelé</h6>
+    <h6><%= @itinerary.elevation %></h6>
+  </div>
+
+  <div class="d-flex justify-content-between">
+    <h6>Départ</h6>
+    <h6><%= @itinerary.departure %></h6>
+  </div>
+
+  <div class="d-flex justify-content-between">
+    <h6>Arrivée</h6>
+    <h6><%= @itinerary.arrival %></h6>
+  </div>
+
+  <div class="d-flex justify-content-between">
+    <h6>Difficulté randonnée</h6>
+    <h6><%= @itinerary.ascent_difficulty %></h6>
+  </div>
+
+  <div class="d-flex justify-content-between">
+    <h6>Difficulté ski</h6>
+    <h6><%= @itinerary.ski_difficulty %></h6>
+  </div>
+
+  <div class="d-flex justify-content-between">
+    <h6>Durée</h6>
+    <h6><%= @itinerary.duration %>h</h6>
+  </div>
+
+</div>
+
+<h5 class="mt-2">Description</h5>
+
+<div style="border: 2px solid #eee" class="p-1 mt-1">
+
+ <%= @itinerary.description %>
+
+</div>
+
+<div class="d-flex justify-content-around mt-3" style="width: 300px; margin: 0 auto">
+  <div class="d-flex flex-column">
+    <i class="fas fa-plus" style="display: inline-block; margin: 0 auto"></i>
+    <p>Favoris</p>
+  </div>
+  <div class="d-flex flex-column">
+    <i class="fas fa-share-alt" style="display: inline-block; margin: 0 auto"></i>
+    <p>Partager</p>
+  </div>
+  <div class="d-flex flex-column">
+    <i class="fas fa-cloud-download-alt" style="display: inline-block; margin: 0 auto"></i>
+    <p>Télécharger</p>
+  </div>
+</div>
+
+<%= link_to "Back to all itineraries", itineraries_path, class: "btn btn-primary w-100 mb-2" %>
+
+</div>
 <div id="hidden" data-waypoints = "<%= @waypoints %>" ></div>
