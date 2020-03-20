@@ -4,6 +4,7 @@ class ItinerariesController < ApplicationController
  skip_before_action :authenticate_user!, only: [:index, :show]
 
 	def index
+    @colors = {"1" => "#CAFF66", "2" => "#FBFF01", "3" => "#FE9800", "4" => "#FD0200", "5" => "#CB0200"}
     if params[:query].present?
       @itineraries = policy_scope(Itinerary).search_by_name_and_mountain(params[:query])
     else
@@ -85,8 +86,8 @@ end
 
   def update_gpx_coordinates_coloring(coordinates, bera)
     colors = {"1" => "#CAFF66", "2" => "#FBFF01", "3" => "#FE9800", "4" => "#FD0200", "5" => "#CB0200"}
-    risk1 = bera.risk1
-    risk2 = bera.risk2
+    risk1 = bera.evolrisk1 ? [bera.risk1, bera.evolrisk1].max : bera.risk1
+    risk2 = bera.evolrisk2 ? [bera.risk2, bera.evolrisk2].max : bera.risk2
     bera_altitude = bera.altitude
     coordinates.each do |coordinate|
       if bera_altitude.nil?

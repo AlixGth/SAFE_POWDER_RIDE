@@ -6,7 +6,7 @@
         <p><%= itinerary.mountain.name %></p>
       </div>
       <p class="ml-3"> <%= itinerary.ski_difficulty %></p>
-      <h1 class="risk-level-infos-large"> <%= itinerary.mountain.beras.last.risk_max %> </h1>
+      <h1 class="risk-level-infos-large" style="background-color: <%= @colors[itinerary.mountain.beras.last.risk_max.to_s] %>"> <%= itinerary.mountain.beras.last.risk_max %> </h1>
     </div>
   <%= link_to "", itinerary_path(itinerary), class: 'card-link' %>
 </div>
