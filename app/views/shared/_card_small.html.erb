@@ -1,0 +1,11 @@
+<div class="card-product">
+  <%= cl_image_tag itinerary.photos[0].key, crop: :scale %>
+  <div class="card-product-infos">
+    <h2> <%= itinerary.name %> </h2>
+    <div class="d-flex justify-content-start align-items-center mt-3">
+      <h3 class="risk-level-infos-small mr-3"> <%= itinerary.mountain.beras.last.risk_max %> </h3>
+      <p><%= itinerary.mountain.name %></p>
+    </div>
+  </div>
+  <%= link_to "", itinerary_path(itinerary), class: 'card-link' %>
+</div>

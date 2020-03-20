@@ -1,18 +1,28 @@
-<%= render 'shared/banner' %>
 <div class="container">
-  <h1 class="display-5 banner-title">Tous les itinéraires</h1>
-</div>
+    <div class="row align-items-center p-3">
+      <div class="col-10 pr-1">
+        <%= form_tag itineraries_path, method: :get, class: "banner-form form-group form-inline m-0" do %>
+          <%= text_field_tag :query,
+            params[:query],
+            class: "form-control",
+            placeholder: "Course, massif ..."
+          %>
+      </div>
+      <div class="col pl-1">
+         <%= submit_tag "GO", class: "btn btn-primary" %>
+          <% end %>
+      </div>
+    </div>
 
-<div class="container">
   <% if @itineraries.count > 0 %>
-    <p><%= @itineraries.count%> itinéraires trouvés </p>
+    <p> <%= pluralize(@itineraries.count, 'itinéraire trouvé', plural: 'itinéraires trouvés')%> </p>
   <% end %>
-  <div class="row">
+
+  <div class="cards-layout">
     <% @itineraries.each do |itinerary| %>
       <div>
-      <%= render 'shared/card', itinerary: itinerary %>
+        <%= render 'shared/card', itinerary: itinerary %>
       </div>
-    <% end %>  
+    <% end %>
   </div>
-  <%= link_to "Add an itinerary", new_itinerary_path %>
 </div>

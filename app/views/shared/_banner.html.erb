@@ -1,19 +1,22 @@
 <div class="banner-img">
   <div class="container">
     <h1 class="display-5 banner-title">Skiez en toute sécurité</h1>
-    <div id="search-bar">
-    	<%= form_tag itineraries_path, method: :get, class: "banner-form form-group form-inline" do %>
-        <div class="banner-form-input d-flex justify-content-between">
+
+
+    <div class="row align-items-center p-3">
+      <div class="col-10 pr-1">
+        <%= form_tag itineraries_path, method: :get, class: "banner-form form-group form-inline m-0" do %>
           <%= text_field_tag :query,
             params[:query],
             class: "form-control",
             placeholder: "Course, massif ..."
           %>
-        </div>
-        <div>
-          <%= submit_tag "Lancer la recherche", class: "btn btn-primary" %>
-           <% end %>
-        </div>
+      </div>
+      <div class="col pl-1">
+         <%= submit_tag "GO", class: "btn btn-primary" %>
+          <% end %>
+      </div>
     </div>
+
   </div>
 </div>
