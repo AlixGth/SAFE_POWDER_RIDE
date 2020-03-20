@@ -29,7 +29,6 @@ avatar1 = URI.open('https://avatars3.githubusercontent.com/u/58790438?v=4')
 avatar2 = URI.open('https://avatars0.githubusercontent.com/u/28073539?v=4')
 avatar3 = URI.open('https://avatars1.githubusercontent.com/u/59839816?v=4')
 avatar4 = URI.open('https://i0.wp.com/www.lechotouristique.com/wp-content/uploads/2018/02/alix-gauthier.jpg?resize=300%2C300&ssl=1')
-
 user1 = User.create({
   username: 'Jerome',
   email: 'jerome.crest@gmail.com',
@@ -67,10 +66,10 @@ puts "users generated!"
 
 puts "generating itineraries"
 
- itinerary1_photo = URI.open('https://www.refugesclareethabor.com/InfoliveImages/itineraires/buffere/baude12_01_09.jpg')
- itinerary2_photo  = URI.open('http://www.skitour.fr/photos_topos/3452.jpg')
- itinerary3_photo_1 = URI.open('http://www.skitour.fr/photos_topos/2471.jpg')
- itinerary3_photo_2 = URI.open('http://www.skitour.fr/photos_topos/2524.jpg')
+itinerary1_photo = URI.open('https://www.refugesclareethabor.com/InfoliveImages/itineraires/buffere/baude12_01_09.jpg')
+itinerary2_photo  = URI.open('http://www.skitour.fr/photos_topos/3452.jpg')
+itinerary3_photo_1 = URI.open('http://www.skitour.fr/photos_topos/2471.jpg')
+itinerary3_photo_2 = URI.open('http://www.skitour.fr/photos_topos/2524.jpg')
 
 
 itinerary1 = Itinerary.create({
@@ -161,4 +160,8 @@ end
 
 puts "coordinates created!"      
         
+puts "parsing bera"
 
+BeraParseJob.perform_now
+
+puts "parsing done!"

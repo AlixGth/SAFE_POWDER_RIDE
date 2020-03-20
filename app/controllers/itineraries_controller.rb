@@ -4,7 +4,11 @@ class ItinerariesController < ApplicationController
  skip_before_action :authenticate_user!, only: [:index, :show]
 
 	def index
-    @itineraries = policy_scope(Itinerary)
+    if params[:query].present?
+      @itineraries = policy_scope(Itinerary).search_by_name_and_mountain(params[:query])
+    else
+      @itineraries = policy_scope(Itinerary)
+    end
   end
 
   def show
