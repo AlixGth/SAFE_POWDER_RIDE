@@ -1,3 +1,4 @@
+
 class ItinerariesController < ApplicationController
  before_action :set_itinerary, only: [:show]
  skip_before_action :authenticate_user!, only: [:index, :show]
@@ -7,11 +8,16 @@ class ItinerariesController < ApplicationController
   end
 
   def show
+    @bera = @itinerary.mountain.beras.last
+    @coordinates = @itinerary.coordinates
+    update_gpx_coordinates_coloring(@coordinates, @bera)
+    @waypoints = generate_waypoints(@coordinates)
   end
 
   def new
     @itinerary = Itinerary.new
     @itinerary.user = current_user
+
     authorize @itinerary
   end
 
@@ -20,33 +26,14 @@ class ItinerariesController < ApplicationController
     @mountain = Mountain.find(params[:itinerary][:mountain].to_i)
     @itinerary.user = current_user
     @itinerary.mountain = @mountain
+    bera = @itinerary.mountain.beras.last
+
     authorize @itinerary
+
     if @itinerary.save
       file_data = params[:itinerary][:gpx_coordinates]
-      if file_data.respond_to?(:path)
-        doc = Nokogiri::XML(open(file_data.path))
-        trackpoints = doc.xpath('//xmlns:trkpt')
-        array = []
-        doc.search('trkpt').each_with_index do |trkpt, index|
-          ele = trkpt.search('ele').text
-          array <<  [trkpt.attribute("lon").value, trkpt.attribute("lat").value, ele ]
-        end
-        reduce_value = (array.size.to_f / 300).round
-        array = array.select.with_index do |coordinate, index|
-          index % reduce_value == 0
-        end
-        for i in (0...array.size)
-          if i != 0 && i % 4 == 0
-            color = array[i-1][2].to_i > 1500 ? "#F71F0A" : "#F7B20A"
-            array[i] = [array[i][0], array[i][1], color]
-            Coordinate.create(longitude: array[i][0].to_f, latitude: array[i][1].to_f, color: color, order: i, itinerary: @itinerary)
-          else
-            Coordinate.create(longitude: array[i][0].to_f, latitude: array[i][1].to_f, color: nil, order: i, itinerary: @itinerary)
-          end
-        end
-      else
-        redirect_to :new
-      end
+      gpx_parsing(file_data, bera)
+
       redirect_to itinerary_path(@itinerary)
     else
       render :new
@@ -54,6 +41,59 @@ class ItinerariesController < ApplicationController
   end
 
 private
+
+def generate_waypoints(coordinates)
+  array = []
+  coordinates.each do |coordinate|
+    array << [coordinate.order, coordinate.longitude, coordinate.latitude, coordinate.color]
+  end
+  array = array.sort_by { |coordinate| coordinate[0] }
+end
+
+  def gpx_parsing(file_data, bera)
+    if file_data.respond_to?(:path)
+      doc = Nokogiri::XML(open(file_data.path))
+      trackpoints = doc.xpath('//xmlns:trkpt')
+      coordinates = []
+      doc.search('trkpt').each_with_index do |trkpt, index|
+        ele = trkpt.search('ele').text
+        coordinates <<  [trkpt.attribute("lon").value, trkpt.attribute("lat").value, ele ]
+      end
+      reduce_value = (coordinates.size.to_f / 300).round
+      coordinates = coordinates.select.with_index do |coordinate, index|
+        index % reduce_value == 0
+      end
+
+      create_coordinates(coordinates)
+
+    else
+      redirect_to :new
+    end
+  end
+
+  def create_coordinates(coordinates)
+    for i in (0...coordinates.size)
+      coord = Coordinate.create(longitude: coordinates[i][0].to_f, latitude: coordinates[i][1].to_f, altitude: coordinates[i][2].to_f, order: i, itinerary: @itinerary)
+    end
+  end
+
+  def update_gpx_coordinates_coloring(coordinates, bera)
+    colors = {"1" => "#CAFF66", "2" => "#FBFF01", "3" => "#FE9800", "4" => "#FD0200", "5" => "#CB0200"}
+    risk1 = bera.risk1
+    risk2 = bera.risk2
+    bera_altitude = bera.altitude
+    coordinates.each do |coordinate|
+      if bera_altitude.nil?
+        coordinate.color = colors[risk1.to_s]
+      else
+        if coordinate.altitude > bera_altitude
+          coordinate.update(color: colors[risk2.to_s])
+        else
+          coordinate.update(color: colors[risk1.to_s])
+        end
+      end
+    end
+  end
 
   def itinerary_params
     params.require(:itinerary).permit(:name, :description, :duration, :elevation, :departure, :arrival, :ascent_difficulty, :ski_difficulty, photos: [])

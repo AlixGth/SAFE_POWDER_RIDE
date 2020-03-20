@@ -1,5 +1,3 @@
-require 'pry-byebug'
-
 class BeraParseJob < ApplicationJob
   queue_as :default
 
