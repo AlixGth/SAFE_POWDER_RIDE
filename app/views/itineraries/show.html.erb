@@ -85,7 +85,9 @@
   <div class="container">
     <div class="row">
       <div class="col-7">
-        <h6>Difficulté de montée</h6>
+        <%= link_to concept_path(anchor: 'difficulty') do %>
+          <h6>Difficulté de montée</h6>
+        <% end %>
       </div>
       <div class="col-5">
         <p><%= @itinerary.ascent_difficulty %></p>
@@ -96,7 +98,9 @@
   <div class="container">
     <div class="row">
       <div class="col-7">
-        <h6>Difficulté ski</h6>
+        <%= link_to concept_path(anchor: 'difficulty')  do %>
+          <h6>Difficulté ski</h6>
+        <% end %>
       </div>
       <div class="col-5">
         <p><%= @itinerary.ski_difficulty %></p>

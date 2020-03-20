@@ -10,7 +10,7 @@
     <p class="m-2 text-center">Vous partez en rando demain ?  <br>
       Vous cherchez des itinéraires sécurisés ?  <br>
       <strong>SafePowderRides vous aide !</strong>
-     Retrouvez sur chaque itinéraire un indice général de risque (sous forme de chiffre), et un tracé colorisé par niveau de risque en fonction de l'altitude. 
+     Retrouvez sur chaque itinéraire un indice général de risque (sous forme de chiffre), et un tracé colorisé par niveau de risque en fonction de l'altitude.
     </p>
   </div>
 </div>
@@ -20,11 +20,11 @@
 
 <h2 class="text-center my-5"> Comment le risque est-il calculé ?</h2>
 
-<h3 class= "text-center"> L'indice général de risque </h3> 
+<h3 class= "text-center"> L'indice général de risque </h3>
 <div class="row align-items-center">
   <div class="col-12 col-md-6 col-lg-4">
     <p class="m-2 text-center"> Dès leur publication, nous prenons les informations du BRA (Bulletin du Risque d'Avalanche, source Météo France).
-      L'indice qui est affiché sous forme de <strong>nombre</strong> sur chaque itinéraire correspond au risque maximal sur cet itinéraire calculé par le BERA. Voici la légende de cette échelle de risque. 
+      L'indice qui est affiché sous forme de <strong>nombre</strong> sur chaque itinéraire correspond au risque maximal sur cet itinéraire calculé par le BERA. Voici la légende de cette échelle de risque.
     </p>
      <div class="col-12 col-md-6 col-lg-4 m-2">
     <%= image_tag "bra-echelle.jpg", alt: "BRA", width: '100%'%>
@@ -37,53 +37,55 @@
   </div>
 </div>
 
-<h2 class= "text-center mt-5"> Le niveau de difficulté à skis </h2>
-  <div class="row align-items-center">
-    <div class="col-12 col-md-6 col-lg-4">
-      <p class="m-2 text-center"> 
-<br> <strong>Une cotation de ski (cotation de descente) </strong>
-<br>
-Cette cotation évalue plus particulièrement la pente.
-Elle comprend 5 degrés. Les 4 premiers sont subdivisés en trois niveaux et le cinquième est ouvert vers le haut. On a donc des notations du type 2.1 (deuxième degré, inférieur), 4.2 (quatrième degré, médian), 5.1 (cinquième degré, premier niveau), 5.4, etc…
-</br>
-<br>
-Les degrés sont décris ainsi :
-</br>
-<br>
-Ski 1 : C'est le niveau initiation. Pas de pentes supérieures à 30°. Les passages, même en forêt sont assez larges. Le dénivelé est inférieur à 800m. L'exposition n'est pas importante.
-Cependant on est déjà dans du ski alpin et plus dans le ski nordique.
-</br>
-<br>
-Ski 2 : Pas de difficultés techniques particulières. Pente à 35° maximum. Mais le dénivelé et l'exposition peuvent être importants.
-</br>
-<br>
-Ski 3 : Début du ski-alpinisme. Il y a des passages techniques et des pentes longues à 35°. Il peut y avoir de courts passages à 40°/45°, des forêts denses, des chemins forestiers raides.
-</br>
-<br>
-Ski 4 : Ski de couloir ou de pente raide : pente à 40° /45° très longue (plus de 200 m), forêts très denses (la pente peut être faible)
-</br>
-<br>
-Ski 5 : Pente à partir de 45°/50° et très longue (plus de 300 m). Sinon à partir de 50° sur 100 m.
-En plus de la pente, il faut aussi tenir compte de la configuration du terrain (étroitures, ...) ainsi une face large et un couloir étroit, à pente égale, n'auront pas la même cotation.
-</br>
-<br>
-<strong> La cotation d'exposition: </strong>
-</br>
-<br>
-Elle décrit les risques de blessures en cas de chute. Elle comprend 4 degrés notés E1, E2, E3 et E4 :
+<div id="difficulty">
+  <h2 class= "text-center mt-5"> Le niveau de difficulté à skis </h2>
+    <div class="row align-items-center">
+      <div class="col-12 col-md-6 col-lg-4">
+        <p class="m-2 text-center">
+  <br> <strong>Une cotation de ski (cotation de descente) </strong>
+  <br>
+  Cette cotation évalue plus particulièrement la pente.
+  Elle comprend 5 degrés. Les 4 premiers sont subdivisés en trois niveaux et le cinquième est ouvert vers le haut. On a donc des notations du type 2.1 (deuxième degré, inférieur), 4.2 (quatrième degré, médian), 5.1 (cinquième degré, premier niveau), 5.4, etc…
+  </br>
+  <br>
+  Les degrés sont décris ainsi :
+  </br>
+  <br>
+  Ski 1 : C'est le niveau initiation. Pas de pentes supérieures à 30°. Les passages, même en forêt sont assez larges. Le dénivelé est inférieur à 800m. L'exposition n'est pas importante.
+  Cependant on est déjà dans du ski alpin et plus dans le ski nordique.
+  </br>
+  <br>
+  Ski 2 : Pas de difficultés techniques particulières. Pente à 35° maximum. Mais le dénivelé et l'exposition peuvent être importants.
+  </br>
+  <br>
+  Ski 3 : Début du ski-alpinisme. Il y a des passages techniques et des pentes longues à 35°. Il peut y avoir de courts passages à 40°/45°, des forêts denses, des chemins forestiers raides.
+  </br>
+  <br>
+  Ski 4 : Ski de couloir ou de pente raide : pente à 40° /45° très longue (plus de 200 m), forêts très denses (la pente peut être faible)
+  </br>
+  <br>
+  Ski 5 : Pente à partir de 45°/50° et très longue (plus de 300 m). Sinon à partir de 50° sur 100 m.
+  En plus de la pente, il faut aussi tenir compte de la configuration du terrain (étroitures, ...) ainsi une face large et un couloir étroit, à pente égale, n'auront pas la même cotation.
+  </br>
+  <br>
+  <strong> La cotation d'exposition: </strong>
+  </br>
+  <br>
+  Elle décrit les risques de blessures en cas de chute. Elle comprend 4 degrés notés E1, E2, E3 et E4 :
 
-</br><br>
-E1 : L’exposition est celle de la pente elle-même, il n’y a pas d’obstacle majeur, uniquement des arbres et des cailloux. Attention, pour une pente raide et/ou une neige dure, le risque de blessure en cas de chute est important.
-</br><br>
-E2 : Barre rocheuse dans l’axe de la pente qui aggraverait les risques de blessures en cas de chute, ou couloir légèrement tournant.
-</br><br>
-E3 : En cas de chute, saut de falaises importantes ou couloir tortueux avec risque de percussion. Mort probable.
-</br>
-<br>
-E4 : Paroi très haute, rebonds multiples, percussions garanties. Mort certaine.
-</br>
-</br> 
-</p>
+  </br><br>
+  E1 : L’exposition est celle de la pente elle-même, il n’y a pas d’obstacle majeur, uniquement des arbres et des cailloux. Attention, pour une pente raide et/ou une neige dure, le risque de blessure en cas de chute est important.
+  </br><br>
+  E2 : Barre rocheuse dans l’axe de la pente qui aggraverait les risques de blessures en cas de chute, ou couloir légèrement tournant.
+  </br><br>
+  E3 : En cas de chute, saut de falaises importantes ou couloir tortueux avec risque de percussion. Mort probable.
+  </br>
+  <br>
+  E4 : Paroi très haute, rebonds multiples, percussions garanties. Mort certaine.
+  </br>
+  </br>
+  </p>
+</div>
 
 <h2 class="text-center my-5"> Qui sommes nous?</h2>
 
