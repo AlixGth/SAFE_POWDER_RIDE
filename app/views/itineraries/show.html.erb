@@ -16,7 +16,7 @@
 
    <%= link_to "Back to all itineraries", itineraries_path %>
 
-
+<%= cl_image_tag @itinerary.photos[0].key %>
 <div
   id="map"
   data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"

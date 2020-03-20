@@ -29,7 +29,6 @@ avatar1 = URI.open('https://avatars3.githubusercontent.com/u/58790438?v=4')
 avatar2 = URI.open('https://avatars0.githubusercontent.com/u/28073539?v=4')
 avatar3 = URI.open('https://avatars1.githubusercontent.com/u/59839816?v=4')
 avatar4 = URI.open('https://i0.wp.com/www.lechotouristique.com/wp-content/uploads/2018/02/alix-gauthier.jpg?resize=300%2C300&ssl=1')
-
 user1 = User.create({
   username: 'Jerome',
   email: 'jerome.crest@gmail.com',
@@ -67,10 +66,10 @@ puts "users generated!"
 
 puts "generating itineraries"
 
- itinerary1_photo = URI.open('https://www.refugesclareethabor.com/InfoliveImages/itineraires/buffere/baude12_01_09.jpg')
- itinerary2_photo  = URI.open('http://www.skitour.fr/photos_topos/3452.jpg')
- itinerary3_photo_1 = URI.open('http://www.skitour.fr/photos_topos/2471.jpg')
- itinerary3_photo_2 = URI.open('http://www.skitour.fr/photos_topos/2524.jpg')
+itinerary1_photo = URI.open('https://www.refugesclareethabor.com/InfoliveImages/itineraires/buffere/baude12_01_09.jpg')
+itinerary2_photo  = URI.open('http://www.skitour.fr/photos_topos/3452.jpg')
+itinerary3_photo_1 = URI.open('http://www.skitour.fr/photos_topos/2471.jpg')
+itinerary3_photo_2 = URI.open('http://www.skitour.fr/photos_topos/2524.jpg')
 
 
 itinerary1 = Itinerary.create({
@@ -84,7 +83,7 @@ itinerary1 = Itinerary.create({
 Au sommet, traverser plein S en visant le collu 2905. Ensuite prendre le vallon orienté W et le descendre tout du long (pente faible, nombreux plats) jusquà atteindre le route de ski de fond un peu en dessous du refuge de Laval.
 La descendre jusquà Névache (long et beaucoup de plat : faut aimer le skating!)",
   duration: 6,
-  mountain: Mountain.find_by(name: 'Thabor'),
+  mountain: Mountain.find_by(name: 'Chablais'),
   user: user1
   })
 itinerary1.photos.attach(io: itinerary1_photo, filename: 'pic_lac_blanc.jpeg', content_type: 'image/jpeg')
@@ -103,7 +102,7 @@ La quitter vers 1800m pour remonter une (ancienne?) piste de ski tracée dans le
 Du sommet, descendre par la combe Nord jusque dans le Bois Noir puis obliquer légèrement à droite pour rejoindre Valpréveyre.
 Le retour vers le parking se fait par la route enneigée.",
   duration: 5,
-  mountain: Mountain.find_by(name: 'Queyras'),
+  mountain: Mountain.find_by(name: 'Chablais'),
   user: user2
   })
 itinerary2.photos.attach(io: itinerary2_photo, filename: 'gilly_versant_nord.jpeg', content_type: 'image/jpeg')
@@ -118,7 +117,7 @@ itinerary3 = Itinerary.create({
   ski_difficulty: '5.1 E3',
   description: "Suivre le fond du vallon de torrent de Combe Bonne, en direction de lac du Lauzon, jusqu’au point 1890, après de Cabane de la Gardère. Puis monter en direction ouest vers le point 2067. Après ce point, pour dépasser la première barre rocheuse, il faut prendre le couloir le plus a droite, toujours en direction ouest. Le centre du couloir avait une barre d’une dizaine de mètres, mais nous avons trouvé une voie qui passe du côté droit. Après on se trouve sur un épaule et le couloir est évident droit devant.",
   duration: 6,
-  mountain: Mountain.find_by(name: 'Queyras'),
+  mountain: Mountain.find_by(name: 'Chablais'),
   user: user3
   })
 itinerary3.photos.attach(io: itinerary3_photo_1, filename: 'pic_jaillon_1.jpeg', content_type: 'image/jpeg')
@@ -161,4 +160,8 @@ end
 
 puts "coordinates created!"      
         
+puts "parsing bera"
 
+BeraParseJob.perform_now
+
+puts "parsing done!"
