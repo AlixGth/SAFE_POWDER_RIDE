@@ -1,7 +1,5 @@
 import mapboxgl from 'mapbox-gl';
 
-mapboxgl.accessToken = document.getElementById("map").dataset.mapboxApiKey;
-
 const extractArray = () => {
   let coordinates = document.getElementById("hidden").dataset.waypoints;
   let array = []
@@ -34,9 +32,6 @@ const getLngs = (wp) => {
   return lngs;
 };
 
-
-const waypoints = extractArray();
-
 const getMinMax = (waypoints) => {
   const padding = 0.005;
   const lats = getLats(waypoints);
@@ -48,17 +43,7 @@ const getMinMax = (waypoints) => {
   return [[maxLng, minLat],[minLng, maxLat]];
 };
 
-
-
-var map = new mapboxgl.Map({
-  container: 'map',
-  style: 'mapbox://styles/mapbox/outdoors-v11?optimize=true',
-  center: [waypoints[0][0], waypoints[0][1]],
-  zoom: 15
-});
-
-
-const display = (route, name, color) => {
+const display = (map, route, name, color) => {
   // [[lng1, lat1],[lng2, lat2], [lng3, lat3]]
   map.addSource(name, {
     'type': 'geojson',
@@ -93,6 +78,14 @@ const display = (route, name, color) => {
 
 const displayRoute = () => {
   if (document.getElementById("map")){
+    mapboxgl.accessToken = document.getElementById("map").dataset.mapboxApiKey;
+    const waypoints = extractArray();
+    var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/outdoors-v11?optimize=true',
+      center: [waypoints[0][0], waypoints[0][1]],
+      zoom: 15
+    });
     map.on("load", function(e) {
       map.fitBounds(getMinMax(waypoints));
       for(let i = 4; i < waypoints.length - 1; i = i + 4) {
@@ -107,7 +100,7 @@ const displayRoute = () => {
         const lng4 = waypoints[i][0];
         const lat4 = waypoints[i][1];
         const color = waypoints[i][2];
-        display([[lng0, lat0], [lng1, lat1], [lng2, lat2], [lng3, lat3], [lng4, lat4]], i.toString(), color);
+        display(map, [[lng0, lat0], [lng1, lat1], [lng2, lat2], [lng3, lat3], [lng4, lat4]], i.toString(), color);
       };
     });
   }
