@@ -86,8 +86,8 @@ const displayRoute = () => {
       center: [waypoints[0][0], waypoints[0][1]],
       zoom: 15
     });
+    map.fitBounds(getMinMax(waypoints));
     map.on("load", function(e) {
-      map.fitBounds(getMinMax(waypoints));
       for(let i = 4; i < waypoints.length - 1; i = i + 4) {
         const lng0 = waypoints[i-4][0];
         const lat0 = waypoints[i-4][1];
