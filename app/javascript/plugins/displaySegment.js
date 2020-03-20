@@ -15,11 +15,40 @@ const extractArray = () => {
       array.push([lng, lat])
     }
   });
-  console.log(array)
   return array;
 };
 
+const getLats = (wp) => {
+  let lats = [];
+  wp.forEach((points) => {
+    lats.push(points[1]);
+  });
+  return lats;
+};
+
+const getLngs = (wp) => {
+  let lngs = [];
+  wp.forEach((points) => {
+    lngs.push(points[0]);
+  });
+  return lngs;
+};
+
+
 const waypoints = extractArray();
+
+const getMinMax = (waypoints) => {
+  const padding = 0.005;
+  const lats = getLats(waypoints);
+  const lngs = getLngs(waypoints);
+  const minLat = Math.min(...lats) - padding;
+  const maxLat = Math.max(...lats) + padding;
+  const minLng = Math.min(...lngs) - padding;
+  const maxLng = Math.max(...lngs) + padding;
+  return [[maxLng, minLat],[minLng, maxLat]];
+};
+
+
 
 var map = new mapboxgl.Map({
   container: 'map',
@@ -31,7 +60,6 @@ var map = new mapboxgl.Map({
 
 const display = (route, name, color) => {
   // [[lng1, lat1],[lng2, lat2], [lng3, lat3]]
-  console.log(color);
   map.addSource(name, {
     'type': 'geojson',
     'data': {
@@ -65,8 +93,8 @@ const display = (route, name, color) => {
 
 const displayRoute = () => {
   if (document.getElementById("map")){
-    console.log(waypoints);
     map.on("load", function(e) {
+      map.fitBounds(getMinMax(waypoints));
       for(let i = 4; i < waypoints.length - 1; i = i + 4) {
         const lng0 = waypoints[i-4][0];
         const lat0 = waypoints[i-4][1];

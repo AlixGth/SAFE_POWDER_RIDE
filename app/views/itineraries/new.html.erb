@@ -18,11 +18,11 @@
                     label: 'Dénivelé'%>
         <div class="d-flex align-items-center justify-content-between">
           <%= f.input :departure,
-                      placeholder: "ex: 1000 m",
-                      label: 'Altitude départ' %>
+                      placeholder: "ex: le Roux dAbriès (05460)",
+                      label: 'Point départ' %>
           <%= f.input :arrival,
-                      placeholder: "ex: 2500 m",
-                      label: "Altitude arrivée" %>
+                      placeholder: "ex: le Roux dAbriès (05460)",
+                      label: "Point arrivée" %>
         </div>
         <%= f.input :ascent_difficulty,
                     placeholder: "ex :PD, D, AD...",
@@ -36,7 +36,7 @@
                     label: 'Description'%>
         <%= f.input :photos, as: :file, input_html: { multiple: true },
                     label: "Photos" %>
-        <p>Coordonnées au format GPX</p>
+        <label>Coordonnées au format GPX</label><br>
         <%= f.file_field :gpx_coordinates,
                     label: "Coordonnées GPX" %>
 
