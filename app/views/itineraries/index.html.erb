@@ -14,7 +14,11 @@
       </div>
     </div>
 
-  <% if @itineraries.count > 0 %>
+
+
+  <% if @results_count == 0 && @params_present%>
+    <p> Aucun résultat ne correspond à votre recherche </p>
+  <% else %>
     <p> <%= pluralize(@itineraries.count, 'itinéraire trouvé', plural: 'itinéraires trouvés')%> </p>
   <% end %>
 
