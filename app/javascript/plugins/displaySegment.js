@@ -2,8 +2,10 @@ import mapboxgl from 'mapbox-gl';
 
 const extractArray = () => {
   let coordinates = document.getElementById("hidden").dataset.waypoints;
+  console.log(coordinates);
   let array = []
   coordinates = coordinates.split("],").forEach((yes) => {
+    console.log(yes);
     const qwe = yes.split("\"").join("").split("[").join("").split(",");
     let lng = Number.parseFloat(qwe[1].trim(), 10);
     let lat = Number.parseFloat(qwe[2].trim(), 10);
@@ -80,6 +82,8 @@ const displayRoute = () => {
   if (document.getElementById("map")){
     mapboxgl.accessToken = document.getElementById("map").dataset.mapboxApiKey;
     const waypoints = extractArray();
+    console.log(waypoints);
+    console.log(waypoints);
     var map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/outdoors-v11?optimize=true',
@@ -100,6 +104,7 @@ const displayRoute = () => {
         const lng4 = waypoints[i][0];
         const lat4 = waypoints[i][1];
         const color = waypoints[i][2];
+        console.log(color);
         display(map, [[lng0, lat0], [lng1, lat1], [lng2, lat2], [lng3, lat3], [lng4, lat4]], i.toString(), color);
       };
     });

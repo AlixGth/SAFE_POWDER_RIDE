@@ -80,7 +80,7 @@ itinerary1 = Itinerary.create({
   arrival: 'Névache (05100)',
   ascent_difficulty: 'R',
   ski_difficulty: '3.1 E2',
-  description: "Une belle et longue boucle panoramique où lon peut profiter de la variété des paysages avec un joli sommet panoramique offrant une superbe vue sur les Ecrins. Pour le retour sur Névache par contre, il faut aimer le ski de fond! De Névache, suivre la route sur environ 900m avant de séchapper sur le droite plein N en direction du vallon qui monte en direction du Lac Blanc que lon suit jusqu'à celui-ci (long). Ensuite, soit prendre l'arête (parfois soufflé, à pied) qui monte en haut de la crête de la Gardiole puis au sommet du Pic de Lac Blanc, soit la face E pour atteindre le sommet directement (100m à 35°, attention aux plaques, mais nombreux rochers émergents).
+  description: "Une belle et longue boucle panoramique où l'on peut profiter de la variété des paysages avec un joli sommet panoramique offrant une superbe vue sur les Ecrins. Pour le retour sur Névache par contre, il faut aimer le ski de fond! De Névache, suivre la route sur environ 900m avant de séchapper sur le droite plein N en direction du vallon qui monte en direction du Lac Blanc que lon suit jusqu'à celui-ci (long). Ensuite, soit prendre l'arête (parfois soufflé, à pied) qui monte en haut de la crête de la Gardiole puis au sommet du Pic de Lac Blanc, soit la face E pour atteindre le sommet directement (100m à 35°, attention aux plaques, mais nombreux rochers émergents).
 Au sommet, traverser plein S en visant le collu 2905. Ensuite prendre le vallon orienté W et le descendre tout du long (pente faible, nombreux plats) jusquà atteindre le route de ski de fond un peu en dessous du refuge de Laval.
 La descendre jusquà Névache (long et beaucoup de plat : faut aimer le skating!)",
   duration: 6,
@@ -142,15 +142,9 @@ def coordinates(filename, itinerary)
 	array = array.select.with_index do |coordinate, index|
 	  index % reduce_value == 0
 	end
-	for i in (0...array.size)
-	  if i != 0 && i % 4 == 0
-	    color = array[i-1][2].to_i > 1500 ? "#F71F0A" : "#F7B20A"
-	    array[i] = [array[i][0], array[i][1], color]
-	    Coordinate.create(longitude: array[i][0].to_f, latitude: array[i][1].to_f, altitude: array[i][2].to_f, color: color, order: i, itinerary: itinerary)
-	  else
-	    Coordinate.create(longitude: array[i][0].to_f, latitude: array[i][1].to_f, altitude: array[i][2].to_f, color: nil, order: i, itinerary: itinerary)
-	  end
-	end
+  for i in (0...array.size)
+    coord = Coordinate.create!(longitude: array[i][0].to_f, latitude: array[i][1].to_f, altitude: array[i][2].to_f, order: i, itinerary: itinerary, color: "#CAFF66")
+  end
 end
 
 filenames = ["skitour_topo3707_jaillon.gpx", "skitour_topo4771_Gilly.gpx", "skitour_topo8041_lacblanc.gpx"]

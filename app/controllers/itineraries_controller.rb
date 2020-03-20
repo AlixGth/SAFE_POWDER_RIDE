@@ -19,8 +19,9 @@ class ItinerariesController < ApplicationController
     colors = {"1" => "#CAFF66", "2" => "#FBFF01", "3" => "#FE9800", "4" => "#FD0200", "5" => "#CB0200"}
     @bera = @itinerary.mountain.beras.last
     @bera_color = colors[@bera.risk_max.to_s]
+    coordinates = @itinerary.coordinates
+    update_gpx_coordinates_coloring(coordinates, @bera)
     @coordinates = @itinerary.coordinates
-    update_gpx_coordinates_coloring(@coordinates, @bera)
     @waypoints = generate_waypoints(@coordinates)
   end
 
@@ -94,12 +95,12 @@ end
     bera_altitude = bera.altitude
     coordinates.each do |coordinate|
       if bera_altitude.nil?
-        coordinate.color = colors[risk1.to_s]
+        coordinate.update!(color: colors[risk1.to_s])
       else
         if coordinate.altitude > bera_altitude
-          coordinate.update(color: colors[risk2.to_s])
+          coordinate.update!(color: colors[risk2.to_s])
         else
-          coordinate.update(color: colors[risk1.to_s])
+          coordinate.update!(color: colors[risk1.to_s])
         end
       end
     end
