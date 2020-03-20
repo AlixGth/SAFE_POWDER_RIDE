@@ -1,8 +1,8 @@
 class BeraParseJob < ApplicationJob
   queue_as :default
 
-  def perform(*args)
-    file = File.open('app/assets/bera_files/BRA.CHABLAIS.20200317144018.xml')
+  def perform(file_path)
+    file = File.open(file_path)
     document = Nokogiri::XML(file)
 
     bra = document.root.xpath('BULLETINS_NEIGE_AVALANCHE')
