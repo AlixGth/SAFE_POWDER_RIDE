@@ -27,57 +27,99 @@
 
 <div class="container">
 <h1 class="text-center"><%= @itinerary.name %></h1>
-<div class="d-flex align-items-center" style="height: 40px; position: relative">
+<div class="d-flex align-items-center" style="height: 40px;">
   <h6>Niveau de risque</h6>
-  <div style="position: absolute; left: 147px; top: -3px;background-color: <%= @bera_color %>; border-radius: 50%; width: 40px; height: 40px">
+  <div class="ml-2" style="position: relative; background-color: <%= @bera_color %>; border-radius: 50%; width: 40px; height: 40px">
+    <p class="text-center" style="font-size: 30px; position: absolute;left: 12px; top: -5px"><%= @bera.risk_max %></p>
   </div>
-  <p class="text-center" style="font-size: 30px; position: absolute;left: 160px; top: -6px"><%= @bera.risk_max %></p>
 </div>
 
 <h5>Données principales</h5>
 
-<div style="border: 2px solid #eee; background-color: #eee" class="p-1">
+<div style="border: 3px solid #eee;" class="p-1">
 
-  <div class="d-flex justify-content-between">
-    <h6>Massif</h6>
-    <h6><%= @itinerary.mountain.name %></h6>
+  <div class="container">
+    <div class="row">
+      <div class="col-7">
+        <h6>Massif</h6>
+      </div>
+      <div class="col-5">
+        <p><%= @itinerary.mountain.name %></p>
+      </div>
+    </div>
   </div>
 
-  <div class="d-flex justify-content-between">
-    <h6>Dénivelé</h6>
-    <h6><%= @itinerary.elevation %></h6>
+  <div class="container">
+    <div class="row">
+      <div class="col-7">
+        <h6>Dénivelé</h6>
+      </div>
+      <div class="col-5">
+        <p><%= @itinerary.elevation %></p>
+      </div>
+    </div>
   </div>
 
-  <div class="d-flex justify-content-between">
-    <h6>Départ</h6>
-    <h6><%= @itinerary.departure %></h6>
+  <div class="container">
+    <div class="row">
+      <div class="col-7">
+        <h6>Départ</h6>
+      </div>
+      <div class="col-5">
+        <p><%= @itinerary.departure %></p>
+      </div>
+    </div>
   </div>
 
-  <div class="d-flex justify-content-between">
-    <h6>Arrivée</h6>
-    <h6><%= @itinerary.arrival %></h6>
+  <div class="container">
+    <div class="row">
+      <div class="col-7">
+        <h6>Arrivée</h6>
+      </div>
+      <div class="col-5">
+        <p><%= @itinerary.arrival %></p>
+      </div>
+    </div>
   </div>
 
-  <div class="d-flex justify-content-between">
-    <h6>Difficulté randonnée</h6>
-    <h6><%= @itinerary.ascent_difficulty %></h6>
+  <div class="container">
+    <div class="row">
+      <div class="col-7">
+        <h6>Difficulté de montée</h6>
+      </div>
+      <div class="col-5">
+        <p><%= @itinerary.ascent_difficulty %></p>
+      </div>
+    </div>
   </div>
 
-  <div class="d-flex justify-content-between">
-    <h6>Difficulté ski</h6>
-    <h6><%= @itinerary.ski_difficulty %></h6>
+  <div class="container">
+    <div class="row">
+      <div class="col-7">
+        <h6>Difficulté ski</h6>
+      </div>
+      <div class="col-5">
+        <p><%= @itinerary.ski_difficulty %></p>
+      </div>
+    </div>
   </div>
 
-  <div class="d-flex justify-content-between">
-    <h6>Durée</h6>
-    <h6><%= @itinerary.duration %>h</h6>
+  <div class="container">
+    <div class="row">
+      <div class="col-7">
+        <h6>Durée</h6>
+      </div>
+      <div class="col-5">
+        <p><%= @itinerary.duration %>h</p>
+      </div>
+    </div>
   </div>
 
 </div>
 
 <h5 class="mt-2">Description</h5>
 
-<div style="border: 2px solid #eee" class="p-1 mt-1">
+<div style="border: 3px solid #eee" class="p-1 mt-1">
 
  <%= @itinerary.description %>
 
