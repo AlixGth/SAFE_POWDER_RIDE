@@ -8,7 +8,9 @@ class ItinerariesController < ApplicationController
   end
 
   def show
+    colors = {"1" => "#CAFF66", "2" => "#FBFF01", "3" => "#FE9800", "4" => "#FD0200", "5" => "#CB0200"}
     @bera = @itinerary.mountain.beras.last
+    @bera_color = colors[@bera.risk_max.to_s]
     @coordinates = @itinerary.coordinates
     update_gpx_coordinates_coloring(@coordinates, @bera)
     @waypoints = generate_waypoints(@coordinates)
