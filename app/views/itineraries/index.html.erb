@@ -1,14 +1,18 @@
 <div class="container">
-  <div class="row align-items-center p-3">
-    <div class="col-10 pr-1">
-      <input type="text" class="form-control" placeholder="Chercher un itinéraire ou un massif">
+    <div class="row align-items-center p-3">
+      <div class="col-10 pr-1">
+        <%= form_tag itineraries_path, method: :get, class: "banner-form form-group form-inline m-0" do %>
+          <%= text_field_tag :query,
+            params[:query],
+            class: "form-control",
+            placeholder: "Course, massif ..."
+          %>
+      </div>
+      <div class="col pl-1">
+         <%= submit_tag "GO", class: "btn btn-primary" %>
+          <% end %>
+      </div>
     </div>
-    <div class="col pl-1">
-      <button class="btn btn-primary btn-block" type="submit">GO</button>
-    </div>
-  </div>
-</div>
-
 
   <% if @itineraries.count > 0 %>
     <p> <%= pluralize(@itineraries.count, 'itinéraire trouvé', plural: 'itinéraires trouvés')%> </p>

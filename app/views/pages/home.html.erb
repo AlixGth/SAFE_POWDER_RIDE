@@ -1,35 +1,15 @@
 <%= render 'shared/banner' %>
 
 <div class="container">
-  <div class="card-trip">
-    <img src="http://savoie.alpes-refuges.fr/tzr/scripts/resizer.php?filename=CIRCUIT/photo/0e/d7/4y4cezew3d4h&mime=image%2Fjpeg&&originalname=Test.jpg&geometry=907x595%5E&crop=907x595" />
-    <div class="card-trip-infos">
+  <% if @itineraries.count > 0 %>
+    <p> <%= pluralize(@itineraries.count, 'itinéraire trouvé', plural: 'itinéraires trouvés')%> </p>
+  <% end %>
+
+  <div class="cards-layout">
+    <% @itineraries.each do |itinerary| %>
       <div>
-        <h2>Col des Jumelles Sud par le Vallon de Fontenil</h2>
-        <p>Massif des Ecrins</p>
+        <%= render 'shared/card_small', itinerary: itinerary %>
       </div>
-      <p class="ml-3"> 2.2 E1 </p>
-      <h1 class="risk-level-infos-large"> 3 </h1>
-    </div>
+    <% end %>
   </div>
-
-  <div class="my-5">
-
-  </div>
-
-  <div class="card-product">
-    <img src="http://savoie.alpes-refuges.fr/tzr/scripts/resizer.php?filename=CIRCUIT/photo/0e/d7/4y4cezew3d4h&mime=image%2Fjpeg&&originalname=Test.jpg&geometry=907x595%5E&crop=907x595" />
-    <div class="card-product-infos">
-      <h2>Col des Jumelles Sud par le Vallon de Fontenil</h2>
-      <div class="d-flex justify-content-start align-items-center mt-3">
-        <h3 class="risk-level-infos-small mr-3"> 2</h3>
-        <p>Massif des Ecrins</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="my-5">
-
-  </div>
-
 </div>

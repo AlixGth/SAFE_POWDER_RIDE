@@ -1,4 +1,5 @@
 .card-product {
+  position:relative;
   overflow: hidden;
   height: 120px;
   background: white;
@@ -49,6 +50,10 @@
 
 
 .cards-layout .card-trip {
+  margin-bottom: 10px;
+}
+
+.cards-layout .card-product {
   margin-bottom: 10px;
 }
 
