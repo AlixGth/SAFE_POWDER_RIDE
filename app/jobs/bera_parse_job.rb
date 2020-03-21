@@ -1,8 +1,10 @@
+require 'open-uri'
+
 class BeraParseJob < ApplicationJob
   queue_as :default
 
   def perform(file_path)
-    file = File.open(file_path)
+    file = open(file_path)
     document = Nokogiri::XML(file)
 
     bra = document.root.xpath('BULLETINS_NEIGE_AVALANCHE')
