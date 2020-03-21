@@ -5,16 +5,19 @@ class BeraScrapJob < ApplicationJob
   queue_as :default
 
   def perform(*args)
+    i = 0
     massifs = Mountain.all
     massifs.each do |massif|
       date_heure = scrap(massif)
 
       url = "https://donneespubliques.meteofrance.fr/donnees_libres/Pdf/BRA/BRA.#{massif.name.upcase}.#{date_heure}.xml"
 
-      parse(url)
+      i = parse(url)
 
       sleep(5)
     end
+
+    return "#{i} Beras created"
     # download = open(url)
     # IO.copy_stream(download, "app/assets/bera_files/BRA_#{massif}_#{date_heure}.xml")
   end
@@ -39,6 +42,7 @@ class BeraScrapJob < ApplicationJob
   end
 
   def parse(file_path)
+    i = 0
     file = open(file_path)
     document = Nokogiri::XML(file)
 
@@ -92,7 +96,12 @@ class BeraScrapJob < ApplicationJob
       naturel_text: naturel_text
     })
     new_bera.mountain = massif
-    new_bera.save!
+    if new_bera.valid?
+      new_bera.save
+      i = 1
+    end
+
+    return i
   end
 end
 
