@@ -12,12 +12,12 @@ class BeraScrapJob < ApplicationJob
 
       url = "https://donneespubliques.meteofrance.fr/donnees_libres/Pdf/BRA/BRA.#{massif.name.upcase}.#{date_heure}.xml"
 
-      i = parse(url)
+      i += parse(url)
 
       sleep(5)
     end
 
-    return "#{i} Beras created"
+    puts "#{i} Beras created"
     # download = open(url)
     # IO.copy_stream(download, "app/assets/bera_files/BRA_#{massif}_#{date_heure}.xml")
   end
