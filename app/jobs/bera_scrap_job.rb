@@ -1,13 +1,12 @@
+require 'open-uri'
+
 class BeraScrapJob < ApplicationJob
   queue_as :default
 
   def perform(*args)
-    url = 'https://donneespubliques.meteofrance.fr/?fond=rubrique&id_rubrique=50'
-    html_file = open(url).read
-    html_doc = Nokogiri::HTML(html_file)
+    url = 'https://donneespubliques.meteofrance.fr/donnees_libres/Pdf/BRA/BRA.CHABLAIS.20200319145759.xml'
+    download = open(url)
 
-    html_doc.search('#from_bra p').each do |p|
-      puts p
-    end
+    IO.copy_stream(download, 'app/assets/bera_files/BRA_CHABLAIS_20200317.xml')
   end
 end
