@@ -52,6 +52,7 @@ GEM
       msgpack (~> 1.0)
     builder (3.2.4)
     byebug (11.1.1)
+    childprocess (3.0.0)
     cloudinary (1.12.0)
       aws_cf_signer
       rest-client
@@ -164,6 +165,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redis (4.1.3)
+    regexp_parser (1.7.0)
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
@@ -172,6 +174,7 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
+    rubyzip (2.3.0)
     sassc (2.2.1)
       ffi (~> 1.9)
     sassc-rails (2.1.2)
@@ -180,6 +183,9 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    selenium-webdriver (3.142.7)
+      childprocess (>= 0.5, < 4.0)
+      rubyzip (>= 1.2.2)
     sidekiq (6.0.5)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
@@ -213,6 +219,9 @@ GEM
     unf_ext (0.0.7.6)
     warden (1.2.8)
       rack (>= 2.0.6)
+    watir (6.16.5)
+      regexp_parser (~> 1.2)
+      selenium-webdriver (~> 3.6)
     web-console (3.7.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -255,6 +264,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   uglifier
+  watir
   web-console (>= 3.3.0)
   webpacker
 
