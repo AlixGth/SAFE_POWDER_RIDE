@@ -7,7 +7,7 @@ const left = document.querySelector('.carousel-control-prev');
 
 const toggleClass = () => {
   console.log("hello");
-  if (map.classList.contains('active')) {
+  if (!map.classList.contains('active')) {
     toggle.classList.remove('d-none')
     toggle.classList.add('d-flex')
   } else {
