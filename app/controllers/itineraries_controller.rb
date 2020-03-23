@@ -23,6 +23,7 @@ class ItinerariesController < ApplicationController
     update_gpx_coordinates_coloring(coordinates, @bera)
     @coordinates = @itinerary.coordinates
     @waypoints = generate_waypoints(@coordinates)
+    @evolrisk = @bera.evolrisk1? || @bera.evolrisk2?
   end
 
   def new
@@ -89,11 +90,11 @@ end
   end
 
   def update_gpx_coordinates_coloring(coordinates, bera)
-    colors = {"1" => "#CAFF66", "2" => "#FBFF01", "3" => "#FE9800", "4" => "#FD0200", "5" => "#CB0200"}
+    colors = {"0"=> "#FFFFFF", "1" => "#CAFF66", "2" => "#FBFF01", "3" => "#FE9800", "4" => "#FD0200", "5" => "#CB0200"}
     risk1 = bera.risk1
     risk2 = bera.risk2
-    evolrisk1 = bera.evolrisk1
-    evolrisk2 = bera.evolrisk2
+    evolrisk1 = bera.evolrisk1 || bera.risk1
+    evolrisk2 = bera.evolrisk2 || bera.risk2
     bera_altitude = bera.altitude
     coordinates.each do |coordinate|
       if bera_altitude.nil?

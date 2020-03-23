@@ -110,12 +110,14 @@ const toggleLayer = (map, coordinatesIds) => {
     }
   };
 
+  console.log("hello");
   const layers = document.getElementById('menu');
   layers.appendChild(link);
 };
 
 const displayRoute = () => {
   const coordinatesIds = []
+  const evolRisk = document.getElementById("hidden").dataset.evolrisk === "true";
   if (document.getElementById("map")){
     mapboxgl.accessToken = document.getElementById("map").dataset.mapboxApiKey;
     const waypoints = extractArray();
@@ -144,7 +146,10 @@ const displayRoute = () => {
         display(map, [[lng0, lat0], [lng1, lat1], [lng2, lat2], [lng3, lat3], [lng4, lat4]], i.toString(), color, evolColor);
       };
     });
-    toggleLayer(map, coordinatesIds);
+    if (evolRisk) {
+      toggleLayer(map, coordinatesIds);
+      console.log(typeof(evolRisk))
+    }
   }
 };
 
