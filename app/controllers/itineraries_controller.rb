@@ -23,6 +23,9 @@ class ItinerariesController < ApplicationController
     update_gpx_coordinates_coloring(coordinates, @bera)
     @coordinates = @itinerary.coordinates
     @waypoints = generate_waypoints(@coordinates)
+    @favorite = Favorite.new
+    @favorite.user = current_user
+    @favorite.itinerary = @itinerary
   end
 
   def new

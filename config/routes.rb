@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root to: 'pages#home', as: 'home'
 
   resources :itineraries, only: [:index, :show, :new, :create]
+  resources :favorites, only: [:index, :create]
   get '/mon-compte', to: "pages#my_account"
   get '/concept', to: "pages#concept"
 
