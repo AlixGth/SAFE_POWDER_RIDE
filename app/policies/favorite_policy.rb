@@ -5,7 +5,7 @@ class FavoritePolicy < ApplicationPolicy
     end
   end
 
-  def create
-    record.user == user
+  def create?
+    true
   end
 end

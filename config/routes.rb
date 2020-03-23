@@ -5,8 +5,10 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'pages#home', as: 'home'
 
-  resources :itineraries, only: [:index, :show, :new, :create]
-  resources :favorites, only: [:index, :create]
+  resources :itineraries, only: [:index, :show, :new, :create] do
+    resources :favorites, only: [:create]
+  end
+  resources :favorites, only: [:index]
   get '/mon-compte', to: "pages#my_account"
   get '/concept', to: "pages#concept"
 
