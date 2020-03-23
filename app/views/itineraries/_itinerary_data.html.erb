@@ -1,0 +1,39 @@
+<div style="border: 3px solid #eee;" class="p-1 mb-5">
+
+  <div class="container">
+    <div class="row d-flex justify-content-around mb-3">
+      <div class="col-4 p-3 text-center">
+        <p><strong>Massif</strong></p>
+        <p><%= @itinerary.mountain.name %></p>
+        <i class="fas fa-mountain fa-2x" style= "color:#82C91D"></i>
+      </div>
+       <div class="col-4 p-3 text-center">
+        <p><strong>Durée</strong></p>
+        <p><%= @itinerary.duration %>h</p>
+        <i class="far fa-clock fa-2x" style= "color:#BF52DB"></i>
+        </div>
+        <div class="col-4 p-3 text-center">
+        <p><strong>Dénivelée</strong></p>
+        <p><%= @itinerary.elevation %>m</p>
+        <i class="fas fa-chart-line fa-2x" style= "color:#ED462F"></i>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-around">
+      <div class="col-4 p-3 text-center">
+        <p><strong>Départ</strong></p>
+        <p><%= @itinerary.departure %></p>
+        <i class="fas fa-map-marked-alt fa-2x" style= "color:#FC8C2E"></i>
+      </div>
+      <div class="col-4 p-3 text-center">
+        <p><strong>Arrivée</strong></p>
+        <p><%= @itinerary.arrival %></p>
+       <i class="fas fa-map-marked-alt fa-2x" style= "color:##4C6EF5"></i>
+      </div>
+      <div class="col-4 p-3 text-center">
+        <p><strong>Longueur</strong></p>
+        <p>Longueur</p>
+        <i class="fas fa-ruler-combined fa-2x" style= "color:#F1949A"></i>
+      </div>
+    </div>
+  </div>
+</div>
