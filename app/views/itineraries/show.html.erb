@@ -1,5 +1,9 @@
 <div id="carouselExampleControls" class="carousel slide" data-touch="false" data-ride="carousel" data-interval="false">
   <div class="carousel-inner">
+    <div
+    class="carousel-item active map"
+    id="map"
+    data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
     <nav id="menu" class="d-flex align-items-center">
       <label class="switch-wrap">
         <input type="checkbox" id="evolRiskCheck" />
@@ -7,17 +11,13 @@
       </label>
       <p class="p-0 m-0 align-content-center">Après-midi</p>
     </nav>
-    <div
-    class="carousel-item active map"
-    id="map"
-    data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
-  ></div>
-
-  <% @itinerary.photos.each do |photo| %>
-    <div class="carousel-item">
-      <%= cl_image_tag photo.key, class: "map"%>
     </div>
-  <% end %>
+
+    <% @itinerary.photos.each do |photo| %>
+      <div class="carousel-item">
+        <%= cl_image_tag photo.key, class: "map"%>
+      </div>
+    <% end %>
   </div>
 
   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">

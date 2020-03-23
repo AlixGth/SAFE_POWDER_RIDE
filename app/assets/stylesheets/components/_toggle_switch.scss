@@ -26,7 +26,7 @@ $height: $width / 2 + $padding;
 //toggle code begins!
 .switch-wrap {
   cursor: pointer;
-  background: $darkblue;
+  background: $primary;
   padding: $padding;
   width: $width;
   height: $height;
@@ -58,7 +58,7 @@ input:checked {
   + .switch {
     grid-template-columns: 1fr 1fr 0fr;
     &::after {
-      background-color: $primary;
+      background-color: $darkblue;
     }
   }
 }

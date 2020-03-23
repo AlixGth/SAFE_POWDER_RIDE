@@ -140,7 +140,6 @@ const displayRoute = () => {
     });
     if (evolRisk) {
       toggleLayer(map, coordinatesIds);
-      console.log(typeof(evolRisk))
     }
   }
 };
