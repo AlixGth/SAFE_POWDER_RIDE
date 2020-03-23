@@ -79,7 +79,8 @@ itinerary1 = Itinerary.create({
   departure: 'Névache (05100)',
   arrival: 'Névache (05100)',
   ascent_difficulty: 'R',
-  ski_difficulty: '3.1 E2',
+  ski_difficulty: '3.1',
+  terrain_difficulty: 'E2',
   description: "Une belle et longue boucle panoramique où l'on peut profiter de la variété des paysages avec un joli sommet panoramique offrant une superbe vue sur les Ecrins. Pour le retour sur Névache par contre, il faut aimer le ski de fond! De Névache, suivre la route sur environ 900m avant de séchapper sur le droite plein N en direction du vallon qui monte en direction du Lac Blanc que lon suit jusqu'à celui-ci (long). Ensuite, soit prendre l'arête (parfois soufflé, à pied) qui monte en haut de la crête de la Gardiole puis au sommet du Pic de Lac Blanc, soit la face E pour atteindre le sommet directement (100m à 35°, attention aux plaques, mais nombreux rochers émergents).
 Au sommet, traverser plein S en visant le collu 2905. Ensuite prendre le vallon orienté W et le descendre tout du long (pente faible, nombreux plats) jusquà atteindre le route de ski de fond un peu en dessous du refuge de Laval.
 La descendre jusquà Névache (long et beaucoup de plat : faut aimer le skating!)",
@@ -96,7 +97,8 @@ itinerary2 = Itinerary.create({
   departure: 'le Roux dAbriès (05460)',
   arrival: 'le Roux dAbriès (05460)',
   ascent_difficulty: 'R',
-  ski_difficulty: '3.1 E1',
+  ski_difficulty: '3.1',
+  terrain_difficulty:'E1',
   description: "Stationner au niveau du pont qui franchit le Torrent du Bouchet, juste avant la Chapelle St Barthélémy.
 Remonter les clairières derrière la Chapelle St Barthélémy pour rejoindre la piste forestière du Bois de la Brune et la suivre quelques instants vers le SW.
 La quitter vers 1800m pour remonter une (ancienne?) piste de ski tracée dans le versant NW du Bois de la Brune et qui mène au sommet de Gilly.
@@ -115,7 +117,8 @@ itinerary3 = Itinerary.create({
   departure: 'Arvieux (05350)',
   arrival: 'Arvieux (05350)',
   ascent_difficulty: 'AD',
-  ski_difficulty: '5.1 E3',
+  ski_difficulty: '5.1',
+  terrain_difficulty: 'E3',
   description: "Suivre le fond du vallon de torrent de Combe Bonne, en direction de lac du Lauzon, jusqu’au point 1890, après de Cabane de la Gardère. Puis monter en direction ouest vers le point 2067. Après ce point, pour dépasser la première barre rocheuse, il faut prendre le couloir le plus a droite, toujours en direction ouest. Le centre du couloir avait une barre d’une dizaine de mètres, mais nous avons trouvé une voie qui passe du côté droit. Après on se trouve sur un épaule et le couloir est évident droit devant.",
   duration: 6,
   mountain: Mountain.find_by(name: 'Queyras'),
