@@ -2,18 +2,12 @@ import mapboxgl from 'mapbox-gl';
 
 const extractArray = () => {
   let coordinates = document.getElementById("hidden").dataset.waypoints;
-  console.log(coordinates);
   let array = []
-  coordinates = coordinates.split("],").forEach((yes) => {
-    console.log(yes);
-    const qwe = yes.split("\"").join("").split("[").join("").split(",");
+  coordinates = coordinates.split("],").forEach((coordinate) => {
+    const qwe = coordinate.split("\"").join("").split("[").join("").split(",");
     let lng = Number.parseFloat(qwe[1].trim(), 10);
     let lat = Number.parseFloat(qwe[2].trim(), 10);
-    if (qwe[3]){
-      array.push([lng, lat, qwe[3]])
-    } else {
-      array.push([lng, lat])
-    }
+    array.push([lng, lat, qwe[3], qwe[4]]);
   });
   return array;
 };
@@ -45,7 +39,7 @@ const getMinMax = (waypoints) => {
   return [[maxLng, minLat],[minLng, maxLat]];
 };
 
-const display = (map, route, name, color) => {
+const display = (map, route, name, color, evolColor) => {
   // [[lng1, lat1],[lng2, lat2], [lng3, lat3]]
   map.addSource(name, {
     'type': 'geojson',
@@ -76,14 +70,55 @@ const display = (map, route, name, color) => {
       'line-width': 3
     }
   });
+  map.addLayer({
+    'id': name.concat("Evolution"),
+    'type': 'line',
+    'source': name,
+    'layout': {
+      'line-join': 'round',
+      'line-cap': 'round',
+      'visibility': 'none'
+    },
+    'paint': {
+      'line-color': evolColor,
+      'line-width': 3
+    }
+  });
+};
+
+const toggleLayer = (map, coordinatesIds) => {
+  const link = document.createElement('a');
+  link.href = '#';
+  link.className = '';
+  link.textContent = 'Evolution';
+
+  link.onclick = function(e) {
+    const clickedLayer = this.textContent;
+    e.preventDefault();
+    e.stopPropagation();
+
+    for (const element of coordinatesIds) {
+      const visibility = map.getLayoutProperty(element.concat(clickedLayer), 'visibility');
+
+      if (visibility === 'visible') {
+        map.setLayoutProperty(element.concat(clickedLayer), 'visibility', 'none')
+        this.className = '';
+      } else {
+        this.className = 'active';
+        map.setLayoutProperty(element.concat(clickedLayer), 'visibility', 'visible');
+      }
+    }
+  };
+
+  const layers = document.getElementById('menu');
+  layers.appendChild(link);
 };
 
 const displayRoute = () => {
+  const coordinatesIds = []
   if (document.getElementById("map")){
     mapboxgl.accessToken = document.getElementById("map").dataset.mapboxApiKey;
     const waypoints = extractArray();
-    console.log(waypoints);
-    console.log(waypoints);
     var map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/outdoors-v11?optimize=true',
@@ -104,10 +139,12 @@ const displayRoute = () => {
         const lng4 = waypoints[i][0];
         const lat4 = waypoints[i][1];
         const color = waypoints[i][2];
-        console.log(color);
-        display(map, [[lng0, lat0], [lng1, lat1], [lng2, lat2], [lng3, lat3], [lng4, lat4]], i.toString(), color);
+        const evolColor = waypoints[i][3];
+        coordinatesIds.push(i.toString())
+        display(map, [[lng0, lat0], [lng1, lat1], [lng2, lat2], [lng3, lat3], [lng4, lat4]], i.toString(), color, evolColor);
       };
     });
+    toggleLayer(map, coordinatesIds);
   }
 };
 
