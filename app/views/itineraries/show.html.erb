@@ -1,51 +1,12 @@
-
-<style>
-  #menu {
-  background: #fff;
-  position: absolute;
-  z-index: 1;
-  top: 10px;
-  right: 10px;
-  border-radius: 3px;
-  width: 120px;
-  border: 1px solid rgba(0, 0, 0, 0.4);
-  font-family: 'Open Sans', sans-serif;
-  }
-
-  #menu a {
-  font-size: 13px;
-  color: #404040;
-  display: block;
-  margin: 0;
-  padding: 0;
-  padding: 10px;
-  text-decoration: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
-  text-align: center;
-  }
-
-  #menu a:last-child {
-  border: none;
-  }
-
-  #menu a:hover {
-  background-color: #f8f8f8;
-  color: #404040;
-  }
-
-  #menu a.active {
-  background-color: #3887be;
-  color: #ffffff;
-  }
-
-  #menu a.active:hover {
-  background: #3074a4;
-  }
-</style>
-
 <div id="carouselExampleControls" class="carousel slide" data-touch="false" data-ride="carousel" data-interval="false">
   <div class="carousel-inner">
-    <nav id="menu"></nav>
+    <nav id="menu" class="d-flex align-items-center">
+      <label class="switch-wrap">
+        <input type="checkbox" id="evolRiskCheck" />
+        <div class="switch"></div>
+      </label>
+      <p class="p-0 m-0 align-content-center">Après-midi</p>
+    </nav>
     <div
     class="carousel-item active map"
     id="map"

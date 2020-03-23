@@ -87,32 +87,24 @@ const display = (map, route, name, color, evolColor) => {
 };
 
 const toggleLayer = (map, coordinatesIds) => {
-  const link = document.createElement('a');
-  link.href = '#';
-  link.className = '';
-  link.textContent = 'Evolution';
+  // const link = document.createElement('a');
+  // link.href = '#';
+  // link.className = '';
+  // link.textContent = 'Evolution';
+  const evolRiskCheck = document.getElementById('evolRiskCheck');
 
-  link.onclick = function(e) {
-    const clickedLayer = this.textContent;
-    e.preventDefault();
-    e.stopPropagation();
+  evolRiskCheck.addEventListener('change', (event) => {
 
     for (const element of coordinatesIds) {
-      const visibility = map.getLayoutProperty(element.concat(clickedLayer), 'visibility');
+      const visibility = map.getLayoutProperty(element.concat("Evolution"), 'visibility');
 
-      if (visibility === 'visible') {
-        map.setLayoutProperty(element.concat(clickedLayer), 'visibility', 'none')
-        this.className = '';
+      if (evolRiskCheck.checked) {
+        map.setLayoutProperty(element.concat("Evolution"), 'visibility', 'visible');
       } else {
-        this.className = 'active';
-        map.setLayoutProperty(element.concat(clickedLayer), 'visibility', 'visible');
+        map.setLayoutProperty(element.concat("Evolution"), 'visibility', 'none');
       }
     }
-  };
-
-  console.log("hello");
-  const layers = document.getElementById('menu');
-  layers.appendChild(link);
+  });
 };
 
 const displayRoute = () => {
