@@ -44,3 +44,14 @@
   box-shadow: none;
   border: none;
 }
+
+.naked-navbar {
+  position: fixed;
+  z-index: 10;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.0);
+  box-shadow: none;
+  h3, .navbar-toggler-icon {
+    color: $darkblue;
+  }
+}

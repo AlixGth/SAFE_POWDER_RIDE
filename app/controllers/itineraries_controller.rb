@@ -28,6 +28,7 @@ class ItinerariesController < ApplicationController
       @alt_lng = altitude_change(@coordinates, @bera)[0]
       @alt_lat = altitude_change(@coordinates, @bera)[1]
     end
+    @naked_navbar = true
   end
 
   def new
