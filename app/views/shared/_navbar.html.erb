@@ -1,16 +1,17 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+<div id="navbar" class="navbar navbar-expand-sm navbar-light navbar-lewagon <%= 'naked-navbar' if @naked_navbar %>">
   <%= link_to home_path, class: "navbar-brand" do %>
-    <div class="">
-      <h3>Safe Powder Ride</h3>
+    <div>
+      <h3 id="app-name">Safe Powder Ride</h3>
     </div>
-    <% end %>
+  <% end %>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+  <button id="toggle" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div class="collapse navbar-collapse" style="position: relative" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
         <% if current_user.admin %>
