@@ -22,6 +22,7 @@ gem 'watir'
 gem 'pundit'
 gem 'sidekiq'
 gem 'sidekiq-failures', '~> 1.0'
+gem 'grabzit'
 
 group :development do
   gem 'web-console', '>= 3.3.0'

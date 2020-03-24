@@ -3,8 +3,8 @@ require 'net/http'
 require 'open-uri'
 
 class ItinerariesController < ApplicationController
- before_action :set_itinerary, only: [:show]
- skip_before_action :authenticate_user!, only: [:index, :show]
+ before_action :set_itinerary, only: [:show, :download_pdf]
+ skip_before_action :authenticate_user!, only: [:index, :show, :download_pdf]
 
 	def index
     @colors = {"1" => "#CAFF66", "2" => "#FBFF01", "3" => "#FE9800", "4" => "#FD0200", "5" => "#CB0200"}
@@ -26,7 +26,23 @@ class ItinerariesController < ApplicationController
     update_gpx_coordinates_coloring(coordinates, @bera)
     @coordinates = @itinerary.coordinates
     @waypoints = generate_waypoints(@coordinates)
+    favorite = Favorite.where(user: current_user).where(itinerary: @itinerary)
+    @favorite = false
+    @favorite = true if favorite.exists?
     @evolrisk = @bera.evolrisk1? || @bera.evolrisk2?
+    if @bera.altitude
+      @alt_lng = altitude_change(@coordinates, @bera)[0]
+      @alt_lat = altitude_change(@coordinates, @bera)[1]
+    end
+    @naked_navbar = true
+  end
+
+  def download_pdf
+    require 'grabzit'
+    #warning: API key to be placed in ENV
+    grabzItClient = GrabzIt::Client.new("MTRhYTY1MDk4MzMwNDZiY2JmOWRlZGQ3ZmRmY2MyMTc=", "Pz89Pz8/BT9jPzNDW0c/XSA/PwY/P1o/Py0/Wkg/Pz8=")
+    grabzItClient.url_to_pdf("https://au-coin-du-ski.herokuapp.com/products/29")
+    grabzItClient.save_to("../safe_powder_ride_#{@itinerary.name}.pdf")
   end
 
   def new
@@ -69,6 +85,11 @@ class ItinerariesController < ApplicationController
       array << [coordinate.order, coordinate.longitude, coordinate.latitude, coordinate.color, coordinate.evol_color]
     end
     array = array.sort_by { |coordinate| coordinate[0] }
+  end
+
+  def altitude_change(coordinates, bera)
+    altitude_coordinate = coordinates.where("altitude >= ?", bera.altitude).first
+    [altitude_coordinate.longitude, altitude_coordinate.latitude]
   end
 
   def gpx_parsing(file_data, bera)

@@ -1,0 +1,20 @@
+<div class="container">
+  <h2 class="text-center my-5">Mon compte</h2>
+
+  <%= link_to "Mes informations personnelles", edit_user_registration_path %>
+  <% if @favorites.count > 0 %>
+    <p class="my-3"> <%= pluralize(@favorites.count, 'itinéraire sauvegardé', plural: 'itinéraires sauvegardés')%> </p>
+  <% end %>
+
+  <div class="cards-layout">
+    <% @favorites.each do |favorite| %>
+      <div>
+        <%= render 'shared/card_small_favorites', favorite: favorite %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+
+<div class="container">
