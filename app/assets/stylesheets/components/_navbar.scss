@@ -5,6 +5,7 @@
   position: sticky;
   top: 0;
   z-index: 1000;
+  transition: all 0.3s;
   h3 {
    color: white;
    margin: 0;
@@ -28,14 +29,14 @@
 }
 
 .navbar-link {
-  color: $darkblue;
+  color: white;
   display: block;
   width: 100%;
   padding: 0.25rem 1.5rem;
   clear: both;
   font-weight: 400;
   white-space: nowrap;
-  background-color: rgba(250, 250, 250, 0.8);
+  // background-color: rgba(250, 250, 250, 0.8);
 }
 
 .navbar-toggler, .navbar-toggler:focus, .navbar-toggle:active {
@@ -50,13 +51,7 @@
   width: 100%;
   background-color: rgba(0, 0, 0, 0.0);
   box-shadow: none;
-  h3, .nav-item {
+  h3, a {
     color: $darkblue;
   }
-}
-
-.navbar-nav {
-  width: 60%;
-  right: 0px;
-  position: absolute;
 }
