@@ -33,7 +33,7 @@ class ItinerariesController < ApplicationController
     #warning: API key to be placed in ENV
     grabzItClient = GrabzIt::Client.new("MTRhYTY1MDk4MzMwNDZiY2JmOWRlZGQ3ZmRmY2MyMTc=", "Pz89Pz8/BT9jPzNDW0c/XSA/PwY/P1o/Py0/Wkg/Pz8=")
     grabzItClient.url_to_pdf("https://au-coin-du-ski.herokuapp.com/products/29")
-    grabzItClient.save_to("safe_powder_ride_#{@itinerary.name}.pdf")
+    grabzItClient.save_to("../safe_powder_ride_#{@itinerary.name}.pdf")
   end
 
   def new
