@@ -82,6 +82,8 @@ GEM
     gpx (1.0.0)
       nokogiri (~> 1.7)
       rake
+    grabzit (3.4.5)
+      rake
     http-accept (1.7.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
@@ -246,6 +248,7 @@ DEPENDENCIES
   dotenv-rails
   font-awesome-sass (~> 5.12.0)
   gpx
+  grabzit
   jbuilder (~> 2.0)
   listen (~> 3.0.5)
   nokogiri
