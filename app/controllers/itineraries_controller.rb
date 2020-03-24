@@ -24,6 +24,10 @@ class ItinerariesController < ApplicationController
     @coordinates = @itinerary.coordinates
     @waypoints = generate_waypoints(@coordinates)
     @evolrisk = @bera.evolrisk1? || @bera.evolrisk2?
+    if @bera.altitude
+      @alt_lng = altitude_change(@coordinates, @bera)[0]
+      @alt_lat = altitude_change(@coordinates, @bera)[1]
+    end
   end
 
   def new
@@ -53,6 +57,11 @@ class ItinerariesController < ApplicationController
   end
 
 private
+
+def altitude_change(coordinates, bera)
+  altitude_coordinate = coordinates.where("altitude >= ?", bera.altitude).first
+  [altitude_coordinate.longitude, altitude_coordinate.latitude]
+end
 
 def generate_waypoints(coordinates)
   array = []

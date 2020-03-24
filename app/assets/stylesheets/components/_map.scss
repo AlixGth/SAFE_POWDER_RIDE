@@ -3,3 +3,35 @@
 	width: 100%;
 	position: relative;
 }
+
+.marker {
+  background-image: url('info-circle-solid.svg');
+  background-size: cover;
+  background-position: center;
+  width: 32px;
+  height: 32px;
+  // border-radius: 50%;
+  cursor: pointer;
+}
+
+.mapboxgl-popup {
+  max-width: 50px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+
+}
+
+.mapboxgl-popup-content {
+  text-align: center;
+  position: relative;
+  padding: 8px;
+}
+
+.mapboxgl-popup-close-button {
+  background: none;
+  border: none;
+  position: absolute;
+  left: 5px;
+  display: none;
+}
