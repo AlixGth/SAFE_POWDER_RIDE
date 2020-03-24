@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title><%= if content_for?(:title) then yield(:title) + ' | ' end %>Safe Powder Ride</title>
+    <%= favicon_link_tag 'mountain-solid.svg' %>
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
 <!--     <script src='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>

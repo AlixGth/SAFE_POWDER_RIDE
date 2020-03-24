@@ -1,10 +1,14 @@
 import "bootstrap";
 import { displayRoute } from '../plugins/displaySegment';
 import { fixFooter } from '../plugins/footer';
-import { navbarShow } from '../plugins/navbarShow';
-import { navbar } from '../plugins/navbar';
+import { navbar, navbarShow } from '../plugins/navbar';
 
 fixFooter();
-displayRoute();
 navbar();
-navbarShow();
+
+
+if (document.getElementById("map")) {
+  displayRoute();
+  navbarShow();
+}
+
