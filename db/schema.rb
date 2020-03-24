@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 2020_03_23_193549) do
     t.string "color"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "evol_color"
     t.index ["itinerary_id"], name: "index_coordinates_on_itinerary_id"
   end
 

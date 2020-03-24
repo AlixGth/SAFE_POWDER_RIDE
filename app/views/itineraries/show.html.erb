@@ -1,18 +1,23 @@
-
-
 <div id="carouselExampleControls" class="carousel slide" data-touch="false" data-ride="carousel" data-interval="false">
   <div class="carousel-inner">
     <div
     class="carousel-item active map"
     id="map"
-    data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
-  ></div>
-
-  <% @itinerary.photos.each do |photo| %>
-    <div class="carousel-item">
-      <%= cl_image_tag photo.key, class: "map"%>
+    data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+    <nav id="menu" class="d-flex align-items-center">
+      <label class="switch-wrap">
+        <input type="checkbox" id="evolRiskCheck" />
+        <div class="switch"></div>
+      </label>
+      <p class="p-0 m-0 align-content-center">Après-midi</p>
+    </nav>
     </div>
-  <% end %>
+
+    <% @itinerary.photos.each do |photo| %>
+      <div class="carousel-item">
+        <%= cl_image_tag photo.key, class: "map"%>
+      </div>
+    <% end %>
   </div>
 
   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -77,4 +82,15 @@
 <%= link_to "Retour aux itinéraires", itineraries_path, class: "btn btn-primary w-100 my-2" %>
 
 </div>
-<div id="hidden" data-waypoints = "<%= @waypoints %>" ></div>
+
+<div id="hidden"
+  data-waypoints="<%= @waypoints %>"
+  data-evolrisk="<%= @evolrisk %>"
+  data-altitude="<%= true if @bera.altitude %>"
+  data-altlng="<%= @alt_lng if @bera.altitude%>"
+  data-altlat="<%= @alt_lat if @bera.altitude %>"
+  data-infoaltitude="<%= @bera.altitude if @bera.altitude %>"
+  data-risk1="<%= @bera.risk1 if @bera.altitude %>"
+  data-evolrisk1="<%= @bera.evolrisk1 if @bera.altitude %>"
+  data-risk2="<%= @bera.risk2 if @bera.altitude %>"
+  data-evolrisk2="<%= @bera.evolrisk2 if @bera.altitude %>"></div>

@@ -2,18 +2,12 @@ import mapboxgl from 'mapbox-gl';
 
 const extractArray = () => {
   let coordinates = document.getElementById("hidden").dataset.waypoints;
-  console.log(coordinates);
   let array = []
-  coordinates = coordinates.split("],").forEach((yes) => {
-    console.log(yes);
-    const qwe = yes.split("\"").join("").split("[").join("").split(",");
+  coordinates = coordinates.split("],").forEach((coordinate) => {
+    const qwe = coordinate.split("\"").join("").split("[").join("").split(",");
     let lng = Number.parseFloat(qwe[1].trim(), 10);
     let lat = Number.parseFloat(qwe[2].trim(), 10);
-    if (qwe[3]){
-      array.push([lng, lat, qwe[3]])
-    } else {
-      array.push([lng, lat])
-    }
+    array.push([lng, lat, qwe[3], qwe[4]]);
   });
   return array;
 };
@@ -45,7 +39,7 @@ const getMinMax = (waypoints) => {
   return [[maxLng, minLat],[minLng, maxLat]];
 };
 
-const display = (map, route, name, color) => {
+const display = (map, route, name, color, evolColor) => {
   // [[lng1, lat1],[lng2, lat2], [lng3, lat3]]
   map.addSource(name, {
     'type': 'geojson',
@@ -76,14 +70,100 @@ const display = (map, route, name, color) => {
       'line-width': 3
     }
   });
+  map.addLayer({
+    'id': name.concat("Evolution"),
+    'type': 'line',
+    'source': name,
+    'layout': {
+      'line-join': 'round',
+      'line-cap': 'round',
+      'visibility': 'none'
+    },
+    'paint': {
+      'line-color': evolColor,
+      'line-width': 3
+    }
+  });
+};
+
+const evolRiskCheck = document.getElementById('evolRiskCheck');
+const toggleLayer = (map, coordinatesIds) => {
+  // const link = document.createElement('a');
+  // link.href = '#';
+  // link.className = '';
+  // link.textContent = 'Evolution';
+
+  evolRiskCheck.addEventListener('change', (event) => {
+
+    for (const element of coordinatesIds) {
+      const visibility = map.getLayoutProperty(element.concat("Evolution"), 'visibility');
+
+      if (evolRiskCheck.checked) {
+        map.setLayoutProperty(element.concat("Evolution"), 'visibility', 'visible');
+      } else {
+        map.setLayoutProperty(element.concat("Evolution"), 'visibility', 'none');
+      }
+    }
+  });
+};
+
+const addPoint = (map) => {
+  const altLng = Number.parseFloat(document.getElementById("hidden").dataset.altlng, 10);
+  const altLat = Number.parseFloat(document.getElementById("hidden").dataset.altlat, 10);
+  const altitudeInfo = document.getElementById("hidden").dataset.infoaltitude;
+  const risk1 = Number(document.getElementById("hidden").dataset.risk1);
+  const risk2 = Number(document.getElementById("hidden").dataset.risk2);
+  const evolRisk1 = Number(document.getElementById("hidden").dataset.evolrisk1);
+  const evolRisk2 = Number(document.getElementById("hidden").dataset.evolrisk2);
+  const geojson = {
+    id: 'altRisk',
+    type: 'FeatureCollection',
+      features: [{
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [altLng, altLat]
+        },
+        properties: {
+          title: 'Différence de risque'
+        }
+      }]
+  }
+
+  geojson.features.forEach(function(marker) {
+
+    // create a HTML element for each feature
+    const el = document.createElement('div');
+    el.className = 'marker';
+
+    const html = `<h6> ${marker.properties.title}</h6><div><p class="m-0">Risque ${risk2}</p><p class="m-0">Altitude limite: ${altitudeInfo}</p><p class="m-0">Risque ${risk1}</p></div>`
+    const htmlEvol = `<h6> ${marker.properties.title}</h6><div><p class="m-0">Risque ${evolRisk2 || risk2}</p><p class="m-0">Altitude limite: ${altitudeInfo}</p><p class="m-0">Risque ${evolRisk1 || risk1}</p></div>`
+
+    const pop = new mapboxgl.Popup({ offset: 25 })
+    // make a marker for each feature and add to the map
+    new mapboxgl.Marker(el)
+      .setLngLat(marker.geometry.coordinates)
+      .setPopup(pop // add popups
+          .setHTML(html))
+      .addTo(map);
+
+    evolRiskCheck.addEventListener('change', (event) => {
+      if (evolRiskCheck.checked) {
+        pop.setHTML(htmlEvol);
+      } else {
+        pop.setHTML(html);
+      }
+    });
+  });
 };
 
 const displayRoute = () => {
+  const coordinatesIds = []
+  const evolRisk = document.getElementById("hidden").dataset.evolrisk === "true";
+  const altitude = document.getElementById("hidden").dataset.altitude === "true";
   if (document.getElementById("map")){
     mapboxgl.accessToken = document.getElementById("map").dataset.mapboxApiKey;
     const waypoints = extractArray();
-    console.log(waypoints);
-    console.log(waypoints);
     var map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/outdoors-v11?optimize=true',
@@ -104,10 +184,18 @@ const displayRoute = () => {
         const lng4 = waypoints[i][0];
         const lat4 = waypoints[i][1];
         const color = waypoints[i][2];
-        console.log(color);
-        display(map, [[lng0, lat0], [lng1, lat1], [lng2, lat2], [lng3, lat3], [lng4, lat4]], i.toString(), color);
+        const evolColor = waypoints[i][3];
+        coordinatesIds.push(i.toString())
+        display(map, [[lng0, lat0], [lng1, lat1], [lng2, lat2], [lng3, lat3], [lng4, lat4]], i.toString(), color, evolColor);
       };
+    if (altitude) {
+      addPoint(map);
+    }
     });
+    if (evolRisk) {
+      toggleLayer(map, coordinatesIds);
+    }
+    // console.log(waypoints[0][0]);
   }
 };
 
