@@ -4,7 +4,7 @@ class ItinerariesController < ApplicationController
  skip_before_action :authenticate_user!, only: [:index, :show]
 
 	def index
-    @colors = {"1" => "#CAFF66", "2" => "#FBFF01", "3" => "#FE9800", "4" => "#FD0200", "5" => "#CB0200"}
+    @colors = {"1" => "#CAF567", "2" => "#FDF733", "3" => "#F39831", "4" => "#ED462F", "5" => "#ED462F"}
     @params_present = params[:query].present?
     @results_count = policy_scope(Itinerary).search_by_name_and_mountain(params[:query]).count
     if @params_present && @results_count > 0
@@ -16,7 +16,7 @@ class ItinerariesController < ApplicationController
   end
 
   def show
-    colors = {"1" => "#CAFF66", "2" => "#FBFF01", "3" => "#FE9800", "4" => "#FD0200", "5" => "#CB0200"}
+    colors = {"1" => "#CAF567", "2" => "#FDF733", "3" => "#F39831", "4" => "#ED462F", "5" => "#ED462F"}
     @bera = @itinerary.mountain.beras.last
     @bera_color = colors[@bera.risk_max.to_s]
     coordinates = @itinerary.coordinates
@@ -93,7 +93,7 @@ end
   end
 
   def update_gpx_coordinates_coloring(coordinates, bera)
-    colors = {"1" => "#CAFF66", "2" => "#FBFF01", "3" => "#FE9800", "4" => "#FD0200", "5" => "#CB0200"}
+    colors = {"1" => "#CAF567", "2" => "#FDF733", "3" => "#F39831", "4" => "#ED462F", "5" => "#ED462F"}
     risk1 = bera.evolrisk1 ? [bera.risk1, bera.evolrisk1].max : bera.risk1
     risk2 = bera.evolrisk2 ? [bera.risk2, bera.evolrisk2].max : bera.risk2
     bera_altitude = bera.altitude
