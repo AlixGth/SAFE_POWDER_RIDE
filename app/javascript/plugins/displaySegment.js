@@ -86,12 +86,12 @@ const display = (map, route, name, color, evolColor) => {
   });
 };
 
+const evolRiskCheck = document.getElementById('evolRiskCheck');
 const toggleLayer = (map, coordinatesIds) => {
   // const link = document.createElement('a');
   // link.href = '#';
   // link.className = '';
   // link.textContent = 'Evolution';
-  const evolRiskCheck = document.getElementById('evolRiskCheck');
 
   evolRiskCheck.addEventListener('change', (event) => {
 
@@ -108,9 +108,15 @@ const toggleLayer = (map, coordinatesIds) => {
 };
 
 const addPoint = (map) => {
-  const altLng = Number.parseFloat(document.getElementById("hidden").dataset.altlng, 10)
-  const altLat = Number.parseFloat(document.getElementById("hidden").dataset.altlat, 10)
+  const altLng = Number.parseFloat(document.getElementById("hidden").dataset.altlng, 10);
+  const altLat = Number.parseFloat(document.getElementById("hidden").dataset.altlat, 10);
+  const altitudeInfo = document.getElementById("hidden").dataset.infoaltitude;
+  const risk1 = Number(document.getElementById("hidden").dataset.risk1);
+  const risk2 = Number(document.getElementById("hidden").dataset.risk2);
+  const evolRisk1 = Number(document.getElementById("hidden").dataset.evolrisk1);
+  const evolRisk2 = Number(document.getElementById("hidden").dataset.evolrisk2);
   const geojson = {
+    id: 'altRisk',
     type: 'FeatureCollection',
       features: [{
         type: 'Feature',
@@ -119,8 +125,7 @@ const addPoint = (map) => {
           coordinates: [altLng, altLat]
         },
         properties: {
-          title: 'Différence de risque',
-          description: 'Washington, D.C.'
+          title: 'Différence de risque'
         }
       }]
   }
@@ -128,21 +133,34 @@ const addPoint = (map) => {
   geojson.features.forEach(function(marker) {
 
     // create a HTML element for each feature
-    var el = document.createElement('div');
+    const el = document.createElement('div');
     el.className = 'marker';
 
+    const html = `<h6> ${marker.properties.title}</h6><div><p class="m-0">Risque ${risk2}</p><p class="m-0">Altitude limite: ${altitudeInfo}</p><p class="m-0">Risque ${risk1}</p></div>`
+    const htmlEvol = `<h6> ${marker.properties.title}</h6><div><p class="m-0">Risque ${evolRisk2 || risk2}</p><p class="m-0">Altitude limite: ${altitudeInfo}</p><p class="m-0">Risque ${evolRisk1 || risk1}</p></div>`
+
+    const pop = new mapboxgl.Popup({ offset: 25 })
     // make a marker for each feature and add to the map
     new mapboxgl.Marker(el)
       .setLngLat(marker.geometry.coordinates)
-      .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-          .setHTML('<h6>' + marker.properties.title + '</h6><p>' + marker.properties.description + '</p>'))
+      .setPopup(pop // add popups
+          .setHTML(html))
       .addTo(map);
+
+    evolRiskCheck.addEventListener('change', (event) => {
+      if (evolRiskCheck.checked) {
+        pop.setHTML(htmlEvol);
+      } else {
+        pop.setHTML(html);
+      }
+    });
   });
 };
 
 const displayRoute = () => {
   const coordinatesIds = []
   const evolRisk = document.getElementById("hidden").dataset.evolrisk === "true";
+  const altitude = document.getElementById("hidden").dataset.altitude === "true";
   if (document.getElementById("map")){
     mapboxgl.accessToken = document.getElementById("map").dataset.mapboxApiKey;
     const waypoints = extractArray();
@@ -170,7 +188,9 @@ const displayRoute = () => {
         coordinatesIds.push(i.toString())
         display(map, [[lng0, lat0], [lng1, lat1], [lng2, lat2], [lng3, lat3], [lng4, lat4]], i.toString(), color, evolColor);
       };
-    addPoint(map);
+    if (altitude) {
+      addPoint(map);
+    }
     });
     if (evolRisk) {
       toggleLayer(map, coordinatesIds);

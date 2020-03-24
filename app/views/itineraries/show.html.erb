@@ -75,4 +75,21 @@
 <%= link_to "Retour aux itinéraires", itineraries_path, class: "btn btn-primary w-100 mb-2" %>
 
 </div>
-<div id="hidden" data-waypoints = "<%= @waypoints %>" data-evolrisk = "<%= @evolrisk %>" data-altlng= "<%= @alt_lng %>" data-altlat= "<%= @alt_lat %>"></div>
+
+<!-- <div>
+  <p class="m-0">Risque <i class="fas fa-sort-up"></i> <%= @bera.risk2 %></p>
+  <p class="m-0">Altitude limite: <%= @bera.altitude %></p>
+  <p class="m-0">Risque <i class="fas fa-sort-down"></i> <%= @bera.risk1 %></p>
+</div> -->
+
+<div id="hidden"
+  data-waypoints="<%= @waypoints %>"
+  data-evolrisk="<%= @evolrisk %>"
+  data-altitude="<%= true if @bera.altitude %>"
+  data-altlng="<%= @alt_lng if @bera.altitude%>"
+  data-altlat="<%= @alt_lat if @bera.altitude %>"
+  data-infoaltitude="<%= @bera.altitude if @bera.altitude %>"
+  data-risk1="<%= @bera.risk1 if @bera.altitude %>"
+  data-evolrisk1="<%= @bera.evolrisk1 if @bera.altitude %>"
+  data-risk2="<%= @bera.risk2 if @bera.altitude %>"
+  data-evolrisk2="<%= @bera.evolrisk2 if @bera.altitude %>"></div>

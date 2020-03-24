@@ -5,11 +5,11 @@
 }
 
 .marker {
-  background-image: url('mountain-solid.svg');
+  background-image: url('info-circle-solid.svg');
   background-size: cover;
   background-position: center;
   width: 32px;
-  height: 25px;
+  height: 32px;
   // border-radius: 50%;
   cursor: pointer;
 }
@@ -25,6 +25,7 @@
 .mapboxgl-popup-content {
   text-align: center;
   position: relative;
+  padding: 8px;
 }
 
 .mapboxgl-popup-close-button {
