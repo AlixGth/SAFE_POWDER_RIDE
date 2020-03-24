@@ -107,6 +107,37 @@ const toggleLayer = (map, coordinatesIds) => {
   });
 };
 
+const addPoint = (map, lng, lat) => {
+  const geojson = {
+    type: 'FeatureCollection',
+      features: [{
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [lng, lat]
+        },
+        properties: {
+          title: 'Mapbox',
+          description: 'Washington, D.C.'
+        }
+      }]
+  }
+
+  geojson.features.forEach(function(marker) {
+
+    // create a HTML element for each feature
+    var el = document.createElement('div');
+    el.className = 'marker';
+
+    // make a marker for each feature and add to the map
+    new mapboxgl.Marker(el)
+      .setLngLat(marker.geometry.coordinates)
+      .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+          .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
+      .addTo(map);
+  });
+};
+
 const displayRoute = () => {
   const coordinatesIds = []
   const evolRisk = document.getElementById("hidden").dataset.evolrisk === "true";
@@ -137,10 +168,12 @@ const displayRoute = () => {
         coordinatesIds.push(i.toString())
         display(map, [[lng0, lat0], [lng1, lat1], [lng2, lat2], [lng3, lat3], [lng4, lat4]], i.toString(), color, evolColor);
       };
+    addPoint(map, waypoints[50][0], waypoints[50][1]);
     });
     if (evolRisk) {
       toggleLayer(map, coordinatesIds);
     }
+    // console.log(waypoints[0][0]);
   }
 };
 

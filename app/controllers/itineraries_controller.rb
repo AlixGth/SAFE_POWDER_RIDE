@@ -24,6 +24,8 @@ class ItinerariesController < ApplicationController
     @coordinates = @itinerary.coordinates
     @waypoints = generate_waypoints(@coordinates)
     @evolrisk = @bera.evolrisk1? || @bera.evolrisk2?
+    @alt_lng
+    @alt_lat
   end
 
   def new
