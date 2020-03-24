@@ -32,22 +32,32 @@
 
 <div class="container">
   <h3 class="text-center mt-3 mb-5"><%= @itinerary.name %></h3>
-  <div class="d-flex align-items-center mb-3 mt-3" style="height: 40px;">
-    <h6>Niveau de risque</h6>
-      <div class="ml-2" style="position: relative; background-color: <%= @bera_color %>; border-radius: 50%; width: 40px; height: 40px">
+  <div class="d-flex align-items-center mb-4 mt-3" style="height: 40px;">
+    <h6>Niveau de risque pour le <%=@bera.bra_date%></h6>
+      <div class="ml-2" style="position: relative; background-color: <%= @bera_color %>; border-radius: 20%; width: 40px; height: 40px">
       <p class="text-center" style="font-size: 30px; position: absolute;left: 12px; top: -5px"><%= @bera.risk_max %></p>
      </div>
+      <p>
+      <button class="btn btn-link btn-lg mt-2" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    ?
+      </button>
+    </p>
+    <div class="collapse" id="collapseExample">
+      <div class="card card-body"> <%=risk_text(@bera.risk_max.to_s)%>
+      <%= link_to "En savoir plus", concept_path(anchor: 'bera') %></div>
+    </div>
   </div>
   <p><strong> Départs spontanés : </strong><%= @bera.accidentel_text %> <br><strong> Déclenchement skieurs : </strong><%= @bera.naturel_text %></p></br>
 </div>
 
 
+
 <div class="container">
 <nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-itinerary_data" role="tab" aria-controls="nav-itinerary_data" aria-selected="true">Caractéristiques</a>
-    <a class="nav-item nav-link" id="nav-level-tab" data-toggle="tab" href="#nav-level" role="tab" aria-controls="nav-level" aria-selected="false">Niveau de difficulté</a>
-    <a class="nav-item nav-link" id="nav-description-tab" data-toggle="tab" href="#nav-description" role="tab" aria-controls="nav-description" aria-selected="false">Description</a>
+    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-itinerary_data" role="tab" aria-controls="nav-itinerary_data" aria-selected="true">L'essentiel</a>
+    <a class="nav-item nav-link" id="nav-level-tab" data-toggle="tab" href="#nav-level" role="tab" aria-controls="nav-level" aria-selected="false">Difficulté</a>
+    <a class="nav-item nav-link" id="nav-description-tab" data-toggle="tab" href="#nav-description" role="tab" aria-controls="nav-description" aria-selected="false">Détail</a>
   </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">
