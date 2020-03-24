@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
   resources :favorites, only: [:index]
   get '/concept', to: "pages#concept"
+  post '/itineraries/:id/download_pdf', to: "itineraries#download_pdf", as: :download_pdf
 
   authenticate :user, lambda { |u| u.admin } do
     mount Sidekiq::Web => '/sidekiq'

@@ -59,15 +59,16 @@
   </div>
   <div class="d-flex flex-column">
     <i class="fas fa-share-alt" style="display: inline-block; margin: 0 auto"></i>
-    <p>Partager</p>
+    <% body = render 'shared/share_email', itinerary: @itinerary %>
+    <%= mail_to "", "Partager", subject: "#{current_user.username} a partagé un itinéraire Safe Powder Ride avec vous", body: body %>
   </div>
   <div class="d-flex flex-column">
     <i class="fas fa-cloud-download-alt" style="display: inline-block; margin: 0 auto"></i>
-    <p>Télécharger</p>
+    <%= link_to "Télécharger", download_pdf_path(@itinerary), method: "post" %>
   </div>
 </div>
 
-<%= link_to "Retour aux itinéraires", itineraries_path, class: "btn btn-primary w-100 mb-2" %>
+<%= link_to "Retour aux itinéraires", itineraries_path, class: "btn btn-primary w-100 my-2" %>
 
 </div>
 <div id="hidden" data-waypoints = "<%= @waypoints %>" ></div>
