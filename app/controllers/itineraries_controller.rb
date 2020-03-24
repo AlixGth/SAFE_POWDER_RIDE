@@ -23,6 +23,10 @@ class ItinerariesController < ApplicationController
     update_gpx_coordinates_coloring(coordinates, @bera)
     @coordinates = @itinerary.coordinates
     @waypoints = generate_waypoints(@coordinates)
+    ascent_difficulties = {"R" => "1", "F" => "2", "PD" => "3", "AD" => "4", "D" => "5"}
+    @ascent_grade = ascent_difficulties[@itinerary.ascent_difficulty]
+    terrain_difficulties = {"E1" => "1", "E2" => "2", "E3" => "3", "E4" => "4"}
+    @terrain_grade = terrain_difficulties[@itinerary.terrain_difficulty]
   end
 
   def new
