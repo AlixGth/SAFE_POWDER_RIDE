@@ -9,7 +9,6 @@ gem 'rails', '5.2.4.1'
 gem 'redis'
 gem 'devise'
 gem 'pg_search', '~> 2.3.0'
-
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass', '~> 5.12.0'
 gem 'sassc-rails'

@@ -1,3 +1,6 @@
+require 'json'
+require 'net/http'
+require 'open-uri'
 
 class ItinerariesController < ApplicationController
  before_action :set_itinerary, only: [:show, :download_pdf]
@@ -61,27 +64,33 @@ class ItinerariesController < ApplicationController
     if @itinerary.save
       file_data = params[:itinerary][:gpx_coordinates]
       gpx_parsing(file_data, bera)
-
+      ItinerarySlopesJobJob.perform_later(@itinerary.id)
       redirect_to itinerary_path(@itinerary)
     else
       render :new
     end
   end
 
-private
+  private
 
-def altitude_change(coordinates, bera)
-  altitude_coordinate = coordinates.where("altitude >= ?", bera.altitude).first
-  [altitude_coordinate.longitude, altitude_coordinate.latitude]
-end
-
-def generate_waypoints(coordinates)
-  array = []
-  coordinates.each do |coordinate|
-    array << [coordinate.order, coordinate.longitude, coordinate.latitude, coordinate.color, coordinate.evol_color]
+  def create_coordinates(coordinates)
+    for i in (0...coordinates.size)
+      coord = Coordinate.create(longitude: coordinates[i][0].to_f, latitude: coordinates[i][1].to_f, altitude: coordinates[i][2].to_f, slope: coordinates[i][3], order: i, itinerary: @itinerary)
+    end
   end
-  array = array.sort_by { |coordinate| coordinate[0] }
-end
+
+  def generate_waypoints(coordinates)
+    array = []
+    coordinates.each do |coordinate|
+      array << [coordinate.order, coordinate.longitude, coordinate.latitude, coordinate.color, coordinate.evol_color]
+    end
+    array = array.sort_by { |coordinate| coordinate[0] }
+  end
+
+  def altitude_change(coordinates, bera)
+    altitude_coordinate = coordinates.where("altitude >= ?", bera.altitude).first
+    [altitude_coordinate.longitude, altitude_coordinate.latitude]
+  end
 
   def gpx_parsing(file_data, bera)
     if file_data.respond_to?(:path)
@@ -96,7 +105,6 @@ end
       coordinates = coordinates.select.with_index do |coordinate, index|
         index % reduce_value == 0
       end
-
       create_coordinates(coordinates)
 
     else
@@ -104,11 +112,6 @@ end
     end
   end
 
-  def create_coordinates(coordinates)
-    for i in (0...coordinates.size)
-      coord = Coordinate.create(longitude: coordinates[i][0].to_f, latitude: coordinates[i][1].to_f, altitude: coordinates[i][2].to_f, order: i, itinerary: @itinerary)
-    end
-  end
 
   def update_gpx_coordinates_coloring(coordinates, bera)
     colors = {"0"=> "#FFFFFF", "1" => "#CAFF66", "2" => "#FBFF01", "3" => "#FE9800", "4" => "#FD0200", "5" => "#CB0200"}

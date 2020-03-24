@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_23_193549) do
+
+ActiveRecord::Schema.define(version: 2020_03_24_084405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +72,7 @@ ActiveRecord::Schema.define(version: 2020_03_23_193549) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "evol_color"
+    t.float "slope"
     t.index ["itinerary_id"], name: "index_coordinates_on_itinerary_id"
   end
 
