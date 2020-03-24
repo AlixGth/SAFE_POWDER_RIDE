@@ -8,7 +8,9 @@ class Itinerary < ApplicationRecord
   has_many :reviews
   has_many_attached :photos
   validates :ascent_difficulty, presence: true,  inclusion: { in: ASCENTDIFFICULTIES }
-  validates :ascent_difficulty, presence: true,  inclusion: { in: ASCENTDIFFICULTIES }
+  validates :ski_difficulty, presence: true,  inclusion: { in: SKIDIFFICULTIES }
+  validates :terrain_difficulty, presence: true,  inclusion: { in: TERRAINDIFFICULTIES }
+
 
 include PgSearch::Model
   pg_search_scope :search_by_name_and_mountain,
