@@ -218,7 +218,7 @@ def coordinates(filename, itinerary)
   end
 end
 
-filenames = ["skitour_topo8041_lacblanc.gpx", "skitour_topo4771_Gilly.gpx", "skitour_topo3707_jaillon.gpx", "laberte.gpx", "mont_thabor.gpx", "chateaurenard.gpx", "paindesucre.gpx"]
+filenames = ["skitour_topo8041_lacblanc.gpx", "skitour_topo4771_Gilly.gpx", "skitour_topo3707_jaillon.gpx","skitour_topo8041_lacblanc.gpx", "skitour_topo4771_Gilly.gpx", "skitour_topo3707_jaillon.gpx", "skitour_topo3707_jaillon.gpx"]
 
 Itinerary.all.each_with_index do |itinerary, index|
 	coordinates(filenames[index], itinerary)
