@@ -29,4 +29,8 @@ class ItineraryPolicy < ApplicationPolicy
     record.user.admin == true
   end
 
+  def download_pdf?
+    true
+  end
+
 end
