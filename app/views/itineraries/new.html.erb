@@ -25,11 +25,14 @@
                       label: "Point arrivée" %>
         </div>
         <%= f.input :ascent_difficulty,
-                    placeholder: "ex :PD, D, AD...",
+                    collection: Itinerary::ASCENTDIFFICULTIES,
                     label: "Difficulté ascension"%>
         <%= f.input :ski_difficulty,
-                    placeholder: "ex: 3.2 E1",
+                    collection: Itinerary::SKIDIFFICULTIES,
                     label: "Difficulté ski"%>
+        <%= f.input :terrain_difficulty,
+                    collection: Itinerary::TERRAINDIFFICULTIES,
+                    label: "Exposition"%>
         <%= f.input :description,
                     placeholder: "Description de la courses, spécificités,...",
                     required: true,
