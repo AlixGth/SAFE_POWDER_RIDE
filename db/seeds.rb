@@ -71,6 +71,11 @@ itinerary1_photo = URI.open('https://www.refugesclareethabor.com/InfoliveImages/
 itinerary2_photo  = URI.open('http://www.skitour.fr/photos_topos/3452.jpg')
 itinerary3_photo_1 = URI.open('http://www.skitour.fr/photos_topos/2471.jpg')
 itinerary3_photo_2 = URI.open('http://www.skitour.fr/photos_topos/2524.jpg')
+itinerary4_photo = URI.open('http://www.skitour.fr/photos_topos/2148_v.jpg')
+itinerary5_photo_1 = URI.open('https://media.camptocamp.org/c2corg-active/1482225896_185703844.jpg')
+itinerary5_photo_2 = URI.open('https://media.camptocamp.org/c2corg-active/1482225906_828710711.jpg')
+itinerary6_photo = URI.open('https://media.camptocamp.org/c2corg-active/1583777252_504080657.jpg')
+itinerary7_photo = URI.open('https://media.camptocamp.org/c2corg-active/1584296248_2965080.jpg')
 
 
 itinerary1 = Itinerary.create({
@@ -124,8 +129,71 @@ itinerary3 = Itinerary.create({
   mountain: Mountain.find_by(name: 'Queyras'),
   user: user3
   })
+  
 itinerary3.photos.attach(io: itinerary3_photo_1, filename: 'pic_jaillon_1.jpeg', content_type: 'image/jpeg')
 itinerary3.photos.attach(io: itinerary3_photo_2, filename: 'pic_jaillon_2.jpeg', content_type: 'image/jpeg')
+
+itinerary4 = Itinerary.create({
+  name: "La Berte, Par le chalet des Mines d'Or",
+  elevation: 806,
+  departure: "L'Erigné devant, Morzine",
+  arrival: "L'Erigné devant, Morzine",
+  ascent_difficulty: 'R',
+  ski_difficulty: '1.3',
+  terrain_difficulty: 'E1',
+  description: "Suivre la route enneigée jusqu'au chalet des Mines d'Or (1390m), qui peut être le point de départ en cas de déneigement naturel de la route. Continuer sur le chemin plein Ouest en direction du Col de Coux que l'on rejoint en passant par le point coté 1506m au dessus des Chalets de Fréterolle. Du Col de Coux il reste 70m sur la ligne de crête (qui fait aussi office de frontière Franco-Suisse) pour rejoindre le sommet de la Berte. Passages à 25° sous le sommet",
+  duration: 3,
+  mountain: Mountain.find_by(name: 'Chablais'),
+  user: user3
+    })
+  
+itinerary4.photos.attach(io: itinerary4_photo, filename: 'laberte.jpeg', content_type: 'image/jpeg')
+
+itinerary5 = Itinerary.create({
+  name: ' Mont Thabor : Versant SE',
+  elevation: 1200,
+  departure: 'Refuge du Mont Thabor ',
+  arrival: 'Refuge du Mont Thabor ',
+  ascent_difficulty: 'PD',
+  ski_difficulty: '2.3',
+  terrain_difficulty: 'E1',
+  description: "Refuge du Mont Thabor > Col du Cheval Blanc > Col du Peyron > Lac du Peyron > Voie normale du Thabor",
+  duration: 5,
+  mountain: Mountain.find_by(name: 'Thabor'),
+  user: user1
+  })
+itinerary5.photos.attach(io: itinerary5_photo_1, filename: 'refuge_thabor.jpeg', content_type: 'image/jpeg')
+itinerary5.photos.attach(io: itinerary5_photo_2, filename: 'thabor_facen.jpeg', content_type: 'image/jpeg')
+
+itinerary6 = Itinerary.create({
+  name: 'Pic de Château Renard : St Véran Refuge de la Blanche',
+  elevation: 1100,
+  departure: 'Saint Véran ',
+  arrival: 'Refuge de la Blanche ',
+  ascent_difficulty: 'F',
+  ski_difficulty: '2.1',
+  terrain_difficulty: 'E1',
+  description: "Montée versant ouest depuis Saint Véran. Descente versant sud-est - Remontée au refuge de la Blanche",
+  duration: 5,
+  mountain: Mountain.find_by(name: 'Queyras'),
+  user: user1
+  })
+itinerary6.photos.attach(io: itinerary6_photo, filename: 'refuge_blanche.jpeg', content_type: 'image/jpeg')
+
+itinerary7 = Itinerary.create({
+  name: 'Pain de Sucre : tour horaire et sommet',
+  elevation: 2030,
+  departure: 'Col Agnel ',
+  arrival: 'Col Agnel ',
+  ascent_difficulty: 'PD',
+  ski_difficulty: '4.1',
+  terrain_difficulty: 'E2',
+  description: "Départ de la route du col Agnel (côte 2260 m), passage entre le col de l'Eychassier et le pic de Foréant et descente sur le lac de Foréant. Remontée à Rocca Rossa, descente à la brèche de Ruine, puis remontée au col d'Asti. Descente versant italien en passant par une brèche sous le pic d'Asti, remontée au Pain de Sucre.",
+  duration: 8,
+  mountain: Mountain.find_by(name: 'Queyras'),
+  user: user4
+  })
+itinerary7.photos.attach(io: itinerary7_photo, filename: 'refuge_agnel.jpeg', content_type: 'image/jpeg')
 
 
 puts "itineraries generated!"
@@ -150,7 +218,7 @@ def coordinates(filename, itinerary)
   end
 end
 
-filenames = ["skitour_topo3707_jaillon.gpx", "skitour_topo4771_Gilly.gpx", "skitour_topo8041_lacblanc.gpx"]
+filenames = ["skitour_topo8041_lacblanc.gpx", "skitour_topo4771_Gilly.gpx", "skitour_topo3707_jaillon.gpx", "laberte.gpx", "mont_thabor.gpx", "chateaurenard.gpx", "paindesucre.gpx"]
 
 Itinerary.all.each_with_index do |itinerary, index|
 	coordinates(filenames[index], itinerary)
