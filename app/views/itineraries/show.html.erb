@@ -54,8 +54,14 @@
 
 <div class="d-flex justify-content-around mt-3" style="width: 300px; margin: 0 auto">
   <div class="d-flex flex-column">
-    <i class="fas fa-plus" style="display: inline-block; margin: 0 auto"></i>
-    <%= link_to "Favoris", itinerary_favorites_path(@itinerary), method: "post" %>
+    <% if @favorite %>
+      <i class="fas fa-check" style="display: inline-block; margin: 0 auto"></i>
+      <%= link_to "Enregistré", favorites_path%>
+    <% else %>
+      <i class="fas fa-plus" style="display: inline-block; margin: 0 auto"></i>
+      <%= link_to "Favoris", itinerary_favorites_path(@itinerary), method: "post" %>
+    <% end %>
+
   </div>
   <div class="d-flex flex-column">
     <i class="fas fa-share-alt" style="display: inline-block; margin: 0 auto"></i>

@@ -23,6 +23,9 @@ class ItinerariesController < ApplicationController
     update_gpx_coordinates_coloring(coordinates, @bera)
     @coordinates = @itinerary.coordinates
     @waypoints = generate_waypoints(@coordinates)
+    favorite = Favorite.where(user: current_user).where(itinerary: @itinerary)
+    @favorite = false
+    @favorite = true if favorite.exists?
   end
 
   def download_pdf

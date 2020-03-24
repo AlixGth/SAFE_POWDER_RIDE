@@ -11,6 +11,7 @@ class FavoritesController < ApplicationController
     @favorite.user = current_user
     @favorite.itinerary = Itinerary.find(params[:itinerary_id])
     @favorite.save
+    redirect_to itinerary_path(@favorite.itinerary)
   end
 
   def destroy
