@@ -4,12 +4,16 @@ class Itinerary < ApplicationRecord
   TERRAINDIFFICULTIES = ["E1", "E2", "E3", "E4"]
   belongs_to :mountain
   belongs_to :user
-  has_many :coordinates
+  has_many :coordinates, dependent: :destroy
   has_many :reviews
   has_many_attached :photos
+
   validates :ascent_difficulty, presence: true,  inclusion: { in: ASCENTDIFFICULTIES }
   validates :ski_difficulty, presence: true,  inclusion: { in: SKIDIFFICULTIES }
   validates :terrain_difficulty, presence: true,  inclusion: { in: TERRAINDIFFICULTIES }
+
+
+  has_many :favorites
 
 
 include PgSearch::Model

@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_23_162047) do
+
+ActiveRecord::Schema.define(version: 2020_03_23_193549) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,7 +71,17 @@ ActiveRecord::Schema.define(version: 2020_03_23_162047) do
     t.string "color"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "evol_color"
     t.index ["itinerary_id"], name: "index_coordinates_on_itinerary_id"
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "itinerary_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["itinerary_id"], name: "index_favorites_on_itinerary_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "itineraries", force: :cascade do |t|
@@ -126,6 +137,8 @@ ActiveRecord::Schema.define(version: 2020_03_23_162047) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "beras", "mountains"
   add_foreign_key "coordinates", "itineraries"
+  add_foreign_key "favorites", "itineraries"
+  add_foreign_key "favorites", "users"
   add_foreign_key "itineraries", "mountains"
   add_foreign_key "itineraries", "users"
   add_foreign_key "reviews", "itineraries"
