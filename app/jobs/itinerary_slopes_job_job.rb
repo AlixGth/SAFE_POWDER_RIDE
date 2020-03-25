@@ -14,7 +14,6 @@ class ItinerarySlopesJobJob < ApplicationJob
     divs.each_with_index do |container, index|
       puts "CONTAINER #{index}"
       slope = queue(container)
-      return if slope == "stop"
       slope.each do |slp|
         slopes << slp
       end
@@ -44,8 +43,6 @@ class ItinerarySlopesJobJob < ApplicationJob
     if res == "err"
       puts "Err, sending again.."
       return queue(container)
-    elsif res == "stop"
-      return "stop"
     end
     slope = res2array(res, container.length)
     return slope
@@ -128,9 +125,7 @@ class ItinerarySlopesJobJob < ApplicationJob
   end
 
   def read_status(jobId, tk)
-    i = 0
-    while i < 600
-      i++
+    while true
       url = "http://elevation.arcgis.com/arcgis/rest/services/Tools/Elevation/GPServer/SummarizeElevation/jobs/#{jobId}"
       jobStatus = Net::HTTP.post_form URI(url),
         "f": "json",
@@ -147,7 +142,6 @@ class ItinerarySlopesJobJob < ApplicationJob
       puts res
       sleep(2)
     end
-    return "stop"
   end
 
   def create_job(feature, tk)
