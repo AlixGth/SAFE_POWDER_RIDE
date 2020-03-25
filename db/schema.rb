@@ -98,9 +98,9 @@ ActiveRecord::Schema.define(version: 2020_03_25_132424) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "terrain_difficulty"
+    t.integer "risk"
     t.integer "length"
     t.integer "max_elevation"
-    t.integer "risk"
     t.index ["mountain_id"], name: "index_itineraries_on_mountain_id"
     t.index ["user_id"], name: "index_itineraries_on_user_id"
   end

@@ -2,6 +2,7 @@ import "bootstrap";
 import { displayRoute } from '../plugins/displaySegment';
 import { fixFooter } from '../plugins/footer';
 import { filtersRisks } from '../plugins/filters';
+import { resetFilters } from '../plugins/resetFilters';
 import { navbar, navbarShow } from '../plugins/navbar';
 
 fixFooter();
@@ -12,4 +13,6 @@ if (document.getElementById("map")) {
   navbarShow();
 }
 
-// filtersRisks();
+if (document.getElementById('reset')) {
+  resetFilters();
+}
