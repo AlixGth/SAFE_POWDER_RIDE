@@ -84,7 +84,7 @@
   <div class="d-flex flex-column">
     <i class="fas fa-share-alt" style="display: inline-block; margin: 0 auto"></i>
     <% body = render 'shared/share_email', itinerary: @itinerary %>
-    <%= mail_to "", "Partager", subject: "#{current_user.username} a partagé un itinéraire Safe Powder Ride avec vous", body: body %>
+    <%= mail_to "", "Partager", subject: current_user ? "#{current_user.username} a partagé un itinéraire Safe Powder Ride avec vous" : "Partage d'itinéraire Safe Powder Ride", body: body %>
   </div>
   <div class="d-flex flex-column">
     <i class="fas fa-cloud-download-alt" style="display: inline-block; margin: 0 auto"></i>
