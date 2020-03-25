@@ -57,6 +57,11 @@ class BeraParseJob < ApplicationJob
       naturel_text: naturel_text
     })
     new_bera.mountain = massif
+    new_bera.mountain.itineraries.each do |itinerary|
+      itinerary.risk = risk_max
+      itinerary.save!
+    end
+
     new_bera.save!
   end
 end

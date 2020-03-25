@@ -9,13 +9,26 @@ class ItinerariesController < ApplicationController
 	def index
     @colors = {"1" => "#CAF567", "2" => "#FDF733", "3" => "#F39831", "4" => "#ED462F", "5" => "#ED462F"}
     @params_present = params[:query].present?
-    @results_count = policy_scope(Itinerary).search_by_name_and_mountain(params[:query]).count
-    if @params_present && @results_count > 0
-      @itineraries = policy_scope(Itinerary).search_by_name_and_mountain(params[:query])
-    else
-      @itineraries = policy_scope(Itinerary)
+    @itineraries = policy_scope(Itinerary)
+    @itineraries = policy_scope(Itinerary).search_by_name_and_mountain(params[:query]) if (@params_present)
+    @results_count = @itineraries.count
+
+    @filters =filtering_params(params)
+
+    @params_mountain = params[:mountain]
+    @params_risk = params[:risk]
+    @params_ski_difficulty = params[:ski_difficulty]
+    @params_ascent_difficulty = params[:ascent_difficulty]
+    @params_terrain_difficulty = params[:terrain_difficulty]
+
+    @filters.each do |key, value|
+      @itineraries = @itineraries.public_send("filter_by_#{key}", value) if value.present?
     end
 
+    # @itineraries = @itineraries.filter_by_mountain(@params_mountain) unless @params_mountain.empty?
+
+    # @itineraries = @itineraries.filter_by_risk(@params_risk.to_i) unless @params_risk.empty?
+# raise
   end
 
   def show
@@ -113,6 +126,10 @@ class ItinerariesController < ApplicationController
   end
 
   private
+
+  def filtering_params(params)
+    params.slice(:risk, :mountain, :ascent_difficulty, :ski_difficulty, :terrain_difficulty)
+  end
 
   def create_coordinates(coordinates)
     for i in (0...coordinates.size)

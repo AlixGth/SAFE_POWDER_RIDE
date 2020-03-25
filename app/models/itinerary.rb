@@ -15,6 +15,12 @@ class Itinerary < ApplicationRecord
 
   has_many :favorites
 
+  scope :filter_by_risk, -> (risk) { where risk: risk }
+  scope :filter_by_mountain, -> (mountain) { where mountain: Mountain.find_by_name(mountain) }
+  scope :filter_by_ascent_difficulty, -> (ascent_difficulty) { where ascent_difficulty: ascent_difficulty }
+  scope :filter_by_ski_difficulty, -> (ski_difficulty) { where ski_difficulty: ski_difficulty }
+  scope :filter_by_terrain_difficulty, -> (terrain_difficulty) { where terrain_difficulty: terrain_difficulty }
+
 
 include PgSearch::Model
   pg_search_scope :search_by_name_and_mountain,
