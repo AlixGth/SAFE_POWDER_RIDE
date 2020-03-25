@@ -91,6 +91,11 @@ class ItinerariesController < ApplicationController
     else
       render :new
     end
+
+    @coordinates = @itinerary.coordinates
+    elevation_calculated = calculate_itinerary_elevation(@coordinates)
+    @itinerary.elevation = @elevation_calculated
+    @itinerary.save
   end
 
   private
