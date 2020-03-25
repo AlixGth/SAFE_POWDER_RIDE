@@ -50,6 +50,12 @@ class ItinerariesController < ApplicationController
     @max_alt = @coordinates.maximum('altitude')
     @elevation_calculated = calculate_itinerary_elevation(@coordinates)
     @length = calculate_itinerary_length(@coordinates)
+    start_address = Geocoder.search([@starting_point.latitude, @starting_point.longitude]).first
+    start_village = start_address.data["address"]["village"] || start_address.data["address"]["county"]
+    @start_address_display = "#{start_village}(#{start_address.data["address"]["postcode"]})"
+    end_address = Geocoder.search([@end_point.latitude, @end_point.longitude]).first
+    end_village = end_address.data["address"]["village"] || end_address.data["address"]["county"]
+    @end_address_display = "#{end_village}(#{end_address.data["address"]["postcode"]})"
   end
 
   def download_pdf
