@@ -236,3 +236,15 @@ BeraParseJob.perform_now('app/assets/bera_files/BRA.QUEYRAS.20200318150126.xml')
 BeraParseJob.perform_now('app/assets/bera_files/BRA.THABOR.20200319151122.xml')
 
 puts "parsing done!"
+
+puts "Starting slopes retrieve job, see the sidekiq for feedbacks"
+
+ItinerarySlopesJobJob.perform_later(itinerary1.id)
+ItinerarySlopesJobJob.perform_later(itinerary2.id)
+ItinerarySlopesJobJob.perform_later(itinerary3.id)
+ItinerarySlopesJobJob.perform_later(itinerary4.id)
+ItinerarySlopesJobJob.perform_later(itinerary5.id)
+ItinerarySlopesJobJob.perform_later(itinerary6.id)
+ItinerarySlopesJobJob.perform_later(itinerary7.id)
+
+puts "Jobs in queue!"

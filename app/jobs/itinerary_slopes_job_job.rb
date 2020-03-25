@@ -34,7 +34,7 @@ class ItinerarySlopesJobJob < ApplicationJob
     response = Net::HTTP.post_form URI('https://www.arcgis.com/sharing/rest/oauth2/token'),
       "f": 'json',
       "client_id": 'xosPPt3elLCXA8tk',
-      "client_secret": '903d4a22e4db48e39ccedaea8e3f7c18',
+      "client_secret": '903d4a22e4db48e39ccedaea8e3f7c18', #ENV['ARCGIS_CLIENT_SECRET_ID']
       "grant_type": 'client_credentials'
 
     token = JSON.parse(response.body)['access_token']

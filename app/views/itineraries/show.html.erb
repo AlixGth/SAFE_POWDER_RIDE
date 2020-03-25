@@ -12,7 +12,7 @@
         <input type="checkbox" id="evolRiskCheck" />
         <div class="switch"></div>
       </label>
-      <p class="p-0 m-0 align-content-center">Après-midi</p>
+      <p class="p-0 m-0 align-content-center" id="switch-status">Matin</p>
     </nav>
     </div>
 
@@ -34,11 +34,11 @@
 </div>
 
 <div class="container">
-  <h3 class="text-center mt-3 mb-5"><%= @itinerary.name %></h3>
+  <h3 class="text-center mt-3 mb-5" id="itinerary-title"><%= @itinerary.name %></h3>
   <div class="d-flex align-items-center mb-4 mt-3" style="height: 40px;">
     <h6>Niveau de risque pour le <%=@bera.bra_date%></h6>
       <div class="ml-2" style="position: relative; background-color: <%= @bera_color %>; border-radius: 20%; width: 40px; height: 40px">
-      <p class="text-center" style="font-size: 30px; position: absolute;left: 12px; top: -5px"><%= @bera.risk_max %></p>
+      <p class="text-center" id="risk_max" style="font-size: 30px; position: absolute;left: 12px; top: -5px"><%= @bera.risk_max %></p>
      </div>
       <p>
       <button class="btn btn-link btn-lg mt-2" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
