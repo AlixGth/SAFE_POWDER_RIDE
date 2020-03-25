@@ -103,7 +103,7 @@
   data-altlng="<%= @alt_lng if @bera.altitude%>"
   data-altlat="<%= @alt_lat if @bera.altitude %>"
   data-infoaltitude="<%= @bera.altitude if @bera.altitude %>"
-  data-risk1="<%= @bera.risk1 if @bera.altitude %>"
-  data-evolrisk1="<%= @bera.evolrisk1 if @bera.altitude %>"
-  data-risk2="<%= @bera.risk2 if @bera.altitude %>"
-  data-evolrisk2="<%= @bera.evolrisk2 if @bera.altitude %>"></div>
+  data-risk1="<%= [@bera.risk1, @colors[@bera.risk1.to_s]] if @bera.altitude %>"
+  data-evolrisk1="<%= [@bera.evolrisk1, @colors[@bera.evolrisk1.to_s]] if @bera.altitude %>"
+  data-risk2="<%= [@bera.risk2, @colors[@bera.risk2.to_s]] if @bera.altitude %>"
+  data-evolrisk2="<%= [@bera.evolrisk2, @colors[@bera.evolrisk2.to_s]] if @bera.altitude %>"></div>
