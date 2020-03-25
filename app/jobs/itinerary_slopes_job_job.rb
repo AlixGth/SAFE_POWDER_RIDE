@@ -129,8 +129,7 @@ class ItinerarySlopesJobJob < ApplicationJob
 
   def read_status(jobId, tk)
     i = 0
-    while true
-      return "stop" if i > 600
+    while i < 600
       i++
       url = "http://elevation.arcgis.com/arcgis/rest/services/Tools/Elevation/GPServer/SummarizeElevation/jobs/#{jobId}"
       jobStatus = Net::HTTP.post_form URI(url),
@@ -148,6 +147,7 @@ class ItinerarySlopesJobJob < ApplicationJob
       puts res
       sleep(2)
     end
+    return "stop"
   end
 
   def create_job(feature, tk)
