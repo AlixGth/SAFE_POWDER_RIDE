@@ -105,7 +105,7 @@ class ItinerariesController < ApplicationController
   def generate_waypoints(coordinates)
     array = []
     coordinates.each do |coordinate|
-      array << [coordinate.order, coordinate.longitude, coordinate.latitude, coordinate.color, coordinate.evol_color]
+      array << [coordinate.order, coordinate.longitude, coordinate.latitude, coordinate.color, coordinate.evol_color, coordinate.slope]
     end
     array = array.sort_by { |coordinate| coordinate[0] }
   end
