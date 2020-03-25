@@ -1,5 +1,5 @@
 import mapboxgl from 'mapbox-gl';
-const MapboxCircle = require('mapbox-gl-circle');
+import MapboxCircle from 'mapbox-gl-circle';
 
 const extractArray = () => {
   let coordinates = document.getElementById("hidden").dataset.waypoints;
@@ -182,7 +182,7 @@ const applySlopes = (map, slopes, riskLevel) => {
           editable: false,
           minRadius: 1500,
           fillColor: '#FF0000'
-      }).addTo(map)      
+      }).addTo(map)
     }
   });
 };
