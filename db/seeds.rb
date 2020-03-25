@@ -150,15 +150,17 @@ itinerary4 = Itinerary.create({
 itinerary4.photos.attach(io: itinerary4_photo, filename: 'laberte.jpeg', content_type: 'image/jpeg')
 
 itinerary5 = Itinerary.create({
-  name: ' Mont Thabor : Versant SE',
-  elevation: 1200,
-  departure: 'Refuge du Mont Thabor ',
-  arrival: 'Refuge du Mont Thabor ',
-  ascent_difficulty: 'PD',
-  ski_difficulty: '2.3',
+  name: ' Col de la roue',
+  elevation: 945,
+  departure: 'Valfréjus ',
+  arrival: 'Valfréjus ',
+  ascent_difficulty: 'R',
+  ski_difficulty: '2.1',
   terrain_difficulty: 'E1',
-  description: "Refuge du Mont Thabor > Col du Cheval Blanc > Col du Peyron > Lac du Peyron > Voie normale du Thabor",
-  duration: 5,
+  description: "Depuis Valfréjus, remonter le vallon du Charmaix par la piste pastorale du Jeu jusqu'au point 2055m.
+Pousuivre pein Sud dans l'axe du vallon en longeant les superbes parois du Grand Argentier.
+Franchir un petit goulet facile qui sort à la cote 2287m, et rejoindre le col de la Roue par des pentes douces.",
+  duration: 3,
   mountain: Mountain.find_by(name: 'Thabor'),
   user: user1
   })
@@ -218,7 +220,7 @@ def coordinates(filename, itinerary)
   end
 end
 
-filenames = ["skitour_topo8041_lacblanc.gpx", "skitour_topo4771_Gilly.gpx", "skitour_topo3707_jaillon.gpx","skitour_topo8041_lacblanc.gpx", "skitour_topo4771_Gilly.gpx", "skitour_topo3707_jaillon.gpx", "skitour_topo3707_jaillon.gpx"]
+filenames = ["skitour_topo8041_lacblanc.gpx", "skitour_topo4771_Gilly.gpx", "skitour_topo3707_jaillon.gpx","skitour_topo959_laberte.gpx", "skitour_topo3196_roue.gpx", "skitour_topo1309_caramantran.gpx", "skitour_topo6910_rossette.gpx"]
 
 Itinerary.all.each_with_index do |itinerary, index|
 	coordinates(filenames[index], itinerary)
