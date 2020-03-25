@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd" version="1.1" creator="EditGPX">
+  <trk>
+    <name>2015-02-13T20:10:43Z</name>
+    <trkseg>
+      <trkpt lat="44.69561071179286" lon="6.874734002736765">
+        <ele>2015</ele>
+      </trkpt>
+      <trkpt lat="44.69452772032947" lon="6.874970037130048">
+        <ele>2007</ele>
+      </trkpt>
+      <trkpt lat="44.69382605307685" lon="6.876514989522431">
+        <ele>2032</ele>
+      </trkpt>
+      <trkpt lat="44.69368876935906" lon="6.878274518635925">
+        <ele>2063</ele>
+      </trkpt>
+      <trkpt lat="44.69230066015342" lon="6.8783174339801825">
+        <ele>2052</ele>
+      </trkpt>
+      <trkpt lat="44.69109557133665" lon="6.880227166798534">
+        <ele>2087</ele>
+      </trkpt>
+      <trkpt lat="44.69013453316925" lon="6.8830381218456695">
+        <ele>2113</ele>
+      </trkpt>
+      <trkpt lat="44.685466406666166" lon="6.885591584827528">
+        <ele>2142</ele>
+      </trkpt>
+      <trkpt lat="44.68268976084735" lon="6.888145047809386">
+        <ele>2169</ele>
+      </trkpt>
+      <trkpt lat="44.68217103203962" lon="6.890591222430646">
+        <ele>2197</ele>
+      </trkpt>
+      <trkpt lat="44.679775665247895" lon="6.893809873248007">
+        <ele>2219</ele>
+      </trkpt>
+      <trkpt lat="44.67777690761091" lon="6.899152833604918">
+        <ele>2230</ele>
+      </trkpt>
+      <trkpt lat="44.676968230350205" lon="6.903830606126237">
+        <ele>2231</ele>
+      </trkpt>
+      <trkpt lat="44.67705977928583" lon="6.90874441304084">
+        <ele>2241</ele>
+      </trkpt>
+      <trkpt lat="44.67841773817924" lon="6.9114480797274656">
+        <ele>2272</ele>
+      </trkpt>
+      <trkpt lat="44.67803629226573" lon="6.915675241134393">
+        <ele>2265</ele>
+      </trkpt>
+      <trkpt lat="44.676785132045055" lon="6.919430333754752">
+        <ele>2316</ele>
+      </trkpt>
+      <trkpt lat="44.67649522521221" lon="6.922391492506746">
+        <ele>2362</ele>
+      </trkpt>
+      <trkpt lat="44.67522877309257" lon="6.924687463423148">
+        <ele>2360</ele>
+      </trkpt>
+      <trkpt lat="44.674725236245756" lon="6.927562791486806">
+        <ele>2378</ele>
+      </trkpt>
+      <trkpt lat="44.674648942402314" lon="6.930545407910973">
+        <ele>2423</ele>
+      </trkpt>
+      <trkpt lat="44.674481095593435" lon="6.934965688366836">
+        <ele>2500</ele>
+      </trkpt>
+      <trkpt lat="44.67420643613062" lon="6.939664918560328">
+        <ele>2541</ele>
+      </trkpt>
+      <trkpt lat="44.674328507163914" lon="6.944986421245066"/>
+      <trkpt lat="44.67414540051787" lon="6.952389318125184"/>
+      <trkpt lat="44.6746947187203" lon="6.957388955728212">
+        <ele>2835</ele>
+      </trkpt>
+      <trkpt lat="44.676205316928296" lon="6.96047886051298">
+        <ele>2944</ele>
+      </trkpt>
+      <trkpt lat="44.678158355231346" lon="6.9629464928063225">
+        <ele>2994</ele>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>
+ 
