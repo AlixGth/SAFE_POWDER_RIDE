@@ -5,10 +5,5 @@ import { navbar, navbarShow } from '../plugins/navbar';
 
 fixFooter();
 navbar();
-
-
-if (document.getElementById("map")) {
-  displayRoute();
-  navbarShow();
-}
-
+displayRoute();
+navbarShow();

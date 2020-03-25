@@ -1,4 +1,5 @@
 import mapboxgl from 'mapbox-gl';
+const MapboxCircle = require('mapbox-gl-circle');
 
 const extractArray = () => {
   let coordinates = document.getElementById("hidden").dataset.waypoints;
@@ -7,7 +8,8 @@ const extractArray = () => {
     const qwe = coordinate.split("\"").join("").split("[").join("").split(",");
     let lng = Number.parseFloat(qwe[1].trim(), 10);
     let lat = Number.parseFloat(qwe[2].trim(), 10);
-    array.push([lng, lat, qwe[3], qwe[4]]);
+    let slope = Number.parseFloat(qwe[5].trim(), 10);
+    array.push([lng, lat, qwe[3], qwe[4], slope]);
   });
   return array;
 };
@@ -94,10 +96,14 @@ const toggleLayer = (map, coordinatesIds) => {
   // link.textContent = 'Evolution';
 
   evolRiskCheck.addEventListener('change', (event) => {
-
+    const switchStatus = document.getElementById('switch-status');
+    if (switchStatus.innerText == "Après-midi"){
+      switchStatus.innerText = "Matin";
+    } else {
+      switchStatus.innerText = "Après-midi";
+    }
     for (const element of coordinatesIds) {
       const visibility = map.getLayoutProperty(element.concat("Evolution"), 'visibility');
-
       if (evolRiskCheck.checked) {
         map.setLayoutProperty(element.concat("Evolution"), 'visibility', 'visible');
       } else {
@@ -157,11 +163,41 @@ const addPoint = (map) => {
   });
 };
 
+const getMaxSlopeRisk = riskLevel => {
+  switch(riskLevel) {
+    case 1:
+      return 40
+    case 2:
+      return 35
+    case 3:
+      return 30
+  }
+};
+
+const applySlopes = (map, slopes, riskLevel) => {
+  const maxSlope = getMaxSlopeRisk(riskLevel);
+  slopes.forEach(slope => {
+    if (slope[4] >= maxSlope) {
+      let circle = new MapboxCircle({lat: slope[1], lng: slope[0]}, slope[4] + 10, {
+          editable: false,
+          minRadius: 1500,
+          fillColor: '#FF0000'
+      }).addTo(map)      
+    }
+  });
+};
+
+const displayDanger = () => {
+  const htmlElement = "<div class='d-flex justify-content-around'><i class='fas fa-exclamation-circle' style='color: red; font-size: 30px'></i><h4>Cet itinéraire semble trop dangereux dans les conditions actuelles!</h4><i class='fas fa-exclamation-circle' style='color: red; font-size: 30px'></i></div>"
+  document.getElementById("itinerary-title").insertAdjacentHTML('afterend', htmlElement);
+};
+
 const displayRoute = () => {
   const coordinatesIds = []
-  const evolRisk = document.getElementById("hidden").dataset.evolrisk === "true";
-  const altitude = document.getElementById("hidden").dataset.altitude === "true";
+
   if (document.getElementById("map")){
+    const evolRisk = document.getElementById("hidden").dataset.evolrisk === "true";
+    const altitude = document.getElementById("hidden").dataset.altitude === "true";
     mapboxgl.accessToken = document.getElementById("map").dataset.mapboxApiKey;
     const waypoints = extractArray();
     var map = new mapboxgl.Map({
@@ -188,14 +224,19 @@ const displayRoute = () => {
         coordinatesIds.push(i.toString())
         display(map, [[lng0, lat0], [lng1, lat1], [lng2, lat2], [lng3, lat3], [lng4, lat4]], i.toString(), color, evolColor);
       };
-    if (altitude) {
-      addPoint(map);
-    }
+      const riskMax = Number.parseInt(document.getElementById('risk_max').innerText, 10);
+      if (riskMax > 3){
+        displayDanger();
+      } else {
+        applySlopes(map, waypoints, riskMax);
+      }
+      if (altitude) {
+        addPoint(map);
+      }
     });
     if (evolRisk) {
       toggleLayer(map, coordinatesIds);
     }
-    // console.log(waypoints[0][0]);
   }
 };
 
