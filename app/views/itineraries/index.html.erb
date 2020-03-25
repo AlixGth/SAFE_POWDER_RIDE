@@ -1,14 +1,14 @@
 <div class="container">
     <div class="row align-items-center p-3">
       <div class="col-10 pr-1">
-        <%= form_tag itineraries_path, method: :get, class: "banner-form form-group form-inline m-0" do %>
+        <%= form_tag itineraries_path, method: :get, class: "form-group m-0" do %>
           <%= text_field_tag :query,
             params[:query],
             class: "form-control",
             placeholder: "Course, massif ..."
           %>
       </div>
-      <div class="col pl-1">
+      <div class="col-1 pl-1">
          <%= submit_tag "GO", class: "btn btn-primary" %>
           <% end %>
       </div>
