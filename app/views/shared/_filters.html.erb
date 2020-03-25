@@ -4,7 +4,7 @@
   <% else %>
     <%= select_tag(:mountain, options_for_select(Mountain::MOUNTAINS, mountain_selected), include_blank: "Choisir un massif", onchange: "this.form.submit();", class: "form-control select") %>
   <% end %>
-  <% if mountain_selected.nil? %>
+  <% if risk_selected.nil? %>
     <%= select_tag(:risk_max, options_for_select(Bera::RISKS), include_blank: "Choisir un niveau de risque", onchange: "this.form.submit();", class: "form-control select") %>
   <% else %>
     <%= select_tag(:risk_max, options_for_select(Bera::RISKS, risk_selected),include_blank: "Choisir un niveau de risque", onchange: "this.form.submit();", class: "form-control select") %>

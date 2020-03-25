@@ -15,6 +15,8 @@ class Itinerary < ApplicationRecord
 
   has_many :favorites
 
+  scope :filter_by_risk, -> (risk) { where risk: risk }
+
 
 include PgSearch::Model
   pg_search_scope :search_by_name_and_mountain,
