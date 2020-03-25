@@ -1,24 +1,27 @@
 const navbar = () => {
-  const navbar = document.getElementById("navbar");
+  const navbar = document.getElementById('navbar');
   const toggle = document.getElementById('toggle');
-  document.addEventListener("scroll", (e) => {
-    const map = document.getElementById("map");
-    const appName = document.getElementById("app-name");
-    if (map) {
-      if (navbar.offsetHeight < window.scrollY) {
-        // navbar.style.transition = "all 0.3s";
-        navbar.classList.remove('naked-navbar');
-        navbar.style.position = 'fixed';
-        navbar.style.width = '100%';
-      } else {
-        navbar.classList.add('naked-navbar');
-      }
+  const toggleIcon = document.getElementById('menu-icon');
+  console.log(navbar)
+  console.log(toggle)
+  console.log(toggleIcon)
+  toggle.addEventListener('click', (e) => {
+    if (toggle.getAttribute('aria-expanded') === 'false') {
+      toggleIcon.classList.add('fa-times');
+      toggleIcon.classList.remove('fa-bars');
+    } else {
+      toggleIcon.classList.add('fa-bars');
+      toggleIcon.classList.remove('fa-times');
     }
   });
-  toggle.addEventListener('click', (e) => {
-    console.log(toggle.classList)
-    if (toggle.getAttribute('aria-expanded') === 'false') {
-      // navbar.style.transition = "all 0.3s";
+};
+
+const navbarShow = () => {
+  const navbar = document.getElementById('navbar');
+  const toggle = document.getElementById('toggle');
+  const toggleIcon = document.getElementById('menu-icon');
+  document.addEventListener("scroll", (e) => {
+    if (navbar.offsetHeight < window.scrollY) {
       navbar.classList.remove('naked-navbar');
       navbar.style.position = 'fixed';
       navbar.style.width = '100%';
@@ -26,6 +29,19 @@ const navbar = () => {
       navbar.classList.add('naked-navbar');
     }
   });
+  toggle.addEventListener('click', (e) => {
+    if (toggle.getAttribute('aria-expanded') === 'false') {
+      navbar.classList.remove('naked-navbar');
+      navbar.style.position = 'fixed';
+      navbar.style.width = '100%';
+      toggleIcon.classList.add('fa-times');
+      toggleIcon.classList.remove('fa-bars');
+    } else {
+      navbar.classList.add('naked-navbar');
+      toggleIcon.classList.add('fa-bars');
+      toggleIcon.classList.remove('fa-times');
+    }
+  });
 };
 
-export { navbar };
+export { navbar, navbarShow };

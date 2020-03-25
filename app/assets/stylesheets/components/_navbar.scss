@@ -6,7 +6,7 @@
   top: 0;
   z-index: 1000;
   transition: all 0.3s;
-  h3 {
+  h3, #toggle {
    color: white;
    margin: 0;
    line-height: 1em;
@@ -36,7 +36,6 @@
   clear: both;
   font-weight: 400;
   white-space: nowrap;
-  // background-color: rgba(250, 250, 250, 0.8);
 }
 
 .navbar-toggler, .navbar-toggler:focus, .navbar-toggle:active {
@@ -51,7 +50,28 @@
   width: 100%;
   background-color: rgba(0, 0, 0, 0.0);
   box-shadow: none;
-  h3, a {
+  h3, a, #toggle {
     color: $darkblue;
   }
+}
+
+.navbar {
+  padding: 0.3rem 1rem;
+}
+
+.nav-item {
+  height: 100%;
+  padding: 0.5rem 0;
+  a {
+    color: white;
+    text-decoration: none;
+  }
+  &:hover {
+    background-color: $darkblue;
+    border-radius: 5px;
+  }
+}
+
+#toggle {
+  font-size: 30px;
 }
