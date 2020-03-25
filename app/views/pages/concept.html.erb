@@ -1,8 +1,7 @@
 <div class="container">
+  <div style="border: 3px solid #eee;" class="p-1 mb-5">
   <h2 class="text-center my-5">Concept</h2>
-
-
-<div class="row align-items-center">
+  <div class="row align-items-center">
   <div class="col-12 col-md-6 col-lg-4 mb-3">
     <%= image_tag "undraw_navigator.svg", alt: "concept", width: '100%'%>
   </div>
@@ -14,27 +13,36 @@
     </p>
   </div>
 </div>
+</div>
 
 
 
-
+<div style="border: 3px solid #eee;" class="p-1 mb-5">
 <h2 class="text-center my-5"> Comment le risque est-il calculé ?</h2>
 
-<h3 class= "text-center"> L'indice général de risque </h3>
+<h3 class= "text-center"> Un indice général </h3>
 <div id="bera" class="row align-items-center">
   <div class="col-12 col-md-6 col-lg-4">
-    <p class="m-2 text-center"> Dès leur publication, nous prenons les informations du BRA (Bulletin du Risque d'Avalanche, source Météo France).
+    <p class="m-2 text-center"> Dès leur publication, nous prenons les informations du BERA (Bulletin d'Estimation du Risque d'Avalanche, source Météo France).
       L'indice qui est affiché sous forme de <strong>nombre</strong> sur chaque itinéraire correspond au risque maximal sur cet itinéraire calculé par le BERA. Voici la légende de cette échelle de risque.
     </p>
-     <div class="col-12 col-md-6 col-lg-4 m-2">
+    <div class="d-flex align-items-center mb-4 mt-3" style="height: 40px;">
+      <div class="risk-level-infos-small mr-3" style="position: relative; background-color: #CAF567; border-radius: 20%; width: 40px; height: 40px">
+      <p class="text-center" style="font-size: 30px; position: absolute;left: 12px; top: -5px">1</p>
+      
+     </div>
+     <h6>Risque faible </h6>
+   </div>
+
     <%= image_tag "bra-echelle.jpg", alt: "BRA", width: '100%'%>
   </div>
-  <h3 class= "text-center mt-5"> Le risque affiché sur les traces d'itinéraire </h3>
+  <h3 class= "text-center mt-5"> L'indice de risque sur la trace de l'itinéraire </h3>
     <p class= "text-center"> <%= image_tag "bra-altitude.jpg", alt: "BRA altitude", width:'100%' %> <br>
       Les couleurs utilisées sur les tracés des cartes d'itinéraire correspondent au niveau de risque par altitude extraite du BERA. Le BRA attire fréquemment l’attention sur une différence du niveau de risque de part et d’autre d’une altitude donnée.
       Nous affichons ce niveau de risque sur chaque itinéraire en fonction de l'altitude.
     </p>
   </div>
+</div>
 </div>
 
 <div id="difficulty">

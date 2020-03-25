@@ -203,6 +203,7 @@ puts "itineraries generated!"
 puts "generating coordinates"
 
 def coordinates(filename, itinerary)
+  puts filename
 	url = Dir.pwd + "/db/" + filename
 	doc = Nokogiri::XML(open(url))
 	trackpoints = doc.xpath('//xmlns:trkpt')
@@ -220,7 +221,7 @@ def coordinates(filename, itinerary)
   end
 end
 
-filenames = ["skitour_topo8041_lacblanc.gpx", "skitour_topo4771_Gilly.gpx", "skitour_topo3707_jaillon.gpx","skitour_topo959_laberte.gpx", "skitour_topo3196_roue.gpx", "skitour_topo1309_caramantran.gpx", "skitour_topo6910_rossette.gpx"]
+filenames = ["skitour_topo8041_lacblanc.gpx", "skitour_topo4771_Gilly.gpx", "skitour_topo3707_jaillon.gpx","skitour_topo959_laberte.gpx", "skitour_topo3196_roue.gpx", "skitour_topo3196_roue.gpx", "skitour_topo6910_rossette.gpx"]
 
 Itinerary.all.each_with_index do |itinerary, index|
 	coordinates(filenames[index], itinerary)
