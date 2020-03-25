@@ -1,0 +1,39 @@
+<div id="filters" class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Filtrer
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <%= form_tag itineraries_path, method: 'get' do %>
+      <% if mountain_selected.nil? %>
+        <%= select_tag(:mountain, options_for_select(Mountain::MOUNTAINS), include_blank: "Massif", onchange: "this.form.submit();", class: "form-control select") %>
+      <% else %>
+        <%= select_tag(:mountain, options_for_select(Mountain::MOUNTAINS, mountain_selected), include_blank: "Massif", onchange: "this.form.submit();", class: "form-control select") %>
+      <% end %>
+
+      <% if risk_selected.nil? %>
+        <%= select_tag(:risk, options_for_select(Bera::RISKS), include_blank: "Niveau de risque", onchange: "this.form.submit();", class: "form-control select") %>
+      <% else %>
+        <%= select_tag(:risk, options_for_select(Bera::RISKS, risk_selected),include_blank: "Niveau de risque", onchange: "this.form.submit();", class: "form-control select") %>
+      <% end %>
+
+      <% if ascent_difficulty_selected.nil? %>
+        <%= select_tag(:ascent_difficulty, options_for_select(Itinerary::ASCENTDIFFICULTIES), include_blank: "Niveau de difficulté de montée", onchange: "this.form.submit();", class: "form-control select") %>
+      <% else %>
+        <%= select_tag(:ascent_difficulty, options_for_select(Itinerary::ASCENTDIFFICULTIES, ascent_difficulty_selected),include_blank: "Niveau de difficulté de montée", onchange: "this.form.submit();", class: "form-control select") %>
+      <% end %>
+
+      <% if ski_difficulty_selected.nil? %>
+        <%= select_tag(:ski_difficulty, options_for_select(Itinerary::SKIDIFFICULTIES), include_blank: "Niveau de difficulté de descente", onchange: "this.form.submit();", class: "form-control select") %>
+      <% else %>
+        <%= select_tag(:ski_difficulty, options_for_select(Itinerary::SKIDIFFICULTIES, ski_difficulty_selected),include_blank: "Niveau de difficulté de descente", onchange: "this.form.submit();", class: "form-control select") %>
+      <% end %>
+
+      <% if terrain_difficulty_selected.nil? %>
+        <%= select_tag(:terrain_difficulty, options_for_select(Itinerary::TERRAINDIFFICULTIES), include_blank: "Niveau de difficulté de terrain", onchange: "this.form.submit();", class: "form-control select") %>
+      <% else %>
+        <%= select_tag(:terrain_difficulty, options_for_select(Itinerary::TERRAINDIFFICULTIES, ski_difficulty_selected),include_blank: "Niveau de difficulté de terrain", onchange: "this.form.submit();", class: "form-control select") %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+

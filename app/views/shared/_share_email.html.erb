@@ -1,5 +1,9 @@
 Bonjour,
 
-<%= current_user.username %> a partagé un itinéraire Safe Powder Ride avec vous.
+<% if current_user %>
+  <%= current_user.username %> a partagé un itinéraire Safe Powder Ride avec vous.
+<% else %>
+  Un itinéraire Safe Powder Ride a été partagé avec vous.
+<% end %>
 Vous pouvez le consulter au lien suivant:
 https://safe-powder-ride-alixgth.herokuapp.com/itineraries/<%="#{itinerary.id}"%>
