@@ -5103,7 +5103,7 @@ mapbox-gl@^0.44.1:
     vt-pbf "^3.0.1"
     webworkify "^1.5.0"
 
-mapbox-gl@^1.8.1:
+mapbox-gl@^1.9.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/mapbox-gl/-/mapbox-gl-1.9.0.tgz#53e3e13c99483f362b07a8a763f2d61d580255a5"
   integrity sha512-PKpoiB2pPUMrqFfBJpt/oA8On3zcp0adEoDS2YIC2RA6o4EZ9Sq2NPZocb64y7ra3mLUvEb7ps1pLVlPMh6y7w==

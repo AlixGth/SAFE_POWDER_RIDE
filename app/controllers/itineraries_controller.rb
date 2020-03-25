@@ -148,6 +148,7 @@ class ItinerariesController < ApplicationController
   def altitude_change(coordinates, bera)
     altitude_coordinate = coordinates.where("altitude >= ?", bera.altitude).first
     [altitude_coordinate.longitude, altitude_coordinate.latitude]
+    # raise
   end
 
   def gpx_parsing(file_data, bera)
