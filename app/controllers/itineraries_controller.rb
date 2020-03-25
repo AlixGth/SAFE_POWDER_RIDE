@@ -41,21 +41,11 @@ class ItinerariesController < ApplicationController
       @alt_lat = altitude_change(@coordinates, @bera)[1]
     end
     @naked_navbar = true
-    #calculation of all data from GPX
-    @starting_point = @coordinates.find_by(order: 0)
+    starting_point = @coordinates.find_by(order: 0)
     end_point_id = @coordinates.count - 1
-    @end_point = @coordinates.find_by(order: end_point_id)
-    @starting_point_alt = @starting_point.altitude
-    @end_point_alt = @end_point.altitude
-    @max_alt = @coordinates.maximum('altitude')
-    @elevation_calculated = calculate_itinerary_elevation(@coordinates)
-    @length = calculate_itinerary_length(@coordinates)
-    start_address = Geocoder.search([@starting_point.latitude, @starting_point.longitude]).first
-    start_village = start_address.data["address"]["village"] || start_address.data["address"]["county"]
-    @start_address_display = "#{start_village}(#{start_address.data["address"]["postcode"]})"
-    end_address = Geocoder.search([@end_point.latitude, @end_point.longitude]).first
-    end_village = end_address.data["address"]["village"] || end_address.data["address"]["county"]
-    @end_address_display = "#{end_village}(#{end_address.data["address"]["postcode"]})"
+    end_point = @coordinates.find_by(order: end_point_id)
+    @starting_point_alt = starting_point.altitude
+    @end_point_alt = end_point.altitude
   end
 
   def download_pdf
@@ -92,9 +82,33 @@ class ItinerariesController < ApplicationController
       render :new
     end
 
-    @coordinates = @itinerary.coordinates
-    elevation_calculated = calculate_itinerary_elevation(@coordinates)
-    @itinerary.elevation = @elevation_calculated
+    coordinates = @itinerary.coordinates
+        #calculation of all data from GPX
+    starting_point = coordinates.find_by(order: 0)
+    end_point_id = coordinates.count - 1
+    end_point = coordinates.find_by(order: end_point_id)
+    starting_point_alt = starting_point.altitude
+    end_point_alt = end_point.altitude
+    start_address = Geocoder.search([starting_point.latitude, starting_point.longitude]).first
+    if start_address.nil?
+      start_address_display= 'NA'
+    else
+      start_village = start_address.data["address"]["village"] || start_address.data["address"]["county"]
+      start_address_display = "#{start_village} (#{start_address.data["address"]["postcode"]})"
+    end
+
+    end_address = Geocoder.search([end_point.latitude, end_point.longitude]).first
+    if end_address.nil?
+      end_address_display = 'NA'
+    else
+      end_village = end_address.data["address"]["village"] || end_address.data["address"]["county"]
+      end_address_display = "#{end_village} (#{end_address.data["address"]["postcode"]})"
+    end
+    @itinerary.elevation = calculate_itinerary_elevation(coordinates)
+    @itinerary.departure = "#{start_address_display}"
+    @itinerary.arrival = "#{end_address_display}"
+    @itinerary.length = calculate_itinerary_length(coordinates) / 1000
+    @itinerary.max_elevation = coordinates.maximum('altitude')
     @itinerary.save
   end
 
@@ -161,7 +175,7 @@ class ItinerariesController < ApplicationController
   end
 
   def itinerary_params
-    params.require(:itinerary).permit(:name, :description, :duration, :elevation, :departure, :arrival, :ascent_difficulty, :ski_difficulty, photos: [])
+    params.require(:itinerary).permit(:name, :description, :duration, :ascent_difficulty, :ski_difficulty, :terrain_difficulty, photos: [])
   end
 
   def set_itinerary

@@ -13,8 +13,8 @@
         <i class="far fa-clock fa-2x" style= "color:#BF52DB"></i>
         </div>
         <div class="col-4 p-3 text-center">
-        <p><strong>Dénivelée</strong></p>
-        <p><%= @itinerary.elevation %>m</p>
+        <p><strong>Dénivelé</strong></p>
+        <p><%= @itinerary.elevation %> m</p>
         <i class="fas fa-chart-line fa-2x" style= "color:#ED462F"></i>
         </div>
     </div>
@@ -27,12 +27,29 @@
       <div class="col-4 p-3 text-center">
         <p><strong>Arrivée</strong></p>
         <p><%= @itinerary.arrival %></p>
-       <i class="fas fa-map-marked-alt fa-2x" style= "color:##4C6EF5"></i>
+       <i class="fas fa-map-marked-alt fa-2x" style= "color:#4C6EF5"></i>
       </div>
       <div class="col-4 p-3 text-center">
         <p><strong>Longueur</strong></p>
-        <p>Longueur</p>
+        <p><%= @itinerary.length %> km</p>
         <i class="fas fa-ruler-combined fa-2x" style= "color:#F1949A"></i>
+      </div>
+    </div>
+    <div class="row d-flex justify-content-around">
+      <div class="col-4 p-3 text-center">
+        <p><strong>Alt Départ</strong></p>
+        <p><%= @starting_point_alt %> m</p>
+        <i class="fas fa-map-marker-alt fa-2x" style= "color:#FC8C2E"></i>
+      </div>
+      <div class="col-4 p-3 text-center">
+        <p><strong>Alt Arrivée</strong></p>
+        <p><%= @end_point_alt %> m</p>
+       <i class="fas fa-map-marker-alt fa-2x" style= "color:#4C6EF5"></i>
+      </div>
+      <div class="col-4 p-3 text-center">
+        <p><strong>Alt Max</strong></p>
+        <p><%= @itinerary.max_elevation %> m</p>
+        <i class="fas fa-map-marker-alt fa-2x" style= "color:#F1949A"></i>
       </div>
     </div>
   </div>
