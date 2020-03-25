@@ -16,6 +16,22 @@ class ItinerariesController < ApplicationController
       @itineraries = policy_scope(Itinerary)
     end
 
+    @params_mountain = params[:mountain]
+    if @params_mountain
+      @itineraries = @itineraries.where(mountain: Mountain.find_by_name(@params_mountain))
+    end
+    # @params_risk = params[:risk]
+    # if @params_risk
+    #   @itineraries = @itineraries.select { |itinerary| itinerary.mountain.beras.last.risk_max == @params_risk.to_i }
+    # end
+    # @params_risk = params["/itineraries"][:risk]
+    # @itineraries = policy_scope(Itinerary)
+    # if !@params_mountain.empty?
+    #   @itineraries = policy_scope(Itinerary).where(mountain: @params_mountain)
+    # end
+    # if !@params_risk.empty?
+    #   @itineraries = policy_scope(Itinerary).where(mountain: @params_risk)
+    # end
   end
 
   def show

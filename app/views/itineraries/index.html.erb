@@ -21,7 +21,7 @@
   <% else %>
     <p> <%= pluralize(@itineraries.count, 'itinéraire trouvé', plural: 'itinéraires trouvés')%> </p>
   <% end %>
-
+  <%= render 'shared/filters', mountain_selected: @params_mountain, risk_selected: @params_risk %>
   <div class="cards-layout">
     <% @itineraries.each do |itinerary| %>
       <div>
