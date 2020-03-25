@@ -13,17 +13,6 @@
         <%= f.input :duration,
                      placeholder: "ex: 4h",
                     label: 'Durée'%>
-        <%= f.input :elevation,
-                    placeholder: "ex: 2000 m",
-                    label: 'Dénivelé'%>
-        <div class="d-flex align-items-center justify-content-between">
-          <%= f.input :departure,
-                      placeholder: "ex: le Roux dAbriès (05460)",
-                      label: 'Point départ' %>
-          <%= f.input :arrival,
-                      placeholder: "ex: le Roux dAbriès (05460)",
-                      label: "Point arrivée" %>
-        </div>
         <%= f.input :ascent_difficulty,
                     collection: Itinerary::ASCENTDIFFICULTIES,
                     label: "Difficulté ascension"%>

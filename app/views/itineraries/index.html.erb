@@ -17,11 +17,19 @@
 
 
   <% if @results_count == 0 && @params_present%>
-    <p> Aucun résultat ne correspond à votre recherche </p>
+    <p class="text-center"> <strong>Aucun résultat ne correspond à votre recherche</strong> </p>
+    <div class="cards-layout">
+    <% Itinerary.all.each do |itinerary| %>
+      <div>
+        <%= render 'shared/card', itinerary: itinerary %>
+      </div>
+    <% end %>
+    <%= render 'shared/filters', mountain_selected: @params_mountain, risk_selected: @params_risk, ascent_difficulty_selected: @params_ascent_difficulty, ski_difficulty_selected: @params_ski_difficulty, terrain_difficulty_selected: @params_terrain_difficulty %>
+  </div>
   <% else %>
     <p> <%= pluralize(@itineraries.count, 'itinéraire trouvé', plural: 'itinéraires trouvés')%> </p>
   <% end %>
-
+  <%= render 'shared/filters', mountain_selected: @params_mountain, risk_selected: @params_risk, ascent_difficulty_selected: @params_ascent_difficulty, ski_difficulty_selected: @params_ski_difficulty, terrain_difficulty_selected: @params_terrain_difficulty %>
   <div class="cards-layout">
     <% @itineraries.each do |itinerary| %>
       <div>

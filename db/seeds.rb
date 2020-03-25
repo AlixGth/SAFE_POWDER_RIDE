@@ -129,7 +129,7 @@ itinerary3 = Itinerary.create({
   mountain: Mountain.find_by(name: 'Queyras'),
   user: user3
   })
-  
+
 itinerary3.photos.attach(io: itinerary3_photo_1, filename: 'pic_jaillon_1.jpeg', content_type: 'image/jpeg')
 itinerary3.photos.attach(io: itinerary3_photo_2, filename: 'pic_jaillon_2.jpeg', content_type: 'image/jpeg')
 
@@ -146,7 +146,7 @@ itinerary4 = Itinerary.create({
   mountain: Mountain.find_by(name: 'Chablais'),
   user: user3
     })
-  
+
 itinerary4.photos.attach(io: itinerary4_photo, filename: 'laberte.jpeg', content_type: 'image/jpeg')
 
 itinerary5 = Itinerary.create({

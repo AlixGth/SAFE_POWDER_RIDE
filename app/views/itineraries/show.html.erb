@@ -56,18 +56,18 @@
 
 
 <div class="container">
-<nav>
-  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-itinerary_data" role="tab" aria-controls="nav-itinerary_data" aria-selected="true">L'essentiel</a>
-    <a class="nav-item nav-link" id="nav-level-tab" data-toggle="tab" href="#nav-level" role="tab" aria-controls="nav-level" aria-selected="false">Difficulté</a>
-    <a class="nav-item nav-link" id="nav-description-tab" data-toggle="tab" href="#nav-description" role="tab" aria-controls="nav-description" aria-selected="false">Détail</a>
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-itinerary_data" role="tab" aria-controls="nav-itinerary_data" aria-selected="true">L'essentiel</a>
+      <a class="nav-item nav-link" id="nav-level-tab" data-toggle="tab" href="#nav-level" role="tab" aria-controls="nav-level" aria-selected="false">Difficulté</a>
+      <a class="nav-item nav-link" id="nav-description-tab" data-toggle="tab" href="#nav-description" role="tab" aria-controls="nav-description" aria-selected="false">Détail</a>
+    </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-itinerary_data" role="tabpanel" aria-labelledby="nav-itinerary_data-tab"> <%= render 'itinerary_data', itinerary: @itinerary %> </div>
+    <div class="tab-pane fade" id="nav-level" role="tabpanel" aria-labelledby="nav-level-tab"><%= render 'level', itinerary: @itinerary %> </div>
+    <div class="tab-pane fade" id="nav-description" role="tabpanel" aria-labelledby="nav-description-tab"><%= render 'description', itinerary: @itinerary %></div>
   </div>
-</nav>
-<div class="tab-content" id="nav-tabContent">
-  <div class="tab-pane fade show active" id="nav-itinerary_data" role="tabpanel" aria-labelledby="nav-itinerary_data-tab"> <%= render 'itinerary_data', itinerary: @itinerary %> </div>
-  <div class="tab-pane fade" id="nav-level" role="tabpanel" aria-labelledby="nav-level-tab"><%= render 'level', itinerary: @itinerary %> </div>
-  <div class="tab-pane fade" id="nav-description" role="tabpanel" aria-labelledby="nav-description-tab"><%= render 'description', itinerary: @itinerary %></div>
-</div>
 </div>
 
 <div class="d-flex justify-content-around mt-3" style="width: 300px; margin: 0 auto">
@@ -84,7 +84,7 @@
   <div class="d-flex flex-column">
     <i class="fas fa-share-alt" style="display: inline-block; margin: 0 auto"></i>
     <% body = render 'shared/share_email', itinerary: @itinerary %>
-    <%= mail_to "", "Partager", subject: "#{current_user.username} a partagé un itinéraire Safe Powder Ride avec vous", body: body %>
+    <%= mail_to "", "Partager", subject: current_user ? "#{current_user.username} a partagé un itinéraire Safe Powder Ride avec vous" : "Partage d'itinéraire Safe Powder Ride", body: body %>
   </div>
   <div class="d-flex flex-column">
     <i class="fas fa-cloud-download-alt" style="display: inline-block; margin: 0 auto"></i>
