@@ -6,13 +6,13 @@ class ItinerarySlopesJobJob < ApplicationJob
   queue_as :critical
 
   def perform(itinerary_id)
+    puts "PERFORMING ON ITINERARY_ID=#{itinerary_id}"
     @itinerary = Itinerary.find(itinerary_id)
     coordinates = @itinerary.coordinates.map { |obj| [obj.longitude, obj.latitude, obj.order] }
-    p coordinates
     divs = coordinates.each_slice(50).to_a
     slopes = []
     divs.each_with_index do |container, index|
-      puts "#{index} CONTAINER"
+      puts "CONTAINER #{index}"
       slope = queue(container)
       slope.each do |slp|
         slopes << slp
@@ -30,11 +30,10 @@ class ItinerarySlopesJobJob < ApplicationJob
   private
 
   def queue(container)
-    sleep(0.5)
     response = Net::HTTP.post_form URI('https://www.arcgis.com/sharing/rest/oauth2/token'),
       "f": 'json',
-      "client_id": 'xosPPt3elLCXA8tk',
-      "client_secret": '903d4a22e4db48e39ccedaea8e3f7c18', #ENV['ARCGIS_CLIENT_SECRET_ID']
+      "client_id": ENV['ARCGIS_CLIENT_ID'],
+      "client_secret": ENV['ARCGIS_CLIENT_SECRET_ID'],
       "grant_type": 'client_credentials'
 
     token = JSON.parse(response.body)['access_token']

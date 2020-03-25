@@ -1,3 +1,4 @@
+<div class= "mt-4 mb-5">
 <div class="container">
     <div class="row mt-3">
       <div class="col-7">
@@ -10,7 +11,7 @@
       </div>
     </div>
     <div class="progress">
-      <div class="progress-bar" role="progressbar" style="<%="width: #{@ascent_grade.to_i * 100 / 5}%"%>" aria-valuenow="<%=@ascent_grade%>" aria-valuemin="0" aria-valuemax="5"><%=@ascent_grade%>/5</div>
+      <div class="progress-bar" role="progressbar" style="<%="width: #{@ascent_grade.to_i * 100 / 5}%"%>" aria-valuenow="<%=@ascent_grade%>" aria-valuemin="0" aria-valuemax="5"><%=@ascent_grade%>/5
       </div>
     </div>
 </div>
@@ -27,7 +28,7 @@
       </div>
     </div>
     <div class="progress">
-      <div class="progress-bar" role="progressbar" style="<%="width: #{@itinerary.ski_difficulty.to_f * 100 / 15}%"%>" aria-valuenow="<%=@itinerary.ski_difficulty%>" aria-valuemin="0" aria-valuemax="15"><%=@itinerary.ski_difficulty%>/15</div>
+      <div class="progress-bar" role="progressbar" style="<%="width: #{@itinerary.ski_difficulty.to_f * 100 / 6}%"%>" aria-valuenow="<%=@itinerary.ski_difficulty%>" aria-valuemin="0" aria-valuemax="6"><%=@itinerary.ski_difficulty%>/6
       </div>
     </div>
 </div>
@@ -44,9 +45,10 @@
       </div>
     </div>
     <div class="progress">
-      <div class="progress-bar" role="progressbar" style="<%="width: #{@terrain_grade.to_i * 100 / 4}%"%>" aria-valuenow="<%=@terrain_grade%>" aria-valuemin="0" aria-valuemax="4"><%=@terrain_grade%>/4</div>
+      <div class="progress-bar" role="progressbar" style="<%="width: #{@terrain_grade.to_i * 100 / 4}%"%>" aria-valuenow="<%=@terrain_grade%>" aria-valuemin="0" aria-valuemax="4"><%=@terrain_grade%>/4
       </div>
     </div>
+</div>
 </div>
 
 

@@ -35,14 +35,16 @@
 
 <div class="container">
   <h3 class="text-center mt-3 mb-5" id="itinerary-title"><%= @itinerary.name %></h3>
-  <div class="d-flex align-items-center mb-4 mt-3" style="height: 40px;">
-    <h6>Niveau de risque pour le <%=@bera.bra_date%></h6>
+  <div class="d-flex justify-content-around mt-3 mb-3" style="height: 40px;">
+    <h6>Niveau de risque max <br> pour le <%=@bera.bra_date.strftime("%-d %bs %Y")%></h6> </br>
       <div class="ml-2" style="position: relative; background-color: <%= @bera_color %>; border-radius: 20%; width: 40px; height: 40px">
       <p class="text-center" id="risk_max" style="font-size: 30px; position: absolute;left: 12px; top: -5px"><%= @bera.risk_max %></p>
      </div>
+  </div>
+  <div>
       <p>
-      <button class="btn btn-link btn-lg mt-2" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-    ?
+      <button class="btn btn-primary w-100" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Que signifie cet indice?
       </button>
     </p>
     <div class="collapse" id="collapseExample">
@@ -52,7 +54,6 @@
   </div>
   <p><strong> Départs spontanés : </strong><%= @bera.accidentel_text %> <br><strong> Déclenchement skieurs : </strong><%= @bera.naturel_text %></p></br>
 </div>
-
 
 
 <div class="container">
