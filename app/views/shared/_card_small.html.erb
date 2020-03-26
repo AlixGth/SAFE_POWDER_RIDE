@@ -1,11 +1,19 @@
 <div class="card-product">
-  <%= cl_image_tag itinerary.photos[0].key, crop: :scale %>
-  <div class="card-product-infos">
-    <h2> <%= itinerary.name %> </h2>
-    <div class="d-flex justify-content-start align-items-center mt-3">
-      <h3 class="risk-level-infos-small mr-3" style="background-color: <%= @colors[itinerary.mountain.beras.last.risk_max.to_s] %>"> <%= itinerary.mountain.beras.last.risk_max %> </h3>
-      <p> <strong> <%= itinerary.mountain.name %></strong></p>
+  <div class="row">
+    <div class="col-4">
+      <%= cl_image_tag itinerary.photos[0].key, crop: :scale %>
     </div>
-  </div>
+
+    <div class="col-8 pl-3 pt-3 position-relative">
+      <h2> <%= itinerary.name %> </h2>
+      <div class="d-flex justify-content-start align-items-center display-mountain-risk">
+        <h3 class="risk-level-infos-small mr-3" style="background-color: <%= @colors[itinerary.mountain.beras.last.risk_max.to_s] %>"> <%= itinerary.mountain.beras.last.risk_max %> </h3>
+        <p><%= itinerary.mountain.name %></p>
+      </div>
+    </div>
   <%= link_to "", itinerary_path(itinerary), class: 'card-link' %>
+  </div>
 </div>
+
+
+

@@ -171,13 +171,13 @@ const displayRoute = () => {
         display(map, [[lng0, lat0], [lng1, lat1], [lng2, lat2], [lng3, lat3], [lng4, lat4]], i.toString(), color, evolColor);
       };
       const riskMax = Number.parseInt(document.getElementById('risk_max').innerText, 10);
+      if (altitude) {
+        addPoint(map);
+      }
       if (riskMax > 3){
         displayDanger();
       } else {
         applySlopes(map, waypoints, riskMax);
-      }
-      if (altitude) {
-        addPoint(map);
       }
     });
     if (evolRisk) {
