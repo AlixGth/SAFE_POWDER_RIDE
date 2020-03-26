@@ -1,13 +1,13 @@
 #menu {
   background: rgba(250, 250, 250, 0.9);
   position: absolute;
-  z-index: 1;
-  bottom: 10px;
+  bottom: 20px;
   right: 20%;
   border-radius: 10px;
   width: 120px;
   padding:5px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
 }
 
 //HOW THIS WORKS:
