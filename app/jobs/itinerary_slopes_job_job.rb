@@ -14,6 +14,7 @@ class ItinerarySlopesJobJob < ApplicationJob
     divs.each_with_index do |container, index|
       puts "CONTAINER #{index}"
       slope = queue(container)
+      return if !slope
       slope.each do |slp|
         slopes << slp
       end
@@ -30,16 +31,19 @@ class ItinerarySlopesJobJob < ApplicationJob
   private
 
   def queue(container)
+    sleep(0.5)
     response = Net::HTTP.post_form URI('https://www.arcgis.com/sharing/rest/oauth2/token'),
       "f": 'json',
-      "client_id": ENV['ARCGIS_CLIENT_ID'],
-      "client_secret": ENV['ARCGIS_CLIENT_SECRET_ID'],
+      "client_id": ENV['ARCGIS_CLIENT_ID'], #ENV['ARCGIS_CLIENT_SECRET_ID']
+      "client_secret": ENV['ARCGIS_CLIENT_SECRET_ID'], 
       "grant_type": 'client_credentials'
 
     token = JSON.parse(response.body)['access_token']
     features = array2hash(container)
+    p features
     jobId = create_job(features, token)
     res = read_status(jobId, token)
+    return if !res
     if res == "err"
       puts "Err, sending again.."
       return queue(container)
@@ -125,7 +129,10 @@ class ItinerarySlopesJobJob < ApplicationJob
   end
 
   def read_status(jobId, tk)
-    while true
+    sleep(5)
+    i = 0
+    while i < 100
+      i += 1
       url = "http://elevation.arcgis.com/arcgis/rest/services/Tools/Elevation/GPServer/SummarizeElevation/jobs/#{jobId}"
       jobStatus = Net::HTTP.post_form URI(url),
         "f": "json",
@@ -140,7 +147,7 @@ class ItinerarySlopesJobJob < ApplicationJob
         return "err"
       end
       puts res
-      sleep(2)
+      sleep(5)
     end
   end
 
