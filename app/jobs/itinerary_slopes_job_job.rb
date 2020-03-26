@@ -22,8 +22,9 @@ class ItinerarySlopesJobJob < ApplicationJob
     puts slopes
     coordinates.each_with_index do |coordinate, index|
       coord = Coordinate.find_by(order: index+1, itinerary: @itinerary)
+      puts "Add slope to coordinates"
       if coord
-        coord.update(slope: slopes[index])
+        coord.update!(slope: slopes[index])
       end
     end
   end
@@ -37,7 +38,7 @@ class ItinerarySlopesJobJob < ApplicationJob
       "client_id": ENV['ARCGIS_CLIENT_ID'],
       "client_secret": ENV['ARCGIS_CLIENT_SECRET_ID'], 
       "grant_type": 'client_credentials'
-      
+
     puts 'ENV ENV ENV'
     puts ENV['ARCGIS_CLIENT_ID']
     token = JSON.parse(response.body)['access_token']
