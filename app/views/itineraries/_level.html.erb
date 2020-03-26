@@ -1,54 +1,91 @@
 <div class= "mt-4 mb-5">
-<div class="container">
-    <div class="row mt-3">
-      <div class="col-7">
-        <%= link_to concept_path(anchor: 'difficulty') do %>
-          <p>Difficulté de montée</p>
-        <% end %>
+  <div class="container">
+      <div class="row">
+        <div class=" d-flex justify-content-around align-items-center">
+            <p>
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseAscent" aria-expanded="false" aria-controls="collapseExample">
+            Difficulté de montée
+            </button>
+            </p>
+            <div class="ml-2">
+              <p><%= @itinerary.ascent_difficulty %></p>
+            </div>
+        </div>
       </div>
-      <div class="col-5">
-        <p><%= @itinerary.ascent_difficulty %></p>
-      </div>
+  </div>
+  <div class="container mb-2">
+    <div class="collapse" id="collapseAscent">
+      <div class="card card-body"> <%=ascent_difficuly_text(@itinerary.ascent_difficulty)%>
+        <%= link_to "En savoir plus", concept_path(anchor: 'difficulty') %></div>
     </div>
-    <div class="progress">
-      <div class="progress-bar" role="progressbar" style="<%="width: #{@ascent_grade.to_i * 100 / 5}%"%>" aria-valuenow="<%=@ascent_grade%>" aria-valuemin="0" aria-valuemax="5"><%=@ascent_grade%>/5
-      </div>
-    </div>
-</div>
+  </div>
 
-<div class="container">
-    <div class="row mt-3">
-      <div class="col-7">
-        <%= link_to concept_path(anchor: 'difficulty') do %>
-          <p>Difficulté en ski</p>
-        <% end %>
+  <div class="container">
+      <div class="progress mb-5">
+        <div class="progress-bar" role="progressbar" style="<%="width: #{@ascent_grade.to_i * 100 / 5}%"%>" aria-valuenow="<%=@ascent_grade%>" aria-valuemin="0" aria-valuemax="5"><%=@ascent_grade%>/5
+        </div>
       </div>
-      <div class="col-5">
-        <p><%= @itinerary.ski_difficulty %></p>
-      </div>
-    </div>
-    <div class="progress">
-      <div class="progress-bar" role="progressbar" style="<%="width: #{@itinerary.ski_difficulty.to_f * 100 / 6}%"%>" aria-valuenow="<%=@itinerary.ski_difficulty%>" aria-valuemin="0" aria-valuemax="6"><%=@itinerary.ski_difficulty%>/6
-      </div>
-    </div>
-</div>
+  </div>
 
-<div class="container">
-    <div class="row mt-3">
-      <div class="col-7">
-        <%= link_to concept_path(anchor: 'difficulty') do %>
-          <p>Exposition</p>
-        <% end %>
+   
+  <div class="container">
+      <div class="row">
+        <div class=" d-flex justify-content-around align-items-center">
+            <p>
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseSki" aria-expanded="false" aria-controls="collapseExample">
+            Difficulté en ski
+            </button>
+            </p>
+            <div class="ml-2">
+              <p><%= @itinerary.ski_difficulty %></p>
+            </div>
+        </div>
       </div>
-      <div class="col-5">
-        <p><%= @itinerary.terrain_difficulty %></p>
-      </div>
+  </div>
+  <div class="container mb-2">
+    <div class="collapse" id="collapseSki">
+      <div class="card card-body"> <%=ski_difficuly_text(@itinerary.ski_difficulty)%>
+        <%= link_to "En savoir plus", concept_path(anchor: 'difficulty') %></div>
     </div>
-    <div class="progress">
-      <div class="progress-bar" role="progressbar" style="<%="width: #{@terrain_grade.to_i * 100 / 4}%"%>" aria-valuenow="<%=@terrain_grade%>" aria-valuemin="0" aria-valuemax="4"><%=@terrain_grade%>/4
+  </div>
+
+  <div class="container">
+      <div class="progress mb-5">
+        <div class="progress-bar" role="progressbar" style="<%="width: #{@itinerary.ski_difficulty.to_f * 100 / 6}%"%>" aria-valuenow="<%=@itinerary.ski_difficulty%>" aria-valuemin="0" aria-valuemax="6"><%=@itinerary.ski_difficulty%>/6
+        </div>
       </div>
+  </div>
+
+
+  <div class="container">
+      <div class="row">
+        <div class=" d-flex justify-content-around align-items-center">
+            <p>
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTerrain" aria-expanded="false" aria-controls="collapseExample">
+           Exposition
+            </button>
+            </p>
+            <div class="ml-2">
+              <p><%= @itinerary.terrain_difficulty %></p>
+            </div>
+        </div>
+      </div>
+  </div>
+
+  <div class="container mb-2">
+    <div class="collapse" id="collapseTerrain">
+      <div class="card card-body"> <%=terrain_difficuly_text(@itinerary.terrain_difficulty)%>
+        <%= link_to "En savoir plus", concept_path(anchor: 'difficulty') %></div>
     </div>
-</div>
+  </div>
+
+  <div class="container">
+      <div class="progress mb-5">
+        <div class="progress-bar" role="progressbar" style="<%="width: #{@terrain_grade.to_i * 100 / 4}%"%>" aria-valuenow="<%=@terrain_grade%>" aria-valuemin="0" aria-valuemax="4"><%=@terrain_grade%>/4
+        </div>
+      </div>
+  </div>
+
 </div>
 
 
