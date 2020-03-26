@@ -3,9 +3,11 @@
 
 <%= render 'shared/banner' %>
 
+<% @itineraries = policy_scope(Itinerary).select{ |itinerary| itinerary.mountain.beras.last.risk_max < 4 } %>
+
 <div class="container">
   <% if @itineraries.count > 0 %>
-    <p> <%= pluralize(@itineraries.count, 'itinéraire trouvé', plural: 'itinéraires trouvés')%> </p>
+    <p> <%= pluralize(@itineraries.count, 'itinéraire trouvé avec un indice de risque inférieur à 3', plural: 'itinéraires trouvés avec un indice de risque inférieur à 3')%> </p>
   <% end %>
 
   <div class="cards-layout">
