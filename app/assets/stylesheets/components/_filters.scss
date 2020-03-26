@@ -1,5 +1,8 @@
 #dropdownMenuButton, .dropdown-menu {
   width: 100%;
+}
+
+#dropdownMenuButton {
   background-color: $darkblue;
 }
 
@@ -10,4 +13,11 @@
 
 #filters {
   padding-bottom: 1rem;
+}
+
+#reset {
+  display: block;
+  width: 100%;
+  color: #303030;
+  text-align: right;
 }
