@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet href="bra.xslt" type="text/xsl"?>
 <Bulletins nombre="1">
-<BULLETINS_NEIGE_AVALANCHE xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" TYPEBULLETIN="BRA" ID="17" MASSIF="QUEYRAS" PRODUCTEUR="STA-Briancon" DATEBULLETIN="2020-03-18T16:00:00" DATEECHEANCE="2020-03-19T18:00:00" DATEVALIDITE="2020-03-23T18:00:00" DATEDIFFUSION="2020-03-18T15:01:26" AMENDEMENT="false">
+<BULLETINS_NEIGE_AVALANCHE xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" TYPEBULLETIN="BRA" ID="17" MASSIF="QUEYRAS" PRODUCTEUR="STA-Briancon" DATEBULLETIN="2020-03-18T16:00:00" DATEECHEANCE="2020-03-19T18:00:00" DATEVALIDITE="2020-03-28T18:00:00" DATEDIFFUSION="2020-03-18T15:01:26" AMENDEMENT="false">
   <DateValidite>2020-03-19T18:00:00</DateValidite>
   <CARTOUCHERISQUE>
     <RISQUE RISQUE1="1" EVOLURISQUE1="2" LOC1="" ALTITUDE="2000" RISQUE2="2" EVOLURISQUE2="3" LOC2="" RISQUEMAXI="3" COMMENTAIRE="Risque faible &#233;voluant en Risque limit&#233;."/>
