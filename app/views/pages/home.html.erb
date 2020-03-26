@@ -6,6 +6,7 @@
   <% end %>
 
   <div class="cards-layout">
+  	<% @itineraries = policy_scope(Itinerary).select{ |itinerary| itinerary.mountain.beras.last.risk_max < 4 } %>
     <% @itineraries.each do |itinerary| %>
       <%= render 'shared/card_small', itinerary: itinerary %>
     <% end %>
