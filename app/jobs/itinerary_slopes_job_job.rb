@@ -13,7 +13,7 @@ class ItinerarySlopesJobJob < ApplicationJob
     slopes = []
     divs.each_with_index do |container, index|
       puts "CONTAINER #{index}"
-      slope = queue(container)
+      slope = queue(container, 0)
       return if !slope
       slope.each do |slp|
         slopes << slp
@@ -30,7 +30,8 @@ class ItinerarySlopesJobJob < ApplicationJob
 
   private
 
-  def queue(container)
+  def queue(container, i)
+    return if i > 50
     sleep(0.5)
     response = Net::HTTP.post_form URI('https://www.arcgis.com/sharing/rest/oauth2/token'),
       "f": 'json',
@@ -44,10 +45,10 @@ class ItinerarySlopesJobJob < ApplicationJob
     p features
     jobId = create_job(features, token)
     res = read_status(jobId, token)
-    return if !res
+    return if !res    
     if res == "err"
       puts "Err, sending again.."
-      return queue(container)
+      return queue(container, i + 1)
     end
     slope = res2array(res, container.length)
     return slope
@@ -150,6 +151,7 @@ class ItinerarySlopesJobJob < ApplicationJob
       puts res
       sleep(5)
     end
+    return
   end
 
   def create_job(feature, tk)
