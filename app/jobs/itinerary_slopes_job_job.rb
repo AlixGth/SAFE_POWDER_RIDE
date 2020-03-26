@@ -31,7 +31,7 @@ class ItinerarySlopesJobJob < ApplicationJob
   private
 
   def queue(container, i)
-    return if i > 50
+    return if i > 20
     sleep(0.5)
     response = Net::HTTP.post_form URI('https://www.arcgis.com/sharing/rest/oauth2/token'),
       "f": 'json',
@@ -133,7 +133,7 @@ class ItinerarySlopesJobJob < ApplicationJob
   def read_status(jobId, tk)
     sleep(5)
     i = 0
-    while i < 100
+    while i < 20
       i += 1
       url = "http://elevation.arcgis.com/arcgis/rest/services/Tools/Elevation/GPServer/SummarizeElevation/jobs/#{jobId}"
       jobStatus = Net::HTTP.post_form URI(url),
