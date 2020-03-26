@@ -1,4 +1,4 @@
-:concurrency: 3
+:concurrency: 1
 :verbose: true
 :queues:  # Queue priority: https://github.com/mperham/sidekiq/wiki/Advanced-Options
   - critical
