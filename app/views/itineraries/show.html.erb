@@ -1,5 +1,7 @@
 <% # Meta information for the <head> section %>
 <% title @itinerary.name %>
+<% content_for :meta_description, @itinerary.description %>
+<% content_for :meta_image, cl_image_path(@itinerary.photos.first.key) %>
 
 <div id="carouselExampleControls" class="carousel slide" data-touch="false" data-ride="carousel" data-interval="false">
   <div class="carousel-inner">
