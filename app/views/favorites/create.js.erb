@@ -1,0 +1,8 @@
+const iconClass = document.getElementById('favorite-icon').classList;
+const iconLink = document.getElementById('favorite-link');
+iconClass.remove('fa-plus');
+iconClass.add('fa-check');
+iconLink.removeAttribute('data-method');
+iconLink.removeAttribute('data-remote');
+iconLink.removeAttribute('rel');
+iconLink.setAttribute('href', '/favorites');

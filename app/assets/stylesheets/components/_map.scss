@@ -6,7 +6,7 @@
 
 .marker {
   background-image: url('info-circle-solid.svg');
-  background-size: cover;
+  background-size: contain;
   background-position: center;
   width: 32px;
   height: 32px;
@@ -14,15 +14,20 @@
   cursor: pointer;
 }
 
+.mapboxgl-popup-tip {
+  border: none !important;
+}
+
 .mapboxgl-popup {
   max-width: 140px !important;
   background-color: #fff;
-  border-radius: 10px;
+  border-radius: 10px !important;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 
 }
 
 .mapboxgl-popup-content {
+  border-radius: 10px !important;
   text-align: center;
   position: relative;
   padding: 8px;
@@ -38,7 +43,6 @@
   border: none;
   position: absolute;
   left: 5px;
-  display: none;
 }
 
 
