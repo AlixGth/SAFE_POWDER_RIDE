@@ -11,7 +11,11 @@ class FavoritesController < ApplicationController
     @favorite.user = current_user
     @favorite.itinerary = Itinerary.find(params[:itinerary_id])
     @favorite.save
-    redirect_to itinerary_path(@favorite.itinerary)
+
+    respond_to do |format|
+      format.html { redirect_to itinerary_path(@favorite.itinerary) }
+      format.js
+    end
   end
 
   def destroy

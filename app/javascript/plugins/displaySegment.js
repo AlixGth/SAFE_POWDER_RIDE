@@ -121,45 +121,26 @@ const addPoint = (map) => {
   const risk2 = Number(document.getElementById("hidden").dataset.risk2);
   const evolRisk1 = Number(document.getElementById("hidden").dataset.evolrisk1);
   const evolRisk2 = Number(document.getElementById("hidden").dataset.evolrisk2);
-  const geojson = {
-    id: 'altRisk',
-    type: 'FeatureCollection',
-      features: [{
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [altLng, altLat]
-        },
-        properties: {
-          title: 'Différence de risque'
-        }
-      }]
-  }
 
-  geojson.features.forEach(function(marker) {
+  const html = `<h6>Différence de risque</h6><div><p class="m-0">Risque ${risk2}</p><p class="m-0">Altitude limite: ${altitudeInfo}</p><p class="m-0">Risque ${risk1}</p></div>`
+  const htmlEvol = `<h6>Différence de risque</h6><div><p class="m-0">Risque ${evolRisk2 || risk2}</p><p class="m-0">Altitude limite: ${altitudeInfo}</p><p class="m-0">Risque ${evolRisk1 || risk1}</p></div>`
 
-    // create a HTML element for each feature
-    const el = document.createElement('div');
-    el.className = 'marker';
-
-    const html = `<h6> ${marker.properties.title}</h6><div><p class="m-0">Risque ${risk2}</p><p class="m-0">Altitude limite: ${altitudeInfo}</p><p class="m-0">Risque ${risk1}</p></div>`
-    const htmlEvol = `<h6> ${marker.properties.title}</h6><div><p class="m-0">Risque ${evolRisk2 || risk2}</p><p class="m-0">Altitude limite: ${altitudeInfo}</p><p class="m-0">Risque ${evolRisk1 || risk1}</p></div>`
-
-    const pop = new mapboxgl.Popup({ offset: 25 })
-    // make a marker for each feature and add to the map
-    new mapboxgl.Marker(el)
-      .setLngLat(marker.geometry.coordinates)
-      .setPopup(pop // add popups
-          .setHTML(html))
+  const popup = new mapboxgl.Popup().setHTML(html);
+    // Create a HTML element for your custom marker
+    const element = document.createElement('div');
+    element.className = 'marker';
+    // Pass the element as an argument to the new marker
+    new mapboxgl.Marker(element)
+      .setLngLat([altLng, altLat])
+      .setPopup(popup)
       .addTo(map);
 
-    evolRiskCheck.addEventListener('change', (event) => {
-      if (evolRiskCheck.checked) {
-        pop.setHTML(htmlEvol);
-      } else {
-        pop.setHTML(html);
-      }
-    });
+  evolRiskCheck.addEventListener('change', (event) => {
+    if (evolRiskCheck.checked) {
+      popup.setHTML(htmlEvol);
+    } else {
+      popup.setHTML(html);
+    }
   });
 };
 
@@ -225,13 +206,13 @@ const displayRoute = () => {
         display(map, [[lng0, lat0], [lng1, lat1], [lng2, lat2], [lng3, lat3], [lng4, lat4]], i.toString(), color, evolColor);
       };
       const riskMax = Number.parseInt(document.getElementById('risk_max').innerText, 10);
+      if (altitude) {
+        addPoint(map);
+      }
       if (riskMax > 3){
         displayDanger();
       } else {
         applySlopes(map, waypoints, riskMax);
-      }
-      if (altitude) {
-        addPoint(map);
       }
     });
     if (evolRisk) {
