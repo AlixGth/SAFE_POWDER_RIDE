@@ -49,7 +49,7 @@ class ItinerariesController < ApplicationController
     @favorite = false
     @favorite = true if favorite.exists?
     @evolrisk = @bera.evolrisk1? || @bera.evolrisk2?
-    if @bera.altitude
+    if @bera.altitude && @coordinates.maximum('altitude') > @bera.altitude && @coordinates.minimum('altitude') < @bera.altitude
       @alt_lng = altitude_change(@coordinates, @bera)[0]
       @alt_lat = altitude_change(@coordinates, @bera)[1]
     end

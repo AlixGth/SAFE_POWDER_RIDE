@@ -7,9 +7,7 @@
 
   <div class="cards-layout">
     <% @itineraries.each do |itinerary| %>
-      <div>
-        <%= render 'shared/card_small', itinerary: itinerary %>
-      </div>
+      <%= render 'shared/card_small', itinerary: itinerary %>
     <% end %>
   </div>
 </div>
