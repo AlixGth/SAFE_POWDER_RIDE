@@ -9,6 +9,7 @@ require "open-uri"
 
 puts "cleaning database"
 
+Favorite.destroy_all
 Coordinate.destroy_all
 Itinerary.destroy_all
 Bera.destroy_all
@@ -69,8 +70,7 @@ puts "generating itineraries"
 
 itinerary1_photo = URI.open('https://www.refugesclareethabor.com/InfoliveImages/itineraires/buffere/baude12_01_09.jpg')
 itinerary2_photo  = URI.open('http://www.skitour.fr/photos_topos/3452.jpg')
-itinerary3_photo_1 = URI.open('http://www.skitour.fr/photos_topos/2471.jpg')
-itinerary3_photo_2 = URI.open('http://www.skitour.fr/photos_topos/2524.jpg')
+itinerary3_photo = URI.open('http://www.skitour.fr/photos/15965-3.jpg')
 itinerary4_photo = URI.open('http://www.skitour.fr/photos_topos/2148_v.jpg')
 itinerary5_photo_1 = URI.open('https://media.camptocamp.org/c2corg-active/1482225896_185703844.jpg')
 itinerary5_photo_2 = URI.open('https://media.camptocamp.org/c2corg-active/1482225906_828710711.jpg')
@@ -136,8 +136,7 @@ itinerary3 = Itinerary.create({
   user: user3
   })
 
-itinerary3.photos.attach(io: itinerary3_photo_1, filename: 'pic_jaillon_1.jpeg', content_type: 'image/jpeg')
-itinerary3.photos.attach(io: itinerary3_photo_2, filename: 'pic_jaillon_2.jpeg', content_type: 'image/jpeg')
+itinerary3.photos.attach(io: itinerary3_photo, filename: 'pic_jaillon_1.jpeg', content_type: 'image/jpeg')
 
 itinerary4 = Itinerary.create({
   name: "La Berte, Par le chalet des Mines d'Or",
@@ -235,7 +234,7 @@ def coordinates(filename, itinerary)
   end
 end
 
-filenames = ["skitour_topo8041_lacblanc.gpx", "skitour_topo4771_Gilly.gpx", "skitour_topo3707_jaillon.gpx","skitour_topo959_laberte.gpx", "skitour_topo3196_roue.gpx", "skitour_topo3196_roue.gpx", "skitour_topo6910_rossette.gpx"]
+filenames = ["skitour_topo8041_lacblanc.gpx", "skitour_topo4771_Gilly.gpx", "skitour_topo3707_jaillon.gpx","skitour_topo959_laberte.gpx", "skitour_topo3196_roue.gpx", "skitour_topo14_longet.gpx", "skitour_topo6910_rossette.gpx"]
 
 Itinerary.all.each_with_index do |itinerary, index|
 	coordinates(filenames[index], itinerary)
