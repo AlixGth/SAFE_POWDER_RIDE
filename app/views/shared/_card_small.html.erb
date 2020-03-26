@@ -4,7 +4,7 @@
     <h2> <%= itinerary.name %> </h2>
     <div class="d-flex justify-content-start align-items-center mt-3">
       <h3 class="risk-level-infos-small mr-3" style="background-color: <%= @colors[itinerary.mountain.beras.last.risk_max.to_s] %>"> <%= itinerary.mountain.beras.last.risk_max %> </h3>
-      <p><%= itinerary.mountain.name %></p>
+      <p> <strong> <%= itinerary.mountain.name %></strong></p>
     </div>
   </div>
   <%= link_to "", itinerary_path(itinerary), class: 'card-link' %>

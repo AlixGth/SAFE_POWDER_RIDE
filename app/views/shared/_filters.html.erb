@@ -1,9 +1,10 @@
 <div id="filters" class="dropdown">
+  <a id="reset" href="#">Réinitialiser les filtres</a>
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Filtrer
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <%= form_tag itineraries_path, method: 'get' do %>
+    <%= form_tag itineraries_path, method: 'get', id: "selects" do %>
       <% if mountain_selected.nil? %>
         <%= select_tag(:mountain, options_for_select(Mountain::MOUNTAINS), include_blank: "Massif", onchange: "this.form.submit();", class: "form-control select") %>
       <% else %>
