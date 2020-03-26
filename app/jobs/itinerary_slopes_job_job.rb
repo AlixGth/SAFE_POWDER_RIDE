@@ -3,7 +3,7 @@ require 'net/http'
 require 'open-uri'
 
 class ItinerarySlopesJobJob < ApplicationJob
-  queue_as :critical
+  queue_as :default
 
   def perform(itinerary_id)
     puts "PERFORMING ON ITINERARY_ID=#{itinerary_id}"
