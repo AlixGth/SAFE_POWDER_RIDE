@@ -32,9 +32,9 @@ class ItinerariesController < ApplicationController
   end
 
   def show
-    colors = {"1" => "#CAF567", "2" => "#FDF733", "3" => "#F39831", "4" => "#ED462F", "5" => "#ED462F"}
+    @colors = {"1" => "#CAF567", "2" => "#FDF733", "3" => "#F39831", "4" => "#ED462F", "5" => "#ED462F"}
     @bera = @itinerary.mountain.beras.last
-    @bera_color = colors[@bera.risk_max.to_s]
+    @bera_color = @colors[@bera.risk_max.to_s]
     coordinates = @itinerary.coordinates
     update_gpx_coordinates_coloring(coordinates, @bera)
     @coordinates = @itinerary.coordinates
@@ -49,7 +49,7 @@ class ItinerariesController < ApplicationController
     @favorite = false
     @favorite = true if favorite.exists?
     @evolrisk = @bera.evolrisk1? || @bera.evolrisk2?
-    if @bera.altitude
+    if @bera.altitude && @coordinates.maximum('altitude') > @bera.altitude && @coordinates.minimum('altitude') < @bera.altitude
       @alt_lng = altitude_change(@coordinates, @bera)[0]
       @alt_lat = altitude_change(@coordinates, @bera)[1]
     end
@@ -148,6 +148,7 @@ class ItinerariesController < ApplicationController
   def altitude_change(coordinates, bera)
     altitude_coordinate = coordinates.where("altitude >= ?", bera.altitude).first
     [altitude_coordinate.longitude, altitude_coordinate.latitude]
+    # raise
   end
 
   def gpx_parsing(file_data, bera)

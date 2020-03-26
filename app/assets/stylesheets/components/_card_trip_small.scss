@@ -8,9 +8,14 @@
 }
 
 .card-product img {
+<<<<<<< HEAD
   height: 120px;
   width: 120px !important;
   object-fit: cover;
+=======
+  height: 100%;
+  width: 120px !important;
+>>>>>>> master
 }
 
 .card-product h2 {
@@ -20,7 +25,7 @@
 }
 
 .card-product p {
-  font-size: 12px;
+  font-size: 16px;
   line-height: 1.4;
   opacity: .7;
   margin: 0;
