@@ -1,11 +1,14 @@
+<% # Meta information for the <head> section %>
+<% title "En savoir plus" %>
+
 <div class="container">
   <div style="border: 3px solid #eee;" class="p-1 my-5">
     <h2 class="text-center my-5">Concept</h2>
-    <div class="row align-items-center">
-      <div class="col-12 col-md-6 col-lg-4 mb-3">
-        <%= image_tag "undraw_navigator.svg", alt: "concept", width: '100%'%>
+    <div class="row align-items-center" style="justify-content: space-around;">
+      <div class="col-12 col-md-6">
+        <%= image_tag "undraw_navigator.svg", alt: "concept", width: '100%', class:"mb-3"%>
       </div>
-      <div class="col-12 col-md-6 col-lg-4">
+      <div class="col-12 col-md-6">
         <p class="m-2 text-center">Vous partez en ski de rando demain ?  <br>
       Vous cherchez à connaitre quelles sont les risques d'avalanche sur votre itinéraire préféré ? Ou cherchez à trouver les itinéraires les moins risqués? <br>
       <strong>SafePowderRides vous aide !</strong> <br>
@@ -25,44 +28,71 @@
       L'indice de risque est le risque maximal donné par le BERA. Il est affiché sous forme de <strong>nombre</strong> sur chaque itinéraire. Voici la légende de cette échelle de risque.
         </p>
       </div>
-      <div class="d-flex align-items-top mb-5 mt-3" style="height: 40px;">
-        <div class="risk-level-infos-small mr-3 ml-3" style="position: relative; background-color: #CAF567; border-radius: 20%; width: 40px; height: 40px">
-          <p class="text-center" style="font-size: 30px; position: absolute;left: 12px; top: -5px">1</p>
+      <div class="container">
+        <div class="row">
+          <div class="col-2 col-md-1">
+            <div class="risk-number" style="background-color: #CAF567;">
+              <p class="text-center">1</p>
+            </div>
+          </div>
+         <div class="col-10 col-md-11">
+            <div class = "d-flex flex-column">
+              <h6>Risque faible</h6>
+              <p>Le manteau neigeux est bien stabilisé dans la plupart des pentes.</p>
+            </div>
+         </div>
         </div>
-        <div class = "mr-3">
-          <h6>Risque faible </h6>  <span><p>Le manteau neigeux est bien stabilisé dans la plupart des pentes.</p>
+         <div class="row">
+          <div class="col-2 col-md-1">
+            <div class="risk-number" style="background-color: #FDF733;">
+              <p class="text-center">2</p>
+            </div>
+          </div>
+          <div class="col-10 col-md-11">
+            <div class = "d-flex flex-column">
+              <h6>Risque limité</h6>
+              <p>Dans quelques pentes suffisamment raides, le manteau neigeux n'est que modéremment stabilisé. Ailleurs, il est bien stabilisé. </p>
+            </div>
+          </div>
         </div>
-      </div>
-       <div class="d-flex align-items-top mb-5 mt-3" style="height: 40px;">
-        <div class="risk-level-infos-small mr-3 ml-3" style="position: relative; background-color: #FDF733; border-radius: 20%; width: 40px; height: 40px">
-          <p class="text-center" style="font-size: 30px; position: absolute;left: 12px; top: -5px">2</p>
+         <div class="row">
+          <div class="col-2 col-md-1">
+            <div class="risk-number" style="background-color: #F39831;">
+              <p class="text-center">3</p>
+            </div>
+          </div>
+          <div class="col-10 col-md-11">
+            <div class = "d-flex flex-column">
+              <h6>Risque marqué</h6>
+              <p>Dans de nombreuses pentes suffisamment raides, le manteau neigeux n'est que modéremment ou faiblement stabilisé.</p>
+            </div>
+          </div>
         </div>
-        <div class = "mr-3">
-          <h6>Risque limité </h6>  <span><p>Dans quelques pentes suffisamment raides, le manteau neigeux n'est que modéremment stabilisé. Ailleurs, il est bien stabilisé. </p>
+        <div class="row">
+          <div class="col-2 col-md-1">
+            <div class="risk-number" style="background-color: #ED462F;">
+              <p class="text-center">4</p>
+            </div>
+          </div>
+          <div class="col-10 col-md-11">
+            <div class = "d-flex flex-column">
+              <h6>Risque fort</h6>
+              <p>Le manteau neigeux est faiblement stabilisé dans la plupart des pentes suffisamment raides.</p>
+            </div>
+          </div>
         </div>
-      </div>
-       <div class="d-flex align-items-top mb-5 mt-5" style="height: 40px;">
-        <div class="risk-level-infos-small mr-3 ml-3" style="position: relative; background-color: #F39831; border-radius: 20%; width: 40px; height: 40px">
-          <p class="text-center" style="font-size: 30px; position: absolute;left: 12px; top: -5px">3</p>
-        </div>
-        <div class = "mr-3">
-          <h6>Risque marqué </h6>  <span><p>Dans de nombreuses pentes suffisamment raides, le manteau neigeux n'est que modéremment ou faiblement stabilisé.</p>
-        </div>
-      </div>
-      <div class="d-flex align-items-top mb-5 mt-4" style="height: 40px;">
-        <div class="risk-level-infos-small mr-3 ml-3" style="position: relative; background-color: #ED462F; border-radius: 20%; width: 40px; height: 40px">
-          <p class="text-center" style="font-size: 30px; position: absolute;left: 12px; top: -5px">4</p>
-        </div>
-        <div class = "mr-3">
-          <h6>Risque fort </h6>  <span><p>Le manteau neigeux est faiblement stabilisé dans la plupart des pentes suffisamment raides.</p>
-        </div>
-      </div>
-      <div class="d-flex align-items-top mb-5 mt-4" style="height: 40px;">
-        <div class="risk-level-infos-small mr-3 ml-3" style="position: relative; background-color: #ED462F; border-radius: 20%; width: 40px; height: 40px">
-          <p class="text-center" style="font-size: 30px; position: absolute;left: 12px; top: -5px">5</p>
-        </div>
-        <div class = "mr-3">
-          <h6>Risque très fort </h6>  <span><p>L'instabilité du manteau neigeux est généralisée.</p>
+        <div class="row">
+          <div class="col-2 col-md-1">
+            <div class="risk-number" style="background-color: #ED462F;">
+              <p class="text-center">5</p>
+            </div>
+          </div>
+          <div class="col-10 col-md-11">
+            <div class = "d-flex flex-column">
+              <h6>Risque très fort</h6>
+              <p>L'instabilité du manteau neigeux est généralisée.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

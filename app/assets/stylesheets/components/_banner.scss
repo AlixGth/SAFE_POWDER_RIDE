@@ -34,3 +34,12 @@ body {
     height: 45px;
   }
 }
+
+.banner-concept-link a {
+  color: white;
+  text-decoration: none;
+  :hover {
+    color: rgb(180,180,180);
+    text-decoration: none;
+  }
+}
