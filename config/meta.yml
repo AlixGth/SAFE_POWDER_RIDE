@@ -1,4 +1,4 @@
 meta_product_name: "Safe Powder Ride"
 meta_title: "Safe Powder Ride - Skiez en sécurité !"
 meta_description: "Safe Powder Ride est une app qui permet aux amateurs de ski de randonnée de trouver un itinéraire pour leur prochaine sortie. Les itinéraires sont mis en lien avec le Bulletin de Risque d'Avalanche (BERA) du jour afin de déterminer si la course est faisable en toute sécurité!"
-meta_image: "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.alpaventure.fr%2Fwp-content%2Fuploads%2F2013%2F05%2FFotolia_44818384_XL.jpg&f=1&nofb=1" # should exist in `app/assets/images/`
+meta_image: "http://www.simpleimageresizer.com/_uploads/photos/c2aac84c/skirando_1200x630.jpg" # should exist in `app/assets/images/`
