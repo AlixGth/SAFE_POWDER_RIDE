@@ -4,7 +4,7 @@
   "dependencies": {
     "@rails/webpacker": "4.2.2",
     "bootstrap": "^4.4.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "mapbox-gl": "^1.9.0",
     "mapbox-gl-circle": "^1.6.5",
     "ngrok": "^3.2.7",
